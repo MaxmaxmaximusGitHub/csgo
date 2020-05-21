@@ -1,6 +1,5 @@
 {
   "name": "csgo",
-  "version": "1.0.0",
   "private": true,
   "main": "services/server/index.js",
   "scripts": {
