@@ -1,8 +1,8 @@
 {
   "name": "@csgo/server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {},
   "dependencies": {
-    "@csgo/reactive": "^1.0.0"
+    "@csgo/reactive": "^2.0.0"
   }
 }
