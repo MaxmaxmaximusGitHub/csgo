@@ -1,0 +1,9 @@
+{
+  "name": "csgo",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "lerna": "^3.21.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "packages": [
+    "packages/*",
+    "client",
+    "server"
+  ],
+  "command": {
+    "dev": ""
+  },
+  "npmClient": "npm",
+  "version": "independent"
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.next" />
+      <excludeFolder url="file://$MODULE_DIR$/.server" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/client/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/examples" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/examples/with-flow/flow-typed" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/packages/next/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/server/build" />
+    </content>
+    <content url="file://$MODULE_DIR$/node_modules/.prisma" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/webpack" level="application" />
+    <orderEntry type="library" name="@types/babel-core" level="application" />
+    <orderEntry type="library" name="@types/babel-plugin-syntax-jsx" level="application" />
+    <orderEntry type="library" name="@types/babel-traverse" level="application" />
+    <orderEntry type="library" name="@types/express" level="application" />
+    <orderEntry type="library" name="@types/gulp" level="application" />
+    <orderEntry type="library" name="@types/gulp-watch" level="application" />
+    <orderEntry type="library" name="@types/babel-types" level="application" />
+  </component>
+</module>
