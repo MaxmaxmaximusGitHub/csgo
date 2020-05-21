@@ -1,7 +1,6 @@
 {
-  "name": "csgo",
+  "name": "@csgo/www",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp build"
@@ -43,12 +42,11 @@
     "react-motion": "^0.5.2",
     "remove": "^0.1.5",
     "resize-observer-polyfill": "^1.5.1",
+    "server": "^1.0.27",
     "styled-jsx": "file:./packages/styled-jsx",
     "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "@types/react": "^16.9.34",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
@@ -68,6 +66,8 @@
     "imagemin-optipng": "^7.1.0",
     "imagemin-svgo": "^7.1.0",
     "nib": "^1.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "responsive-loader": "^1.2.0",
     "start-server-webpack-plugin": "^2.2.5",
     "styled-jsx-plugin-postcss": "^2.0.1",

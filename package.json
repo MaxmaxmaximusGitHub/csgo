@@ -2,8 +2,15 @@
   "name": "csgo",
   "version": "1.0.0",
   "private": true,
+  "main": "services/server/index.js",
+  "scripts": {
+    "dev": "lerna run dev --stream",
+    "update:version": "lerna version --no-push"
+  },
+  "workspaces": [
+    "services/*"
+  ],
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "lerna": "^3.21.0"
+    "lerna": "^3.20.2"
   }
 }
