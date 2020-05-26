@@ -1,0 +1,6 @@
+FROM mhart/alpine-node:12
+EXPOSE 3000
+EXPOSE 9222
+
+WORKDIR /app/services/html
+CMD yarn run dev

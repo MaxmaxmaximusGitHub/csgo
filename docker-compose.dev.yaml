@@ -34,20 +34,26 @@ services:
   auth-server:
     build:
       context: .
-      dockerfile: ./services/auth-server/Dockerfile
+      dockerfile: ./services/auth-server/Dockerfile.dev
+    volumes:
+      - ./:/app
     restart: always
     ports:
       - 4000:4000
+      - 9229:9229
     depends_on:
       - postgres
 
   html:
     build:
       context: .
-      dockerfile: ./services/html/Dockerfile
+      dockerfile: ./services/html/Dockerfile.dev
+    volumes:
+      - ./:/app
     restart: always
     ports:
       - 3000:3000
+      - 9222:9222
     depends_on:
       - graphql-engine
 

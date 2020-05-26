@@ -1,0 +1,7 @@
+FROM mhart/alpine-node:12
+EXPOSE 4000
+EXPOSE 9229
+
+
+WORKDIR /app/services/auth-server
+CMD yarn run dev
