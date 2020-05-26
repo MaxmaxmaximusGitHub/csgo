@@ -9,12 +9,12 @@ import { getMainDefinition } from "apollo-utilities";
 import Head from 'next/head'
 
 
-export default function withApollo(App) {
+export default function withApollo(App, options) {
 
   function AppWithApollo({client, clientState, ...props}) {
 
     if (!client) {
-      client = initApolloClient(clientState)
+      client = initApolloClient(options, clientState)
     }
 
     return <ApolloProvider client={ client }>
@@ -23,7 +23,7 @@ export default function withApollo(App) {
   }
 
 
-  AppWithApollo.getInitialProps = async ({AppTree, ctx}) => {
+  AppWithApollo.getInitialProps = async function ({AppTree, ctx, router}) {
     let pageProps = {}
     let clientState = {}
     let client = null
@@ -36,10 +36,10 @@ export default function withApollo(App) {
       }
 
       const {getDataFromTree} = require('@apollo/react-ssr')
-      client = initApolloClient()
+      client = initApolloClient(options)
 
       try {
-        await getDataFromTree(<AppTree  { ...{pageProps, client} }/>)
+        await getDataFromTree(<AppTree  { ...{pageProps, client, ctx} }/>)
         clientState = client.cache.extract()
       } catch (error) {
         console.error(error)
@@ -64,19 +64,21 @@ export default function withApollo(App) {
 let browserApolloClientCache = null
 
 
-function initApolloClient(clientState) {
-  if (!process.browser) return createApolloClient(clientState)
+function initApolloClient(options, clientState = null) {
+  if (!process.browser) {
+    return createApolloClient(options, clientState)
+  }
 
   if (!browserApolloClientCache) {
-    browserApolloClientCache = createApolloClient(clientState)
+    browserApolloClientCache = createApolloClient(options, clientState)
   }
   return browserApolloClientCache
 }
 
 
-function createApolloClient(clientState) {
+function createApolloClient(options, clientState = null) {
   const cache = new InMemoryCache()
-  const link = createApolloLink()
+  const link = createLink(options)
 
   const client = new ApolloClient({
     ssrMode: !process.browser,
@@ -89,22 +91,17 @@ function createApolloClient(clientState) {
 }
 
 
-function createApolloLink() {
+function createLink(options) {
   if (!process.browser) {
-    return createServerLink()
+    return new HttpLink({
+      uri: `http://graphql-engine:8080/v1/graphql`,
+      fetch: require('isomorphic-fetch')
+    })
   }
 
   return createBrowserLink()
 }
 
-function createServerLink() {
-  if (process.browser) return null
-
-  return new HttpLink({
-    uri: `http://localhost:8080/v1/graphql`,
-    fetch: require('isomorphic-fetch')
-  })
-}
 
 
 function createBrowserLink() {

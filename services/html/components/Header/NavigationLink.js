@@ -3,15 +3,9 @@ import css from 'styled-jsx/css'
 import Link from "next/link"
 
 
-
-
 export default function NavigationLink({href, icon, children}) {
 
-  let router = useRouter()
-  console.log('router is', router)
-
-  // const {pathname} = useRouter()
-  const pathname = '/'
+  const {pathname} = useRouter()
 
   return <>
     <Link href={ href }>
