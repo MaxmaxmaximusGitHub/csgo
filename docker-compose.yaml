@@ -6,11 +6,12 @@ services:
     image: postgres:12
     restart: always
     ports:
-      - 5432:5432
-    volumes:
-      - db_data:/var/lib/postgresql/data
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    command: -p ${POSTGRES_PORT}
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
 
   graphql-engine:
@@ -19,22 +20,22 @@ services:
       - 8080:8080
     restart: always
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 300
       HASURA_GRAPHQL_ADMIN_SECRET: pass
-      HASURA_GRAPHQL_AUTH_HOOK: http://auth-server:4000
+      HASURA_GRAPHQL_AUTH_HOOK: http://auth:4000
     depends_on:
       - postgres
-      - auth-server
+      - auth
 
-  auth-server:
+  auth:
     build:
       context: .
-      dockerfile: ./services/auth-server/Dockerfile
+      dockerfile: ./services/auth/Dockerfile
     restart: always
     ports:
       - 4000:4000

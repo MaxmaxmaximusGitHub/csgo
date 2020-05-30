@@ -6,6 +6,10 @@ schema {
   subscription: subscription_root
 }
 
+type SampleOutput {
+  accessToken: String!
+}
+
 "columns and relationships of \"message\""
 type message {
   id: Int!
@@ -116,6 +120,8 @@ type mutation_root {
     "on conflict condition"
     on_conflict: message_on_conflict
   ): message
+  "perform the action: \"login\""
+  login(arg1: SampleInput!): SampleOutput
   "update data of the table: \"message\""
   update_message(
     "increments the integer columns with given value of the filtered values"
@@ -250,6 +256,11 @@ input Int_comparison_exp {
   _nin: [Int!]
 }
 
+input SampleInput {
+  password: String!
+  username: String!
+}
+
 "expression to compare columns of type String. All fields are combined with logical 'AND'."
 input String_comparison_exp {
   _eq: String
@@ -267,6 +278,19 @@ input String_comparison_exp {
   _nlike: String
   _nsimilar: String
   _similar: String
+}
+
+"expression to compare columns of type json. All fields are combined with logical 'AND'."
+input json_comparison_exp {
+  _eq: json
+  _gt: json
+  _gte: json
+  _in: [json!]
+  _is_null: Boolean
+  _lt: json
+  _lte: json
+  _neq: json
+  _nin: [json!]
 }
 
 "order by aggregate values of table \"message\""
@@ -391,3 +415,10 @@ input message_var_samp_order_by {
 input message_variance_order_by {
   id: order_by
 }
+
+
+scalar json
+
+scalar timestamptz
+
+scalar uuid

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export{default}from\"../components/SupportPage/SupportPage\";","map":{"version":3,"sources":["C:/localhost/csshot/web/pages/support.js"],"names":["default"],"mappings":"AAAA,OAASA,OAAT,KAAwB,uCAAxB","sourcesContent":["export { default } from \"../components/SupportPage/SupportPage\"\r\n\r\n"]},"metadata":{},"sourceType":"module"}

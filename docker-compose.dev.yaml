@@ -6,11 +6,12 @@ services:
     image: postgres:12
     restart: always
     ports:
-      - 5432:5432
-    volumes:
-      - db_data:/var/lib/postgresql/data
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    command: -p ${POSTGRES_PORT}
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
 
   graphql-engine:
@@ -19,43 +20,85 @@ services:
       - 8080:8080
     restart: always
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 300
-      HASURA_GRAPHQL_ADMIN_SECRET: pass
-      HASURA_GRAPHQL_AUTH_HOOK: http://auth-server:4000
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      HASURA_GRAPHQL_AUTH_HOOK: http://auth:4000/hasurahook
+      HASURA_GRAPHQL_ACTION_SECRET: ${HASURA_GRAPHQL_ACTION_SECRET}
     depends_on:
       - postgres
-      - auth-server
+      - auth
 
-  auth-server:
+
+  next:
     build:
       context: .
-      dockerfile: ./services/auth-server/Dockerfile.dev
-    volumes:
-      - ./:/app
-    restart: always
-    ports:
-      - 4000:4000
-      - 9229:9229
-    depends_on:
-      - postgres
-
-  html:
-    build:
-      context: .
-      dockerfile: ./services/html/Dockerfile.dev
+      dockerfile: ./services/next/Dockerfile.dev
     volumes:
       - ./:/app
     restart: always
     ports:
       - 3000:3000
       - 9222:9222
+    environment:
+      DOCKER_GRAPHQL_ENDPOINT: http://graphql-engine:8080/v1/graphql
+
     depends_on:
       - graphql-engine
 
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./services/nginx/Dockerfile.dev
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./services/nginx/conf.dev/:/etc/nginx/conf.d/
+      - ./services/nginx/content/:/var/www/public
+      - ./services/nginx/logs/:/var/log/nginx/
+
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./services/auth/Dockerfile.dev
+    volumes:
+      - ./:/app
+    restart: always
+    environment:
+      PORT: 4000
+      DEBUGGER_PORT: 9228
+    ports:
+      - 4000:4000
+      - 9228:9228
+    depends_on:
+      - postgres
+
+
+  api:
+    build:
+      context: .
+      dockerfile: ./services/api/Dockerfile.dev
+    volumes:
+      - ./:/app
+    restart: always
+    environment:
+      HASURA_GRAPHQL_ACTION_SECRET: ${HASURA_GRAPHQL_ACTION_SECRET}
+      PORT: 5000
+      DEBUGGER_PORT: 9229
+    ports:
+      - 5000:5000
+      - 9229:9229
+    depends_on:
+      - postgres
+
 volumes:
   db_data:
+    driver: local

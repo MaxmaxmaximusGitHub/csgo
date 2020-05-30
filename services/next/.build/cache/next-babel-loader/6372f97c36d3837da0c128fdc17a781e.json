@@ -1,0 +1,1 @@
+{"ast":null,"code":"export*from\"../components/RefsPage/RefsPage\";","map":{"version":3,"sources":["C:/localhost/csshot/web/pages/referrals.js"],"names":[],"mappings":"AAAA,WAAc,iCAAd","sourcesContent":["export * from \"../components/RefsPage/RefsPage\"\r\n\r\n\r\n\r\n"]},"metadata":{},"sourceType":"module"}

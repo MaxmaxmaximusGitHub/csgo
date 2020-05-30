@@ -1,0 +1,4 @@
+FROM mhart/alpine-node:12
+
+WORKDIR /app/services/next
+CMD yarn run dev

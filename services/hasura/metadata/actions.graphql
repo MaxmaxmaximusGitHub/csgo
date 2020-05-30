@@ -1,0 +1,45 @@
+type Mutation {
+  actionName (
+    arg1: SampleInput!
+  ): SampleOutput
+}
+
+
+type Mutation {
+  actionNamqqe (
+    arg1: SampleInput!
+  ): SampleOutput
+}
+
+
+type Mutation {
+  ffddffdfdfdfdfdfddffd (
+    arg1: SampleInput!
+  ): SampleOutput
+}
+
+
+type Mutation {
+  login (
+    username: String!
+    password: String!
+  ): LoginResponse
+}
+
+
+
+
+input SampleInput {
+  username : String!
+  password : String!
+}
+
+type LoginResponse {
+  accessToken : String!
+  messageId : Int!
+}
+
+type SampleOutput {
+  accessToken : String!
+}
+
