@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/next" libraries="{next}" />
+    <file url="file://$PROJECT_DIR$/next/next.config.js" libraries="{@types/webpack, HTTP Response Handler, next, styled-jsx}" />
     <file url="file://$PROJECT_DIR$/packages/styled-jsx" libraries="{@types/babel-core, @types/babel-plugin-syntax-jsx, @types/babel-traverse, @types/babel-types, @types/webpack, HTML, HTTP Response Handler}" />
-    <file url="file://$PROJECT_DIR$/services/next" libraries="{next}" />
-    <file url="file://$PROJECT_DIR$/services/next/next.config.js" libraries="{@types/webpack, HTTP Response Handler, next, styled-jsx}" />
     <file url="PROJECT" libraries="{@types/babel-core, @types/babel-plugin-syntax-jsx, @types/express, @types/gulp, @types/gulp-watch, @types/webpack, HTML, next, styled-jsx}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>

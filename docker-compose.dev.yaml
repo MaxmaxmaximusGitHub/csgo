@@ -14,7 +14,7 @@ services:
       - db_data:/var/lib/postgresql/data
 
 
-  graphql-engine:
+  hasura:
     image: hasura/graphql-engine:v1.2.1
     ports:
       - 8080:8080
@@ -37,7 +37,7 @@ services:
   next:
     build:
       context: .
-      dockerfile: ./services/next/Dockerfile.dev
+      dockerfile: ./next/Dockerfile.dev
     volumes:
       - ./:/app
     restart: always
@@ -45,30 +45,29 @@ services:
       - 3000:3000
       - 9222:9222
     environment:
-      DOCKER_GRAPHQL_ENDPOINT: http://graphql-engine:8080/v1/graphql
+      DOCKER_GRAPHQL_ENDPOINT: http://hasura:8080/v1/graphql
 
     depends_on:
-      - graphql-engine
+      - hasura
 
 
   nginx:
     build:
       context: .
-      dockerfile: ./services/nginx/Dockerfile.dev
+      dockerfile: ./nginx/Dockerfile.dev
     restart: always
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./services/nginx/conf.dev/:/etc/nginx/conf.d/
-      - ./services/nginx/content/:/var/www/public
-      - ./services/nginx/logs/:/var/log/nginx/
+      - ./nginx/conf.dev/:/etc/nginx/conf.d/
+      - ./nginx/logs/:/var/log/nginx/
 
 
   auth:
     build:
       context: .
-      dockerfile: ./services/auth/Dockerfile.dev
+      dockerfile: ./auth/Dockerfile.dev
     volumes:
       - ./:/app
     restart: always
@@ -85,7 +84,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: ./services/api/Dockerfile.dev
+      dockerfile: ./api/Dockerfile.dev
     volumes:
       - ./:/app
     restart: always
