@@ -1,5 +1,5 @@
 import React from "react"
-import Messages from "./Messages"
+import Messages from "./MessagesList"
 import ChatInput from "./ChatInput"
 import ChatHeader from "./ChatHeader"
 import css from 'styled-jsx/css'

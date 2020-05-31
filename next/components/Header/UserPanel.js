@@ -1,26 +1,12 @@
 import css from 'styled-jsx/css'
 import Button from "../Widgets/Button"
 import toMoney from "../../lib/filters/toMoney"
-import steamIcon from 'res/images/steam.svg'
 import walletIcon from 'res/images/wallet-icon.svg'
-import UserActions from "./UserActions";
+import UserActions from "./UserActions"
+import LoginButton from './LogignButton'
 
 
-
-export default function UserPanel() {
-
-  const user = {
-    nickname: 'Lorem ipsum',
-    avatar: 'https://sun9-32.userapi.com/c847019/v847019594/c84e1/zsT4P2fn1hg.jpg',
-    balance: 123
-  }
-
-  if (!user) {
-    return <div className='user-panel'>
-      <Button icon={ steamIcon }>Войти через стим</Button>
-      <style jsx>{ style }</style>
-    </div>
-  }
+export default function UserPanel({user}) {
 
 
   const {nickname, avatar, balance} = user
@@ -55,7 +41,7 @@ const style = css`
 
       .nickname {
         font-size 1em
-        white-space nowrap 
+        white-space nowrap
       }
 
       .balance {

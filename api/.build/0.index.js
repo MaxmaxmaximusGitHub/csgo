@@ -13,13 +13,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./app.js");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! node-fetch */ "node-fetch");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/gql */ "./lib/gql.js");
+/* harmony import */ var _csshot_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @csshot/gql */ "@csshot/gql");
+/* harmony import */ var _csshot_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_csshot_gql__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 
 
-const HASURA_OPERATION = _lib_gql__WEBPACK_IMPORTED_MODULE_2__["default"]`
+const HASURA_OPERATION = _csshot_gql__WEBPACK_IMPORTED_MODULE_2___default.a`
   mutation sendMessage ($text: String) {
     insert_message_one(object: {
       text: $text
@@ -100,23 +101,6 @@ app.listen(PORT, (error) => {
 
 /* harmony default export */ __webpack_exports__["default"] = (app);
 
-
-
-/***/ }),
-
-/***/ "./lib/gql.js":
-/*!********************!*\
-  !*** ./lib/gql.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return gql; });
-function gql([code]) {
-  return code
-}
 
 
 /***/ }),

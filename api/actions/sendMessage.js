@@ -1,6 +1,6 @@
 import app from "../app"
 import fetch from "node-fetch"
-import gql from "../lib/gql"
+import gql from "@csshot/gql"
 
 
 const HASURA_OPERATION = gql`

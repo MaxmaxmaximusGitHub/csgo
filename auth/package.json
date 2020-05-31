@@ -9,18 +9,23 @@
     "start": "node .build/index.js"
   },
   "devDependencies": {
-    "webpack-node-externals": "*",
     "clean-webpack-plugin": "^3.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "gulp": "^4.0.2",
-    "webpack": "latest"
+    "webpack": "latest",
+    "webpack-node-externals": "*"
   },
   "dependencies": {
+    "@csshot/gql": "*",
+    "@csshot/catch-exceptions": "*",
     "body-parser": "^1.19.0",
+    "connect-redis": "^4.0.4",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "passport": "^0.4.1",
-    "@csshot/catch-exceptions": "*"
+    "passport-steam": "^1.0.14",
+    "redis": "^3.0.2"
   }
 }

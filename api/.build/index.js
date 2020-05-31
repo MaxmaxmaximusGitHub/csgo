@@ -159,6 +159,17 @@ module.exports = require("@csshot/catch-exceptions");
 
 /***/ }),
 
+/***/ "@csshot/gql":
+/*!******************************!*\
+  !*** external "@csshot/gql" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@csshot/gql");
+
+/***/ }),
+
 /***/ "body-parser":
 /*!******************************!*\
   !*** external "body-parser" ***!
