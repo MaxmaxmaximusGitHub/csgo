@@ -1,7 +1,9 @@
 import app from "../app"
 import fetch from "node-fetch"
+import gql from "../lib/gql"
 
-const HASURA_OPERATION = `
+
+const HASURA_OPERATION = gql`
   mutation sendMessage ($text: String) {
     insert_message_one(object: {
       text: $text
@@ -9,18 +11,17 @@ const HASURA_OPERATION = `
   }
 `
 
-const execute = async (variables) => {
-  const fetchResponse = await fetch(
+
+const execute = async (query, variables) => {
+  const fetchedResponse = await fetch(
     "http://hasura:8080/v1/graphql",
     {
       method: 'POST',
-      body: JSON.stringify({
-        query: HASURA_OPERATION,
-        variables
-      })
+      body: JSON.stringify({query, variables})
     }
   );
-  const data = await fetchResponse.json();
+
+  const data = await fetchedResponse.json();
   console.log('DEBUG: ', data);
   return data;
 };
@@ -31,7 +32,7 @@ app.post('/sendMessage', async (req, res) => {
 
   // run some business logic
 
-  const {data, errors} = await execute({text});
+  const {data, errors} = await execute(HASURA_OPERATION, {text});
 
   if (errors) {
     return res.status(400).json(errors[0])

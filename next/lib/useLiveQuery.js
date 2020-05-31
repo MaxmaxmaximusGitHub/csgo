@@ -2,15 +2,24 @@ import { useQuery, useSubscription } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 
 
+export default function useLiveQuery(query, options = {}) {
+  if (!process.browser) {
+    return useQuery(query, options)
+  }
+
+  return useLiveQueryBrowser(query, options)
+}
+
+
 const subscriptionsMap = new WeakMap()
 
-
-export default function useLiveQuery(query, options = {}) {
+function useLiveQueryBrowser(query, options) {
   if (!subscriptionsMap.has(query)) {
     subscriptionsMap.set(query, createSubscription(query))
   }
 
   const subscription = subscriptionsMap.get(query)
+
   const queryResult = useQuery(query, options)
 
   useSubscription(subscription, {

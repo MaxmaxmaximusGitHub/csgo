@@ -79,10 +79,46 @@ function MessagesList() {
   </ul>
 }
 
+
+// const CURRENT_USER = gql`
+//   {
+//     current_user {
+//       id
+//       name
+//     }
+//   }
+// `
+const CURRENT_USER = gql`
+  query {
+    me(args:{user_id:7}){
+      id
+      name
+    }
+  }
+`
+
+function CurrentUser() {
+  const {loading, error, data} = useLiveQuery(CURRENT_USER)
+
+  if (loading) return 'Loading...'
+  if (error) return `Error... ${ error.message }`
+
+  // const user = data['me'][0]
+  // console.log('user', user)
+
+  return <div style={ {fontSize: 30} }>
+    {/*id { user.id }, name { user.name }*/ }
+  </div>
+}
+
+
 export default function RefsPage() {
 
   return <Page>
     <div>
+      <div>
+        <CurrentUser/>
+      </div>
       <MessagesInput/>
       <MessagesList/>
     </div>

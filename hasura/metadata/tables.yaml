@@ -1,3 +1,26 @@
 - table:
     schema: public
+    name: current_user
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - avatar
+      - name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+- table:
+    schema: public
     name: message
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - text
+      filter: {}
+- table:
+    schema: public
+    name: user

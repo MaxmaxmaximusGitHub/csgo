@@ -1,7 +1,7 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import hasuraAuthMiddleware from './hasuraAuthMiddleware'
+import hasuraAuthMiddleware from './lib/hasuraAuthMiddleware'
 
 const PORT = process.env.PORT
 const app = express()

@@ -1,29 +1,11 @@
 actions:
-- name: actionName
+- name: sendMessage
   definition:
     kind: synchronous
-    handler: http://api:5000
-- name: actionNamqqe
-  definition:
-    kind: synchronous
-    handler: http://api:5000
-- name: ffddffdfdfdfdfdfddffd
-  definition:
-    kind: synchronous
-    handler: http://host.docker.internal:3000
-- name: login
-  definition:
-    kind: synchronous
-    handler: http://api:5000
-    forward_client_headers: true
-    headers:
-    - name: x-hasura-action-secret
-      value_from_env: HASURA_GRAPHQL_ACTION_SECRET
+    handler: http://api:5000/sendMessage
 custom_types:
   enums: []
-  input_objects:
-  - name: SampleInput
+  input_objects: []
   objects:
-  - name: LoginResponse
-  - name: SampleOutput
+  - name: SendMessageOutput
   scalars: []

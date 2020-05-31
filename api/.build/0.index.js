@@ -13,10 +13,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./app.js");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! node-fetch */ "node-fetch");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/gql */ "./lib/gql.js");
 
 
 
-const HASURA_OPERATION = `
+
+
+const HASURA_OPERATION = _lib_gql__WEBPACK_IMPORTED_MODULE_2__["default"]`
   mutation sendMessage ($text: String) {
     insert_message_one(object: {
       text: $text
@@ -24,18 +27,17 @@ const HASURA_OPERATION = `
   }
 `
 
-const execute = async (variables) => {
-  const fetchResponse = await node_fetch__WEBPACK_IMPORTED_MODULE_1___default()(
+
+const execute = async (query, variables) => {
+  const fetchedResponse = await node_fetch__WEBPACK_IMPORTED_MODULE_1___default()(
     "http://hasura:8080/v1/graphql",
     {
       method: 'POST',
-      body: JSON.stringify({
-        query: HASURA_OPERATION,
-        variables
-      })
+      body: JSON.stringify({query, variables})
     }
   );
-  const data = await fetchResponse.json();
+
+  const data = await fetchedResponse.json();
   console.log('DEBUG: ', data);
   return data;
 };
@@ -46,7 +48,7 @@ _app__WEBPACK_IMPORTED_MODULE_0__["default"].post('/sendMessage', async (req, re
 
   // run some business logic
 
-  const {data, errors} = await execute({text});
+  const {data, errors} = await execute(HASURA_OPERATION, {text});
 
   if (errors) {
     return res.status(400).json(errors[0])
@@ -76,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var cookie_parser__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cookie_parser__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! body-parser */ "body-parser");
 /* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(body_parser__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _hasuraAuthMiddleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hasuraAuthMiddleware */ "./hasuraAuthMiddleware.js");
+/* harmony import */ var _lib_hasuraAuthMiddleware__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/hasuraAuthMiddleware */ "./lib/hasuraAuthMiddleware.js");
 
 
 
@@ -102,10 +104,27 @@ app.listen(PORT, (error) => {
 
 /***/ }),
 
-/***/ "./hasuraAuthMiddleware.js":
-/*!*********************************!*\
-  !*** ./hasuraAuthMiddleware.js ***!
-  \*********************************/
+/***/ "./lib/gql.js":
+/*!********************!*\
+  !*** ./lib/gql.js ***!
+  \********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return gql; });
+function gql([code]) {
+  return code
+}
+
+
+/***/ }),
+
+/***/ "./lib/hasuraAuthMiddleware.js":
+/*!*************************************!*\
+  !*** ./lib/hasuraAuthMiddleware.js ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

@@ -1,28 +1,272 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
-
 schema {
   query: query_root
   mutation: mutation_root
   subscription: subscription_root
 }
 
-type SampleOutput {
-  accessToken: String!
+# columns and relationships of "current_user"
+type current_user {
+  avatar: String
+  id: Int
+  name: String
 }
 
-"columns and relationships of \"message\""
+# aggregated selection of "current_user"
+type current_user_aggregate {
+  aggregate: current_user_aggregate_fields
+  nodes: [current_user!]!
+}
+
+# aggregate fields of "current_user"
+type current_user_aggregate_fields {
+  avg: current_user_avg_fields
+  count(columns: [current_user_select_column!], distinct: Boolean): Int
+  max: current_user_max_fields
+  min: current_user_min_fields
+  stddev: current_user_stddev_fields
+  stddev_pop: current_user_stddev_pop_fields
+  stddev_samp: current_user_stddev_samp_fields
+  sum: current_user_sum_fields
+  var_pop: current_user_var_pop_fields
+  var_samp: current_user_var_samp_fields
+  variance: current_user_variance_fields
+}
+
+# order by aggregate values of table "current_user"
+input current_user_aggregate_order_by {
+  avg: current_user_avg_order_by
+  count: order_by
+  max: current_user_max_order_by
+  min: current_user_min_order_by
+  stddev: current_user_stddev_order_by
+  stddev_pop: current_user_stddev_pop_order_by
+  stddev_samp: current_user_stddev_samp_order_by
+  sum: current_user_sum_order_by
+  var_pop: current_user_var_pop_order_by
+  var_samp: current_user_var_samp_order_by
+  variance: current_user_variance_order_by
+}
+
+# input type for inserting array relation for remote table "current_user"
+input current_user_arr_rel_insert_input {
+  data: [current_user_insert_input!]!
+}
+
+# aggregate avg on columns
+type current_user_avg_fields {
+  id: Float
+}
+
+# order by avg() on columns of table "current_user"
+input current_user_avg_order_by {
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "current_user". All fields are combined with a logical 'AND'.
+input current_user_bool_exp {
+  _and: [current_user_bool_exp]
+  _not: current_user_bool_exp
+  _or: [current_user_bool_exp]
+  avatar: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+# input type for incrementing integer column in table "current_user"
+input current_user_inc_input {
+  id: Int
+}
+
+# input type for inserting data into table "current_user"
+input current_user_insert_input {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# aggregate max on columns
+type current_user_max_fields {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# order by max() on columns of table "current_user"
+input current_user_max_order_by {
+  avatar: order_by
+  id: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type current_user_min_fields {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# order by min() on columns of table "current_user"
+input current_user_min_order_by {
+  avatar: order_by
+  id: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "current_user"
+type current_user_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [current_user!]!
+}
+
+# input type for inserting object relation for remote table "current_user"
+input current_user_obj_rel_insert_input {
+  data: current_user_insert_input!
+}
+
+# ordering options when selecting data from "current_user"
+input current_user_order_by {
+  avatar: order_by
+  id: order_by
+  name: order_by
+}
+
+# select columns of table "current_user"
+enum current_user_select_column {
+  # column name
+  avatar
+
+  # column name
+  id
+
+  # column name
+  name
+}
+
+# input type for updating data in table "current_user"
+input current_user_set_input {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# aggregate stddev on columns
+type current_user_stddev_fields {
+  id: Float
+}
+
+# order by stddev() on columns of table "current_user"
+input current_user_stddev_order_by {
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
+type current_user_stddev_pop_fields {
+  id: Float
+}
+
+# order by stddev_pop() on columns of table "current_user"
+input current_user_stddev_pop_order_by {
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
+type current_user_stddev_samp_fields {
+  id: Float
+}
+
+# order by stddev_samp() on columns of table "current_user"
+input current_user_stddev_samp_order_by {
+  id: order_by
+}
+
+# aggregate sum on columns
+type current_user_sum_fields {
+  id: Int
+}
+
+# order by sum() on columns of table "current_user"
+input current_user_sum_order_by {
+  id: order_by
+}
+
+# aggregate var_pop on columns
+type current_user_var_pop_fields {
+  id: Float
+}
+
+# order by var_pop() on columns of table "current_user"
+input current_user_var_pop_order_by {
+  id: order_by
+}
+
+# aggregate var_samp on columns
+type current_user_var_samp_fields {
+  id: Float
+}
+
+# order by var_samp() on columns of table "current_user"
+input current_user_var_samp_order_by {
+  id: order_by
+}
+
+# aggregate variance on columns
+type current_user_variance_fields {
+  id: Float
+}
+
+# order by variance() on columns of table "current_user"
+input current_user_variance_order_by {
+  id: order_by
+}
+
+# expression to compare columns of type Int. All fields are combined with logical 'AND'.
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+scalar json
+
+# expression to compare columns of type json. All fields are combined with logical 'AND'.
+input json_comparison_exp {
+  _eq: json
+  _gt: json
+  _gte: json
+  _in: [json!]
+  _is_null: Boolean
+  _lt: json
+  _lte: json
+  _neq: json
+  _nin: [json!]
+}
+
+input me_args {
+  user_id: Int
+}
+
+# columns and relationships of "message"
 type message {
   id: Int!
   text: String!
 }
 
-"aggregated selection of \"message\""
+# aggregated selection of "message"
 type message_aggregate {
   aggregate: message_aggregate_fields
   nodes: [message!]!
 }
 
-"aggregate fields of \"message\""
+# aggregate fields of "message"
 type message_aggregate_fields {
   avg: message_avg_fields
   count(columns: [message_select_column!], distinct: Boolean): Int
@@ -37,231 +281,533 @@ type message_aggregate_fields {
   variance: message_variance_fields
 }
 
-"aggregate avg on columns"
+# order by aggregate values of table "message"
+input message_aggregate_order_by {
+  avg: message_avg_order_by
+  count: order_by
+  max: message_max_order_by
+  min: message_min_order_by
+  stddev: message_stddev_order_by
+  stddev_pop: message_stddev_pop_order_by
+  stddev_samp: message_stddev_samp_order_by
+  sum: message_sum_order_by
+  var_pop: message_var_pop_order_by
+  var_samp: message_var_samp_order_by
+  variance: message_variance_order_by
+}
+
+# input type for inserting array relation for remote table "message"
+input message_arr_rel_insert_input {
+  data: [message_insert_input!]!
+  on_conflict: message_on_conflict
+}
+
+# aggregate avg on columns
 type message_avg_fields {
   id: Float
 }
 
-"aggregate max on columns"
+# order by avg() on columns of table "message"
+input message_avg_order_by {
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "message". All fields are combined with a logical 'AND'.
+input message_bool_exp {
+  _and: [message_bool_exp]
+  _not: message_bool_exp
+  _or: [message_bool_exp]
+  id: Int_comparison_exp
+  text: String_comparison_exp
+}
+
+# unique or primary key constraints on table "message"
+enum message_constraint {
+  # unique or primary key constraint
+  message_pkey
+}
+
+# input type for incrementing integer column in table "message"
+input message_inc_input {
+  id: Int
+}
+
+# input type for inserting data into table "message"
+input message_insert_input {
+  id: Int
+  text: String
+}
+
+# aggregate max on columns
 type message_max_fields {
   id: Int
   text: String
 }
 
-"aggregate min on columns"
+# order by max() on columns of table "message"
+input message_max_order_by {
+  id: order_by
+  text: order_by
+}
+
+# aggregate min on columns
 type message_min_fields {
   id: Int
   text: String
 }
 
-"response of any mutation on the table \"message\""
+# order by min() on columns of table "message"
+input message_min_order_by {
+  id: order_by
+  text: order_by
+}
+
+# response of any mutation on the table "message"
 type message_mutation_response {
-  "number of affected rows by the mutation"
+  # number of affected rows by the mutation
   affected_rows: Int!
-  "data of the affected rows by the mutation"
+
+  # data of the affected rows by the mutation
   returning: [message!]!
 }
 
-"aggregate stddev on columns"
+# input type for inserting object relation for remote table "message"
+input message_obj_rel_insert_input {
+  data: message_insert_input!
+  on_conflict: message_on_conflict
+}
+
+# on conflict condition type for table "message"
+input message_on_conflict {
+  constraint: message_constraint!
+  update_columns: [message_update_column!]!
+  where: message_bool_exp
+}
+
+# ordering options when selecting data from "message"
+input message_order_by {
+  id: order_by
+  text: order_by
+}
+
+# primary key columns input for table: "message"
+input message_pk_columns_input {
+  id: Int!
+}
+
+# select columns of table "message"
+enum message_select_column {
+  # column name
+  id
+
+  # column name
+  text
+}
+
+# input type for updating data in table "message"
+input message_set_input {
+  id: Int
+  text: String
+}
+
+# aggregate stddev on columns
 type message_stddev_fields {
   id: Float
 }
 
-"aggregate stddev_pop on columns"
+# order by stddev() on columns of table "message"
+input message_stddev_order_by {
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
 type message_stddev_pop_fields {
   id: Float
 }
 
-"aggregate stddev_samp on columns"
+# order by stddev_pop() on columns of table "message"
+input message_stddev_pop_order_by {
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
 type message_stddev_samp_fields {
   id: Float
 }
 
-"aggregate sum on columns"
+# order by stddev_samp() on columns of table "message"
+input message_stddev_samp_order_by {
+  id: order_by
+}
+
+# aggregate sum on columns
 type message_sum_fields {
   id: Int
 }
 
-"aggregate var_pop on columns"
+# order by sum() on columns of table "message"
+input message_sum_order_by {
+  id: order_by
+}
+
+# update columns of table "message"
+enum message_update_column {
+  # column name
+  id
+
+  # column name
+  text
+}
+
+# aggregate var_pop on columns
 type message_var_pop_fields {
   id: Float
 }
 
-"aggregate var_samp on columns"
+# order by var_pop() on columns of table "message"
+input message_var_pop_order_by {
+  id: order_by
+}
+
+# aggregate var_samp on columns
 type message_var_samp_fields {
   id: Float
 }
 
-"aggregate variance on columns"
+# order by var_samp() on columns of table "message"
+input message_var_samp_order_by {
+  id: order_by
+}
+
+# aggregate variance on columns
 type message_variance_fields {
   id: Float
 }
 
-"mutation root"
+# order by variance() on columns of table "message"
+input message_variance_order_by {
+  id: order_by
+}
+
+# mutation root
 type mutation_root {
-  "delete data from the table: \"message\""
+  # delete data from the table: "current_user"
+  delete_current_user(
+    # filter the rows which have to be deleted
+    where: current_user_bool_exp!
+  ): current_user_mutation_response
+
+  # delete data from the table: "message"
   delete_message(
-    "filter the rows which have to be deleted"
+    # filter the rows which have to be deleted
     where: message_bool_exp!
   ): message_mutation_response
-  "delete single row from the table: \"message\""
+
+  # delete single row from the table: "message"
   delete_message_by_pk(id: Int!): message
-  "insert data into the table: \"message\""
+
+  # delete data from the table: "user"
+  delete_user(
+    # filter the rows which have to be deleted
+    where: user_bool_exp!
+  ): user_mutation_response
+
+  # delete single row from the table: "user"
+  delete_user_by_pk(id: Int!): user
+
+  # insert data into the table: "current_user"
+  insert_current_user(
+    # the rows to be inserted
+    objects: [current_user_insert_input!]!
+  ): current_user_mutation_response
+
+  # insert a single row into the table: "current_user"
+  insert_current_user_one(
+    # the row to be inserted
+    object: current_user_insert_input!
+  ): current_user
+
+  # insert data into the table: "message"
   insert_message(
-    "the rows to be inserted"
-    objects: [message_insert_input!]!,
-    "on conflict condition"
+    # the rows to be inserted
+    objects: [message_insert_input!]!
+
+    # on conflict condition
     on_conflict: message_on_conflict
   ): message_mutation_response
-  "insert a single row into the table: \"message\""
+
+  # insert a single row into the table: "message"
   insert_message_one(
-    "the row to be inserted"
-    object: message_insert_input!,
-    "on conflict condition"
+    # the row to be inserted
+    object: message_insert_input!
+
+    # on conflict condition
     on_conflict: message_on_conflict
   ): message
-  "perform the action: \"login\""
-  login(arg1: SampleInput!): SampleOutput
-  "update data of the table: \"message\""
+
+  # insert data into the table: "user"
+  insert_user(
+    # the rows to be inserted
+    objects: [user_insert_input!]!
+
+    # on conflict condition
+    on_conflict: user_on_conflict
+  ): user_mutation_response
+
+  # insert a single row into the table: "user"
+  insert_user_one(
+    # the row to be inserted
+    object: user_insert_input!
+
+    # on conflict condition
+    on_conflict: user_on_conflict
+  ): user
+
+  # perform the action: "sendMessage"
+  sendMessage(text: String): SendMessageOutput
+
+  # update data of the table: "current_user"
+  update_current_user(
+    # increments the integer columns with given value of the filtered values
+    _inc: current_user_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: current_user_set_input
+
+    # filter the rows which have to be updated
+    where: current_user_bool_exp!
+  ): current_user_mutation_response
+
+  # update data of the table: "message"
   update_message(
-    "increments the integer columns with given value of the filtered values"
-    _inc: message_inc_input,
-    "sets the columns of the filtered rows to the given values"
-    _set: message_set_input,
-    "filter the rows which have to be updated"
+    # increments the integer columns with given value of the filtered values
+    _inc: message_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: message_set_input
+
+    # filter the rows which have to be updated
     where: message_bool_exp!
   ): message_mutation_response
-  "update single row of the table: \"message\""
+
+  # update single row of the table: "message"
   update_message_by_pk(
-    "increments the integer columns with given value of the filtered values"
-    _inc: message_inc_input,
-    "sets the columns of the filtered rows to the given values"
-    _set: message_set_input,
+    # increments the integer columns with given value of the filtered values
+    _inc: message_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: message_set_input
     pk_columns: message_pk_columns_input!
   ): message
+
+  # update data of the table: "user"
+  update_user(
+    # increments the integer columns with given value of the filtered values
+    _inc: user_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: user_set_input
+
+    # filter the rows which have to be updated
+    where: user_bool_exp!
+  ): user_mutation_response
+
+  # update single row of the table: "user"
+  update_user_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: user_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: user_set_input
+    pk_columns: user_pk_columns_input!
+  ): user
 }
 
-"query root"
-type query_root {
-  "fetch data from the table: \"message\""
-  message(
-    "distinct select on columns"
-    distinct_on: [message_select_column!],
-    "limit the number of rows returned"
-    limit: Int,
-    "skip the first n rows. Use only with order_by"
-    offset: Int,
-    "sort the rows by one or more columns"
-    order_by: [message_order_by!],
-    "filter the rows returned"
-    where: message_bool_exp
-  ): [message!]!
-  "fetch aggregated fields from the table: \"message\""
-  message_aggregate(
-    "distinct select on columns"
-    distinct_on: [message_select_column!],
-    "limit the number of rows returned"
-    limit: Int,
-    "skip the first n rows. Use only with order_by"
-    offset: Int,
-    "sort the rows by one or more columns"
-    order_by: [message_order_by!],
-    "filter the rows returned"
-    where: message_bool_exp
-  ): message_aggregate!
-  "fetch data from the table: \"message\" using primary key columns"
-  message_by_pk(id: Int!): message
-}
-
-"subscription root"
-type subscription_root {
-  "fetch data from the table: \"message\""
-  message(
-    "distinct select on columns"
-    distinct_on: [message_select_column!],
-    "limit the number of rows returned"
-    limit: Int,
-    "skip the first n rows. Use only with order_by"
-    offset: Int,
-    "sort the rows by one or more columns"
-    order_by: [message_order_by!],
-    "filter the rows returned"
-    where: message_bool_exp
-  ): [message!]!
-  "fetch aggregated fields from the table: \"message\""
-  message_aggregate(
-    "distinct select on columns"
-    distinct_on: [message_select_column!],
-    "limit the number of rows returned"
-    limit: Int,
-    "skip the first n rows. Use only with order_by"
-    offset: Int,
-    "sort the rows by one or more columns"
-    order_by: [message_order_by!],
-    "filter the rows returned"
-    where: message_bool_exp
-  ): message_aggregate!
-  "fetch data from the table: \"message\" using primary key columns"
-  message_by_pk(id: Int!): message
-}
-
-"unique or primary key constraints on table \"message\""
-enum message_constraint {
-  "unique or primary key constraint"
-  message_pkey
-}
-
-"select columns of table \"message\""
-enum message_select_column {
-  "column name"
-  id
-  "column name"
-  text
-}
-
-"update columns of table \"message\""
-enum message_update_column {
-  "column name"
-  id
-  "column name"
-  text
-}
-
-"column ordering options"
+# column ordering options
 enum order_by {
-  "in the ascending order, nulls last"
+  # in the ascending order, nulls last
   asc
-  "in the ascending order, nulls first"
+
+  # in the ascending order, nulls first
   asc_nulls_first
-  "in the ascending order, nulls last"
+
+  # in the ascending order, nulls last
   asc_nulls_last
-  "in the descending order, nulls first"
+
+  # in the descending order, nulls first
   desc
-  "in the descending order, nulls first"
+
+  # in the descending order, nulls first
   desc_nulls_first
-  "in the descending order, nulls last"
+
+  # in the descending order, nulls last
   desc_nulls_last
 }
 
-"expression to compare columns of type Int. All fields are combined with logical 'AND'."
-input Int_comparison_exp {
-  _eq: Int
-  _gt: Int
-  _gte: Int
-  _in: [Int!]
-  _is_null: Boolean
-  _lt: Int
-  _lte: Int
-  _neq: Int
-  _nin: [Int!]
+# query root
+type query_root {
+  # fetch data from the table: "current_user"
+  current_user(
+    # distinct select on columns
+    distinct_on: [current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [current_user_order_by!]
+
+    # filter the rows returned
+    where: current_user_bool_exp
+  ): [current_user!]!
+
+  # fetch aggregated fields from the table: "current_user"
+  current_user_aggregate(
+    # distinct select on columns
+    distinct_on: [current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [current_user_order_by!]
+
+    # filter the rows returned
+    where: current_user_bool_exp
+  ): current_user_aggregate!
+
+  # execute function "me" which returns "user"
+  me(
+    # input parameters for function "me"
+    args: me_args!
+
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): [user!]!
+
+  # execute function "me" and query aggregates on result of table type "user"
+  me_aggregate(
+    # input parameters for function "me"
+    args: me_args!
+
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): user_aggregate!
+
+  # fetch data from the table: "message"
+  message(
+    # distinct select on columns
+    distinct_on: [message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [message_order_by!]
+
+    # filter the rows returned
+    where: message_bool_exp
+  ): [message!]!
+
+  # fetch aggregated fields from the table: "message"
+  message_aggregate(
+    # distinct select on columns
+    distinct_on: [message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [message_order_by!]
+
+    # filter the rows returned
+    where: message_bool_exp
+  ): message_aggregate!
+
+  # fetch data from the table: "message" using primary key columns
+  message_by_pk(id: Int!): message
+
+  # fetch data from the table: "user"
+  user(
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): [user!]!
+
+  # fetch aggregated fields from the table: "user"
+  user_aggregate(
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): user_aggregate!
+
+  # fetch data from the table: "user" using primary key columns
+  user_by_pk(id: Int!): user
 }
 
-input SampleInput {
-  password: String!
-  username: String!
+type SendMessageOutput {
+  id: Int!
 }
 
-"expression to compare columns of type String. All fields are combined with logical 'AND'."
+# expression to compare columns of type String. All fields are combined with logical 'AND'.
 input String_comparison_exp {
   _eq: String
   _gt: String
@@ -280,145 +826,416 @@ input String_comparison_exp {
   _similar: String
 }
 
-"expression to compare columns of type json. All fields are combined with logical 'AND'."
-input json_comparison_exp {
-  _eq: json
-  _gt: json
-  _gte: json
-  _in: [json!]
-  _is_null: Boolean
-  _lt: json
-  _lte: json
-  _neq: json
-  _nin: [json!]
+# subscription root
+type subscription_root {
+  # fetch data from the table: "current_user"
+  current_user(
+    # distinct select on columns
+    distinct_on: [current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [current_user_order_by!]
+
+    # filter the rows returned
+    where: current_user_bool_exp
+  ): [current_user!]!
+
+  # fetch aggregated fields from the table: "current_user"
+  current_user_aggregate(
+    # distinct select on columns
+    distinct_on: [current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [current_user_order_by!]
+
+    # filter the rows returned
+    where: current_user_bool_exp
+  ): current_user_aggregate!
+
+  # execute function "me" which returns "user"
+  me(
+    # input parameters for function "me"
+    args: me_args!
+
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): [user!]!
+
+  # execute function "me" and query aggregates on result of table type "user"
+  me_aggregate(
+    # input parameters for function "me"
+    args: me_args!
+
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): user_aggregate!
+
+  # fetch data from the table: "message"
+  message(
+    # distinct select on columns
+    distinct_on: [message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [message_order_by!]
+
+    # filter the rows returned
+    where: message_bool_exp
+  ): [message!]!
+
+  # fetch aggregated fields from the table: "message"
+  message_aggregate(
+    # distinct select on columns
+    distinct_on: [message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [message_order_by!]
+
+    # filter the rows returned
+    where: message_bool_exp
+  ): message_aggregate!
+
+  # fetch data from the table: "message" using primary key columns
+  message_by_pk(id: Int!): message
+
+  # fetch data from the table: "user"
+  user(
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): [user!]!
+
+  # fetch aggregated fields from the table: "user"
+  user_aggregate(
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): user_aggregate!
+
+  # fetch data from the table: "user" using primary key columns
+  user_by_pk(id: Int!): user
 }
-
-"order by aggregate values of table \"message\""
-input message_aggregate_order_by {
-  avg: message_avg_order_by
-  count: order_by
-  max: message_max_order_by
-  min: message_min_order_by
-  stddev: message_stddev_order_by
-  stddev_pop: message_stddev_pop_order_by
-  stddev_samp: message_stddev_samp_order_by
-  sum: message_sum_order_by
-  var_pop: message_var_pop_order_by
-  var_samp: message_var_samp_order_by
-  variance: message_variance_order_by
-}
-
-"input type for inserting array relation for remote table \"message\""
-input message_arr_rel_insert_input {
-  data: [message_insert_input!]!
-  on_conflict: message_on_conflict
-}
-
-"order by avg() on columns of table \"message\""
-input message_avg_order_by {
-  id: order_by
-}
-
-"Boolean expression to filter rows from the table \"message\". All fields are combined with a logical 'AND'."
-input message_bool_exp {
-  _and: [message_bool_exp]
-  _not: message_bool_exp
-  _or: [message_bool_exp]
-  id: Int_comparison_exp
-  text: String_comparison_exp
-}
-
-"input type for incrementing integer column in table \"message\""
-input message_inc_input {
-  id: Int
-}
-
-"input type for inserting data into table \"message\""
-input message_insert_input {
-  id: Int
-  text: String
-}
-
-"order by max() on columns of table \"message\""
-input message_max_order_by {
-  id: order_by
-  text: order_by
-}
-
-"order by min() on columns of table \"message\""
-input message_min_order_by {
-  id: order_by
-  text: order_by
-}
-
-"input type for inserting object relation for remote table \"message\""
-input message_obj_rel_insert_input {
-  data: message_insert_input!
-  on_conflict: message_on_conflict
-}
-
-"on conflict condition type for table \"message\""
-input message_on_conflict {
-  constraint: message_constraint!
-  update_columns: [message_update_column!]!
-  where: message_bool_exp
-}
-
-"ordering options when selecting data from \"message\""
-input message_order_by {
-  id: order_by
-  text: order_by
-}
-
-"primary key columns input for table: \"message\""
-input message_pk_columns_input {
-  id: Int!
-}
-
-"input type for updating data in table \"message\""
-input message_set_input {
-  id: Int
-  text: String
-}
-
-"order by stddev() on columns of table \"message\""
-input message_stddev_order_by {
-  id: order_by
-}
-
-"order by stddev_pop() on columns of table \"message\""
-input message_stddev_pop_order_by {
-  id: order_by
-}
-
-"order by stddev_samp() on columns of table \"message\""
-input message_stddev_samp_order_by {
-  id: order_by
-}
-
-"order by sum() on columns of table \"message\""
-input message_sum_order_by {
-  id: order_by
-}
-
-"order by var_pop() on columns of table \"message\""
-input message_var_pop_order_by {
-  id: order_by
-}
-
-"order by var_samp() on columns of table \"message\""
-input message_var_samp_order_by {
-  id: order_by
-}
-
-"order by variance() on columns of table \"message\""
-input message_variance_order_by {
-  id: order_by
-}
-
-
-scalar json
 
 scalar timestamptz
 
+# columns and relationships of "user"
+type user {
+  avatar: String
+  id: Int!
+  name: String!
+}
+
+# aggregated selection of "user"
+type user_aggregate {
+  aggregate: user_aggregate_fields
+  nodes: [user!]!
+}
+
+# aggregate fields of "user"
+type user_aggregate_fields {
+  avg: user_avg_fields
+  count(columns: [user_select_column!], distinct: Boolean): Int
+  max: user_max_fields
+  min: user_min_fields
+  stddev: user_stddev_fields
+  stddev_pop: user_stddev_pop_fields
+  stddev_samp: user_stddev_samp_fields
+  sum: user_sum_fields
+  var_pop: user_var_pop_fields
+  var_samp: user_var_samp_fields
+  variance: user_variance_fields
+}
+
+# order by aggregate values of table "user"
+input user_aggregate_order_by {
+  avg: user_avg_order_by
+  count: order_by
+  max: user_max_order_by
+  min: user_min_order_by
+  stddev: user_stddev_order_by
+  stddev_pop: user_stddev_pop_order_by
+  stddev_samp: user_stddev_samp_order_by
+  sum: user_sum_order_by
+  var_pop: user_var_pop_order_by
+  var_samp: user_var_samp_order_by
+  variance: user_variance_order_by
+}
+
+# input type for inserting array relation for remote table "user"
+input user_arr_rel_insert_input {
+  data: [user_insert_input!]!
+  on_conflict: user_on_conflict
+}
+
+# aggregate avg on columns
+type user_avg_fields {
+  id: Float
+}
+
+# order by avg() on columns of table "user"
+input user_avg_order_by {
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'.
+input user_bool_exp {
+  _and: [user_bool_exp]
+  _not: user_bool_exp
+  _or: [user_bool_exp]
+  avatar: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+# unique or primary key constraints on table "user"
+enum user_constraint {
+  # unique or primary key constraint
+  user_pkey
+}
+
+# input type for incrementing integer column in table "user"
+input user_inc_input {
+  id: Int
+}
+
+# input type for inserting data into table "user"
+input user_insert_input {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# aggregate max on columns
+type user_max_fields {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# order by max() on columns of table "user"
+input user_max_order_by {
+  avatar: order_by
+  id: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type user_min_fields {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# order by min() on columns of table "user"
+input user_min_order_by {
+  avatar: order_by
+  id: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "user"
+type user_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [user!]!
+}
+
+# input type for inserting object relation for remote table "user"
+input user_obj_rel_insert_input {
+  data: user_insert_input!
+  on_conflict: user_on_conflict
+}
+
+# on conflict condition type for table "user"
+input user_on_conflict {
+  constraint: user_constraint!
+  update_columns: [user_update_column!]!
+  where: user_bool_exp
+}
+
+# ordering options when selecting data from "user"
+input user_order_by {
+  avatar: order_by
+  id: order_by
+  name: order_by
+}
+
+# primary key columns input for table: "user"
+input user_pk_columns_input {
+  id: Int!
+}
+
+# select columns of table "user"
+enum user_select_column {
+  # column name
+  avatar
+
+  # column name
+  id
+
+  # column name
+  name
+}
+
+# input type for updating data in table "user"
+input user_set_input {
+  avatar: String
+  id: Int
+  name: String
+}
+
+# aggregate stddev on columns
+type user_stddev_fields {
+  id: Float
+}
+
+# order by stddev() on columns of table "user"
+input user_stddev_order_by {
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
+type user_stddev_pop_fields {
+  id: Float
+}
+
+# order by stddev_pop() on columns of table "user"
+input user_stddev_pop_order_by {
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
+type user_stddev_samp_fields {
+  id: Float
+}
+
+# order by stddev_samp() on columns of table "user"
+input user_stddev_samp_order_by {
+  id: order_by
+}
+
+# aggregate sum on columns
+type user_sum_fields {
+  id: Int
+}
+
+# order by sum() on columns of table "user"
+input user_sum_order_by {
+  id: order_by
+}
+
+# update columns of table "user"
+enum user_update_column {
+  # column name
+  avatar
+
+  # column name
+  id
+
+  # column name
+  name
+}
+
+# aggregate var_pop on columns
+type user_var_pop_fields {
+  id: Float
+}
+
+# order by var_pop() on columns of table "user"
+input user_var_pop_order_by {
+  id: order_by
+}
+
+# aggregate var_samp on columns
+type user_var_samp_fields {
+  id: Float
+}
+
+# order by var_samp() on columns of table "user"
+input user_var_samp_order_by {
+  id: order_by
+}
+
+# aggregate variance on columns
+type user_variance_fields {
+  id: Float
+}
+
+# order by variance() on columns of table "user"
+input user_variance_order_by {
+  id: order_by
+}
+
 scalar uuid
+

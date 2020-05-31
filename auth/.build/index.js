@@ -116,7 +116,7 @@ app.use(body_parser__WEBPACK_IMPORTED_MODULE_2___default.a.json())
 app.get('/hasurahook', (req, res) => {
 
   res.json({
-    "X-Hasura-User-Id": "25",
+    "X-Hasura-User-Id": "5",
     "X-Hasura-Role": "admin",
     "X-Hasura-Is-Owner": "true",
     "X-Hasura-Custom": "custom value"
