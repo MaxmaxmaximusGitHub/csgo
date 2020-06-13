@@ -19,6 +19,308 @@ input bigint_comparison_exp {
   _nin: [bigint!]
 }
 
+# columns and relationships of "chat_message"
+type chat_message {
+  # An object relationship
+  author: user!
+  author_id: Int!
+  created_at: timestamptz!
+  id: bigint!
+  text: String!
+  updated_at: timestamptz!
+}
+
+# aggregated selection of "chat_message"
+type chat_message_aggregate {
+  aggregate: chat_message_aggregate_fields
+  nodes: [chat_message!]!
+}
+
+# aggregate fields of "chat_message"
+type chat_message_aggregate_fields {
+  avg: chat_message_avg_fields
+  count(columns: [chat_message_select_column!], distinct: Boolean): Int
+  max: chat_message_max_fields
+  min: chat_message_min_fields
+  stddev: chat_message_stddev_fields
+  stddev_pop: chat_message_stddev_pop_fields
+  stddev_samp: chat_message_stddev_samp_fields
+  sum: chat_message_sum_fields
+  var_pop: chat_message_var_pop_fields
+  var_samp: chat_message_var_samp_fields
+  variance: chat_message_variance_fields
+}
+
+# order by aggregate values of table "chat_message"
+input chat_message_aggregate_order_by {
+  avg: chat_message_avg_order_by
+  count: order_by
+  max: chat_message_max_order_by
+  min: chat_message_min_order_by
+  stddev: chat_message_stddev_order_by
+  stddev_pop: chat_message_stddev_pop_order_by
+  stddev_samp: chat_message_stddev_samp_order_by
+  sum: chat_message_sum_order_by
+  var_pop: chat_message_var_pop_order_by
+  var_samp: chat_message_var_samp_order_by
+  variance: chat_message_variance_order_by
+}
+
+# input type for inserting array relation for remote table "chat_message"
+input chat_message_arr_rel_insert_input {
+  data: [chat_message_insert_input!]!
+  on_conflict: chat_message_on_conflict
+}
+
+# aggregate avg on columns
+type chat_message_avg_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by avg() on columns of table "chat_message"
+input chat_message_avg_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "chat_message". All fields are combined with a logical 'AND'.
+input chat_message_bool_exp {
+  _and: [chat_message_bool_exp]
+  _not: chat_message_bool_exp
+  _or: [chat_message_bool_exp]
+  author: user_bool_exp
+  author_id: Int_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  text: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+# unique or primary key constraints on table "chat_message"
+enum chat_message_constraint {
+  # unique or primary key constraint
+  chat_message_pkey
+}
+
+# input type for incrementing integer column in table "chat_message"
+input chat_message_inc_input {
+  author_id: Int
+  id: bigint
+}
+
+# input type for inserting data into table "chat_message"
+input chat_message_insert_input {
+  author: user_obj_rel_insert_input
+  author_id: Int
+  created_at: timestamptz
+  id: bigint
+  text: String
+  updated_at: timestamptz
+}
+
+# aggregate max on columns
+type chat_message_max_fields {
+  author_id: Int
+  created_at: timestamptz
+  id: bigint
+  text: String
+  updated_at: timestamptz
+}
+
+# order by max() on columns of table "chat_message"
+input chat_message_max_order_by {
+  author_id: order_by
+  created_at: order_by
+  id: order_by
+  text: order_by
+  updated_at: order_by
+}
+
+# aggregate min on columns
+type chat_message_min_fields {
+  author_id: Int
+  created_at: timestamptz
+  id: bigint
+  text: String
+  updated_at: timestamptz
+}
+
+# order by min() on columns of table "chat_message"
+input chat_message_min_order_by {
+  author_id: order_by
+  created_at: order_by
+  id: order_by
+  text: order_by
+  updated_at: order_by
+}
+
+# response of any mutation on the table "chat_message"
+type chat_message_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [chat_message!]!
+}
+
+# input type for inserting object relation for remote table "chat_message"
+input chat_message_obj_rel_insert_input {
+  data: chat_message_insert_input!
+  on_conflict: chat_message_on_conflict
+}
+
+# on conflict condition type for table "chat_message"
+input chat_message_on_conflict {
+  constraint: chat_message_constraint!
+  update_columns: [chat_message_update_column!]!
+  where: chat_message_bool_exp
+}
+
+# ordering options when selecting data from "chat_message"
+input chat_message_order_by {
+  author: user_order_by
+  author_id: order_by
+  created_at: order_by
+  id: order_by
+  text: order_by
+  updated_at: order_by
+}
+
+# primary key columns input for table: "chat_message"
+input chat_message_pk_columns_input {
+  id: bigint!
+}
+
+# select columns of table "chat_message"
+enum chat_message_select_column {
+  # column name
+  author_id
+
+  # column name
+  created_at
+
+  # column name
+  id
+
+  # column name
+  text
+
+  # column name
+  updated_at
+}
+
+# input type for updating data in table "chat_message"
+input chat_message_set_input {
+  author_id: Int
+  created_at: timestamptz
+  id: bigint
+  text: String
+  updated_at: timestamptz
+}
+
+# aggregate stddev on columns
+type chat_message_stddev_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by stddev() on columns of table "chat_message"
+input chat_message_stddev_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
+type chat_message_stddev_pop_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by stddev_pop() on columns of table "chat_message"
+input chat_message_stddev_pop_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
+type chat_message_stddev_samp_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by stddev_samp() on columns of table "chat_message"
+input chat_message_stddev_samp_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# aggregate sum on columns
+type chat_message_sum_fields {
+  author_id: Int
+  id: bigint
+}
+
+# order by sum() on columns of table "chat_message"
+input chat_message_sum_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# update columns of table "chat_message"
+enum chat_message_update_column {
+  # column name
+  author_id
+
+  # column name
+  created_at
+
+  # column name
+  id
+
+  # column name
+  text
+
+  # column name
+  updated_at
+}
+
+# aggregate var_pop on columns
+type chat_message_var_pop_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by var_pop() on columns of table "chat_message"
+input chat_message_var_pop_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# aggregate var_samp on columns
+type chat_message_var_samp_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by var_samp() on columns of table "chat_message"
+input chat_message_var_samp_order_by {
+  author_id: order_by
+  id: order_by
+}
+
+# aggregate variance on columns
+type chat_message_variance_fields {
+  author_id: Float
+  id: Float
+}
+
+# order by variance() on columns of table "chat_message"
+input chat_message_variance_order_by {
+  author_id: order_by
+  id: order_by
+}
+
 type CreateUserOutput {
   id: Int!
 }
@@ -384,6 +686,15 @@ type Lol {
 
 # mutation root
 type mutation_root {
+  # delete data from the table: "chat_message"
+  delete_chat_message(
+    # filter the rows which have to be deleted
+    where: chat_message_bool_exp!
+  ): chat_message_mutation_response
+
+  # delete single row from the table: "chat_message"
+  delete_chat_message_by_pk(id: bigint!): chat_message
+
   # delete data from the table: "current_user"
   delete_current_user(
     # filter the rows which have to be deleted
@@ -407,6 +718,24 @@ type mutation_root {
 
   # delete single row from the table: "user_role"
   delete_user_role_by_pk(value: String!): user_role
+
+  # insert data into the table: "chat_message"
+  insert_chat_message(
+    # the rows to be inserted
+    objects: [chat_message_insert_input!]!
+
+    # on conflict condition
+    on_conflict: chat_message_on_conflict
+  ): chat_message_mutation_response
+
+  # insert a single row into the table: "chat_message"
+  insert_chat_message_one(
+    # the row to be inserted
+    object: chat_message_insert_input!
+
+    # on conflict condition
+    on_conflict: chat_message_on_conflict
+  ): chat_message
 
   # insert data into the table: "current_user"
   insert_current_user(
@@ -461,6 +790,31 @@ type mutation_root {
 
   # perform the action: "moneyPlus"
   moneyPlus(id: Int!): Output
+
+  # perform the action: "sendChatMessage"
+  sendChatMessage(text: String!): SendChatMessageOutput!
+
+  # update data of the table: "chat_message"
+  update_chat_message(
+    # increments the integer columns with given value of the filtered values
+    _inc: chat_message_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: chat_message_set_input
+
+    # filter the rows which have to be updated
+    where: chat_message_bool_exp!
+  ): chat_message_mutation_response
+
+  # update single row of the table: "chat_message"
+  update_chat_message_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: chat_message_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: chat_message_set_input
+    pk_columns: chat_message_pk_columns_input!
+  ): chat_message
 
   # update data of the table: "current_user"
   update_current_user(
@@ -540,6 +894,45 @@ type Output {
 
 # query root
 type query_root {
+  # fetch data from the table: "chat_message"
+  chat_message(
+    # distinct select on columns
+    distinct_on: [chat_message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [chat_message_order_by!]
+
+    # filter the rows returned
+    where: chat_message_bool_exp
+  ): [chat_message!]!
+
+  # fetch aggregated fields from the table: "chat_message"
+  chat_message_aggregate(
+    # distinct select on columns
+    distinct_on: [chat_message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [chat_message_order_by!]
+
+    # filter the rows returned
+    where: chat_message_bool_exp
+  ): chat_message_aggregate!
+
+  # fetch data from the table: "chat_message" using primary key columns
+  chat_message_by_pk(id: bigint!): chat_message
+
   # fetch data from the table: "current_user"
   current_user(
     # distinct select on columns
@@ -673,6 +1066,10 @@ type SampleOutput {
   accessToken: String!
 }
 
+type SendChatMessageOutput {
+  id: Int!
+}
+
 # expression to compare columns of type String. All fields are combined with logical 'AND'.
 input String_comparison_exp {
   _eq: String
@@ -694,6 +1091,45 @@ input String_comparison_exp {
 
 # subscription root
 type subscription_root {
+  # fetch data from the table: "chat_message"
+  chat_message(
+    # distinct select on columns
+    distinct_on: [chat_message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [chat_message_order_by!]
+
+    # filter the rows returned
+    where: chat_message_bool_exp
+  ): [chat_message!]!
+
+  # fetch aggregated fields from the table: "chat_message"
+  chat_message_aggregate(
+    # distinct select on columns
+    distinct_on: [chat_message_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [chat_message_order_by!]
+
+    # filter the rows returned
+    where: chat_message_bool_exp
+  ): chat_message_aggregate!
+
+  # fetch data from the table: "chat_message" using primary key columns
+  chat_message_by_pk(id: bigint!): chat_message
+
   # fetch data from the table: "current_user"
   current_user(
     # distinct select on columns
@@ -1112,6 +1548,7 @@ enum user_role_constraint {
 enum user_role_enum {
   admin
   anonymous
+  owner
   user
 }
 

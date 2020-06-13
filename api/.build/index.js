@@ -106,8 +106,6 @@ __webpack_require__.r(__webpack_exports__);
 
 _lib_actions__WEBPACK_IMPORTED_MODULE_0__["default"].add('moneyPlus', async (data, user) => {
 
-  console.log('user', user)
-
   const {rows} = await _lib_db__WEBPACK_IMPORTED_MODULE_1__["default"].query(sql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
     UPDATE "user"
     SET money = money + 2
@@ -122,6 +120,7 @@ _lib_actions__WEBPACK_IMPORTED_MODULE_0__["default"].add('moneyPlus', async (dat
 
 
 _lib_actions__WEBPACK_IMPORTED_MODULE_0__["default"].add('moneyMinus', async (data, user) => {
+
   const {rows} = await _lib_db__WEBPACK_IMPORTED_MODULE_1__["default"].query(sql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
     UPDATE "user"
     SET money = money - 2
@@ -130,6 +129,20 @@ _lib_actions__WEBPACK_IMPORTED_MODULE_0__["default"].add('moneyMinus', async (da
 
   return {
     money: rows[0].money
+  }
+})
+
+
+_lib_actions__WEBPACK_IMPORTED_MODULE_0__["default"].add('sendChatMessage', async (data, user) => {
+
+  const {rows} = await _lib_db__WEBPACK_IMPORTED_MODULE_1__["default"].query(sql_tag__WEBPACK_IMPORTED_MODULE_2___default.a`
+    INSERT INTO "chat_message" (author_id, text)
+    VALUES (${user.id}, ${data.text})
+    RETURNING id
+  `)
+
+  return {
+    id: rows[0].id
   }
 })
 

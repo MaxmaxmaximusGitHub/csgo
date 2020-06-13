@@ -1,5 +1,5 @@
 import React from "react"
-import Messages from "./MessagesList"
+import ChatMessages from "./ChatMessages"
 import ChatInput from "./ChatInput"
 import ChatHeader from "./ChatHeader"
 import css from 'styled-jsx/css'
@@ -11,7 +11,7 @@ export default function Chat() {
     <ChatHeader/>
 
     <div className='content-panel'>
-      <Messages/>
+      <ChatMessages/>
       <ChatInput/>
     </div>
 

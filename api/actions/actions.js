@@ -5,8 +5,6 @@ import sql from 'sql-tag'
 
 actions.add('moneyPlus', async (data, user) => {
 
-  console.log('user', user)
-
   const {rows} = await db.query(sql`
     UPDATE "user"
     SET money = money + 2
@@ -21,6 +19,7 @@ actions.add('moneyPlus', async (data, user) => {
 
 
 actions.add('moneyMinus', async (data, user) => {
+
   const {rows} = await db.query(sql`
     UPDATE "user"
     SET money = money - 2
@@ -29,6 +28,20 @@ actions.add('moneyMinus', async (data, user) => {
 
   return {
     money: rows[0].money
+  }
+})
+
+
+actions.add('sendChatMessage', async (data, user) => {
+
+  const {rows} = await db.query(sql`
+    INSERT INTO "chat_message" (author_id, text)
+    VALUES (${user.id}, ${data.text})
+    RETURNING id
+  `)
+
+  return {
+    id: rows[0].id
   }
 })
 
