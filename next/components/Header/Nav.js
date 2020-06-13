@@ -12,23 +12,23 @@ export default function Nav() {
   return <nav className='nav-bar'>
     <NavigationLink href='/'>Главная</NavigationLink>
 
-    <NavigationLink href='/history' icon={ historyIcon }>
+    <NavigationLink href='/history' icon={historyIcon}>
       История
     </NavigationLink>
 
-    <NavigationLink href='/support' icon={ supportIcon }>
+    <NavigationLink href='/support' icon={supportIcon}>
       Поддержка
     </NavigationLink>
 
-    <NavigationLink href='/bonuses' icon={ bonusesIcon }>
+    <NavigationLink href='/bonuses' icon={bonusesIcon}>
       Бонусы
     </NavigationLink>
 
-    <NavigationLink href='/referrals' icon={ refsIcon }>
+    <NavigationLink href='/referrals' icon={refsIcon}>
       Рефералы
     </NavigationLink>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </nav>
 }
 

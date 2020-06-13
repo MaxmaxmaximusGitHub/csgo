@@ -10,7 +10,7 @@ export default function ChatInput() {
 
     <button className='send-button'></button>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </form>
 }
 
@@ -47,7 +47,7 @@ const style = css`
   background-position center
   background-size cover
   background-origin content-box
-  background-image url(${ sendMessageIcon })
+  background-image url(${sendMessageIcon})
   padding 0.5em
   padding-right 1em
 }

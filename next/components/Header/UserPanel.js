@@ -1,28 +1,25 @@
 import css from 'styled-jsx/css'
 import Button from "../Widgets/Button"
-import toMoney from "../../lib/filters/toMoney"
+import toMoney from "../../filters/toMoney"
 import walletIcon from 'res/images/wallet-icon.svg'
 import UserActions from "./UserActions"
-import LoginButton from './LogignButton'
 
 
 export default function UserPanel({user}) {
 
-
-  const {nickname, avatar, balance} = user
+  const {nickname, avatar, money} = user
 
   return <div className='user-panel'>
-    <Button icon={ walletIcon }>Пополнение</Button>
+    <Button icon={walletIcon}>Пополнение</Button>
 
     <div className="user-info">
-      <div className="nickname">{ nickname }</div>
-      <div className="balance">{ toMoney(balance) }</div>
+      <div className="nickname">{nickname}</div>
+      <div className="money">{toMoney(money)}</div>
     </div>
-
 
     <UserActions/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 
@@ -42,9 +39,11 @@ const style = css`
       .nickname {
         font-size 1em
         white-space nowrap
+        max-width 12em
+        overflow hidden
       }
 
-      .balance {
+      .money {
         color #E6B757
         margin-top 0.3em
         margin-left 0.5em

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 
 
@@ -6,7 +6,7 @@ export default function CreateTicket() {
 
   return <div className='CreateTicketForm'>
     CreateTicketForm
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

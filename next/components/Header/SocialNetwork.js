@@ -1,5 +1,4 @@
 import css from 'styled-jsx/css'
-import Link from "next/link"
 
 
 export default function SocialNetwork({href, icon}) {
@@ -17,7 +16,7 @@ export default function SocialNetwork({href, icon}) {
   return <>
     <div className="lol"></div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </>
 }
 

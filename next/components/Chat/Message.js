@@ -1,5 +1,5 @@
 import css from 'styled-jsx/css'
-import toDate from "../../lib/filters/toDate"
+import toDate from "../../filters/toDate"
 import ClientRender from "../Widgets/ClientRender";
 
 
@@ -10,16 +10,16 @@ export default function Message({message: {avatar, nickname, text, createdAt}}) 
     <div className="message-content">
 
       <div className="info-row">
-        <div className="nickname">{ nickname }</div>
+        <div className="nickname">{nickname}</div>
         <div className="time">
-          <ClientRender>{ toDate(createdAt, "h:MM") }</ClientRender>
+          <ClientRender>{toDate(createdAt, "h:MM")}</ClientRender>
         </div>
       </div>
 
-      <div className="text">{ text }</div>
+      <div className="text">{text}</div>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </li>
 }
 

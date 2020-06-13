@@ -7,11 +7,11 @@ export default React.memo(function GlobalFontSize() {
   const fontSize = useFontSize()
 
   // language=Stylus
-  return <style jsx global>{ `
+  return <style jsx global>{`
 		body {
-		  font-size ${ fontSize }px
+		  font-size ${fontSize}px
 		}
-  ` }</style>
+  `}</style>
 
 })
 

@@ -6,16 +6,17 @@ export default function ActionButton({icon, indicator, bg = true, ...props}) {
   let inlineStyle = {}
 
   if (icon) {
-    inlineStyle.backgroundImage = `url(${ icon })`
+    inlineStyle.backgroundImage = `url(${icon})`
   }
 
   return <div
-    className={ `action-button __with-bg-${ bg }` }
-    style={ inlineStyle } { ...props }>
+    className={`action-button __with-bg-${bg}`}
+    style={inlineStyle}
+    {...props}>
 
-    { indicator && <div className='indicator'></div> }
+    {indicator && <div className='indicator'></div>}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

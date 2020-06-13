@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 import TicketsList from "./TicketsList";
 import ActiveTicket from "./ActiveTicket";
-import CreateTicket from "./CreateTicket";
 
 
 export default function Tickets() {
@@ -14,12 +13,12 @@ export default function Tickets() {
       <TicketsList></TicketsList>
     </>
   } else {
-    var content = <ActiveTicket ticket={ activeTicket }/>
+    var content = <ActiveTicket ticket={activeTicket}/>
   }
 
   return <div className='tickets'>
-    { content }
-    <style jsx>{ style }</style>
+    {content}
+    <style jsx>{style}</style>
   </div>
 }
 

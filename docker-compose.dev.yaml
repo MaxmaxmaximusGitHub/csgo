@@ -6,32 +6,40 @@ services:
     image: postgres:12
     restart: always
     ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
-    command: -p ${POSTGRES_PORT}
+      - ${PG_PORT}:${PG_PORT}
+    command: -p ${PG_PORT}
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PG_PASSWORD: ${PG_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
 
 
+  redis:
+    image: redis:6.0.4
+    restart: always
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    command: redis-server --port ${REDIS_PORT} --requirepass ${REDIS_PASS}
+
+
   hasura:
-    image: hasura/graphql-engine:v1.2.1
+    image: hasura/graphql-engine:v1.2.2
     ports:
       - 8080:8080
     restart: always
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${PG_PASSWORD}@${PG_USER}:${PG_PORT}/${PG_DB_NAME}
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
       HASURA_GRAPHQL_DEV_MODE: "true"
-      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 300
+      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 1000
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
-      HASURA_GRAPHQL_AUTH_HOOK: http://auth:${AUTH_PORT}/hook/hasurahook
       HASURA_GRAPHQL_ACTION_SECRET: ${HASURA_GRAPHQL_ACTION_SECRET}
+      HASURA_GRAPHQL_AUTH_HOOK: ${HASURA_GRAPHQL_AUTH_HOOK}
     depends_on:
       - postgres
-      - auth
+      - api
 
 
   next:
@@ -43,12 +51,52 @@ services:
     restart: always
     ports:
       - ${NEXT_PORT}:${NEXT_PORT}
-      - 9222:9222
+      - ${NEXT_DEBUG_PORT}:${NEXT_DEBUG_PORT}
     environment:
-      DOCKER_GRAPHQL_ENDPOINT: http://hasura:8080/v1/graphql
+      NEXT_PUBLIC_GRAPHQL: ${NEXT_PUBLIC_GRAPHQL}
+      NEXT_PUBLIC_GRAPHQL_SUBSCRIPTIONS: ${NEXT_PUBLIC_GRAPHQL_SUBSCRIPTIONS}
+
+      NEXT_GRAPHQL_SSR: ${NEXT_GRAPHQL_SSR}
+      NEXT_DEBUG_PORT: ${NEXT_DEBUG_PORT}
+      NEXT_PORT: ${NEXT_PORT}
 
     depends_on:
       - hasura
+
+
+  api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile.dev
+
+    volumes:
+      - ./:/app
+
+    restart: always
+    environment:
+      PORT: ${API_PORT}
+      DEBUG_PORT: ${API_DEBUG_PORT}
+      API_STEAM_REALM: ${API_STEAM_REALM}
+      API_STEAM_API_KEY: ${API_STEAM_API_KEY}
+      API_SESSIONS_SECRET_KEY: ${API_SESSIONS_SECRET_KEY}
+
+      PG_DB_NAME: ${PG_DB_NAME}
+      PG_HOST: ${PG_HOST}
+      PG_PORT: ${PG_PORT}
+      PG_USER: ${PG_USER}
+      PG_PASSWORD: ${PG_PASSWORD}
+
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PASS: ${REDIS_PASS}
+      REDIS_PORT: ${REDIS_PORT}
+
+    ports:
+      - ${API_PORT}:${API_PORT}
+      - ${API_DEBUG_PORT}:${API_DEBUG_PORT}
+
+    depends_on:
+      - postgres
+      - redis
 
 
   nginx:
@@ -62,53 +110,9 @@ services:
     volumes:
       - ./nginx/conf.dev/:/etc/nginx/conf.d/
       - ./nginx/logs/:/var/log/nginx/
-
-
-  redis:
-    image: redis:6.0.4
-    restart: always
-    ports:
-      - 6379:6379
-    command: redis-server --requirepass ${REDIS_PASS}
-
-
-  auth:
-    build:
-      context: .
-      dockerfile: ./auth/Dockerfile.dev
-    volumes:
-      - ./:/app
-    restart: always
-    environment:
-      PORT: ${AUTH_PORT}
-      DEBUGGER_PORT: 9228
-      AUTH_STEAM_API_KEY: ${AUTH_STEAM_API_KEY}
-      AUTH_SESSIONS_SECRET_KEY: ${AUTH_SESSIONS_SECRET_KEY}
-      REDIS_PASS: ${REDIS_PASS}
-    ports:
-      - ${AUTH_PORT}:${AUTH_PORT}
-      - 9228:9228
     depends_on:
-      - postgres
-      - redis
-
-
-  api:
-    build:
-      context: .
-      dockerfile: ./api/Dockerfile.dev
-    volumes:
-      - ./:/app
-    restart: always
-    environment:
-      HASURA_GRAPHQL_ACTION_SECRET: ${HASURA_GRAPHQL_ACTION_SECRET}
-      PORT: ${API_PORT}
-      DEBUGGER_PORT: 9229
-    ports:
-      - ${API_PORT}:${API_PORT}
-      - 9229:9229
-    depends_on:
-      - postgres
+      - next
+      - api
 
 volumes:
   db_data:

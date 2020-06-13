@@ -5,7 +5,7 @@ export default function HomePage() {
 
   return <div className='class'>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

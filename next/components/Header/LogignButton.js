@@ -5,8 +5,8 @@ import css from "styled-jsx/css";
 
 export default function LoginButton() {
   return <a className='login-button' href="/auth/steam" target="_self">
-    <Button icon={ steamIcon }>Войти через стим</Button>
-    <style jsx>{ style }</style>
+    <Button icon={steamIcon}>Войти через стим</Button>
+    <style jsx>{style}</style>
   </a>
 }
 

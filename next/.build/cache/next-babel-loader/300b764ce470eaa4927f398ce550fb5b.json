@@ -1,1 +1,0 @@
-{"ast":null,"code":"export*from\"../components/SupportPage/SupportPage\";","map":{"version":3,"sources":["C:/localhost/csshot/web/pages/support.js"],"names":[],"mappings":"AAAA,WAAc,uCAAd","sourcesContent":["export * from \"../components/SupportPage/SupportPage\"\r\n\r\n"]},"metadata":{},"sourceType":"module"}

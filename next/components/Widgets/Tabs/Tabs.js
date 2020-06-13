@@ -1,9 +1,6 @@
 import css from 'styled-jsx/css'
-import React, { Children, cloneElement, useEffect, useState, useRef } from "react"
-import useSize from "../../../hooks/useSize";
-import classes from "../../../lib/classes";
+import React, {Children, cloneElement, useState} from "react"
 import TabTitles from "./TabTitles";
-import TabTitle from "./TabTitle";
 
 
 export default function Tabs({children}) {
@@ -25,13 +22,13 @@ export default function Tabs({children}) {
 
   return <div className='tabs'>
 
-    <TabTitles tabs={ tabs } onTitleClick={ activateTab }/>
+    <TabTitles tabs={tabs} onTitleClick={activateTab}/>
 
     <div className="tabs-container">
-      { tabs }
+      {tabs}
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

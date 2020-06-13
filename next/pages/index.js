@@ -8,7 +8,7 @@ export default function HomePage() {
 
     <Game/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

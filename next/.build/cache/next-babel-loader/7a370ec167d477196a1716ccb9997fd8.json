@@ -1,1 +1,0 @@
-{"ast":null,"code":"export{default}from\"../components/RefsPage/RefsPage\";","map":{"version":3,"sources":["/app/services/next-js/pages/referrals.js"],"names":["default"],"mappings":"AAAA,OAASA,OAAT,KAAwB,iCAAxB","sourcesContent":["export { default } from \"../components/RefsPage/RefsPage\"\r\n\r\n\r\n\r\n"]},"metadata":{},"sourceType":"module"}

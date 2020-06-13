@@ -18,7 +18,7 @@ export default function HistoryPage() {
       <GamesHistory/>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </Page>
 }
 
@@ -51,7 +51,7 @@ const style = css`
     background-size contain
     background-position center
     background-repeat no-repeat
-    background-image url(${ historyIcon })
+    background-image url(${historyIcon})
   }
 
   .description {

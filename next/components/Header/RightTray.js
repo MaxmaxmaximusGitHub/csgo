@@ -2,20 +2,20 @@ import css from 'styled-jsx/css'
 import SocialNetworks from "./SocialNetworks"
 import UserPanel from "./UserPanel"
 import LoginButton from "./LogignButton"
-import useUser from "../../hooks/useUser"
+import useCurrentUser from "../../hooks/useCurrentUser"
 
 
 export default function RightTray() {
 
-  const user = useUser()
+  const user = useCurrentUser()
 
   return <div className='right-tray'>
     <SocialNetworks/>
 
-    { user && <UserPanel user={ user }/> }
-    { !user && <LoginButton/> }
+    {user && <UserPanel user={user}/>}
+    {!user && <LoginButton/>}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

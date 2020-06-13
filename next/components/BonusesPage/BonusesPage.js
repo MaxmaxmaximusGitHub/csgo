@@ -3,7 +3,6 @@ import Page from "../Widgets/Page"
 import PromoCode from "./PromoCode";
 import BonusesFAQ from "./BonusesFAQ";
 import BonusesNickName from "./BonusesNickName";
-import { loadGetInitialProps } from "next/dist/next-server/lib/utils";
 
 
 export default function BonusesPage() {
@@ -19,7 +18,7 @@ export default function BonusesPage() {
       <BonusesFAQ/>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </Page>
 }
 

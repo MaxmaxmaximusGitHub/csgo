@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 import Roll from "../Widgets/Roll";
 import Button from "../Widgets/Button";
@@ -10,13 +10,13 @@ export default function FAQ() {
 
 
   return <List>
-    { useRepeat(15, (index) =>
-      <Roll title='dfdf' key={ index }>
+    {useRepeat(15, (index) =>
+      <Roll title='dfdf' key={index}>
         <Button>fddddf</Button>
       </Roll>
-    ) }
+    )}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </List>
 }
 

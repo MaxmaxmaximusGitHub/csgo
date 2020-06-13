@@ -9,9 +9,9 @@ export default function LeftTray() {
   return <div className='left-tray'>
 
     <LangSelect/>
-    <ActionButton icon={ volumeIcon } bg={ false }/>
+    <ActionButton icon={volumeIcon} bg={false}/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
-import toDays from "../../lib/filters/toDays";
+import toDays from "../../filters/toDays";
 import classes from "../../lib/classes";
 
 
@@ -11,13 +11,13 @@ export default function BonusNickLevel({percent, days, active, current}) {
     __current: current,
   })
 
-  return <div className={ levelClasses }>
-    <div className="percent">{ percent }%</div>
-    <div className="days">{ toDays(days) }</div>
+  return <div className={levelClasses}>
+    <div className="percent">{percent}%</div>
+    <div className="days">{toDays(days)}</div>
 
-    { current && <div className='current-label'>Ваш бонус</div> }
+    {current && <div className='current-label'>Ваш бонус</div>}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

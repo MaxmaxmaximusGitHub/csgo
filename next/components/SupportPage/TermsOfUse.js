@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 import List from "../Widgets/List"
 import useRepeat from "../../hooks/useRepeat"
@@ -6,12 +6,12 @@ import useRepeat from "../../hooks/useRepeat"
 
 export default function TermsOfUse() {
 
-  return <List style={ {
+  return <List style={{
     padding: '1em 7em',
     margin: '0.5em 1em'
-  } }>
+  }}>
 
-    { useRepeat(20, (index) => {
+    {useRepeat(20, (index) => {
 
       return <div key={index}>
         <h5>Лва</h5>
@@ -28,9 +28,9 @@ export default function TermsOfUse() {
           occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
-    }) }
+    })}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </List>
 
 }

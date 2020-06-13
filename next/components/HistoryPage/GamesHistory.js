@@ -12,12 +12,12 @@ export default function GamesHistory() {
     // justifyContent: 'center',
   }
 
-  return <List style={ listStyle } withoutPadding={true}>
-    { useRepeat(100, index =>
-      <GameHistoryItem key={ index }/>)
+  return <List style={listStyle} withoutPadding={true}>
+    {useRepeat(100, index =>
+      <GameHistoryItem key={index}/>)
     }
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </List>
 }
 

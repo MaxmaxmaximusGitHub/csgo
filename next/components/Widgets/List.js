@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 import classes from "../../lib/classes";
 
@@ -9,13 +9,13 @@ export default function List({children, withoutPadding, ...props}) {
     '__without-padding': withoutPadding
   })
 
-  return <div className={ listWrapper }>
+  return <div className={listWrapper}>
 
-    <div className='list' { ...props }>
-      { children }
+    <div className='list' {...props}>
+      {children}
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

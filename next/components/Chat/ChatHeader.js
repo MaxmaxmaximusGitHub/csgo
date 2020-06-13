@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react"
 import css from 'styled-jsx/css'
 import chatIcon from 'res/images/chat-icon.svg'
 import closeChatIcon from 'res/images/close-chat-icon.svg'
@@ -31,7 +30,7 @@ export default function ChatHeader() {
       <div className="close-button"></div>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 
@@ -54,7 +53,7 @@ const style = css`
   
   .icon {
     size 1.9em
-    background-image url(${ chatIcon }) 
+    background-image url(${chatIcon}) 
     background-repeat no-repeat
     background-size contain
     background-position center
@@ -121,7 +120,7 @@ const style = css`
     size 2.2em
     border-radius 0.5em
     margin-left 1em
-    background-image url(${ closeChatIcon }) 
+    background-image url(${closeChatIcon}) 
     background-repeat no-repeat
     background-size contain
     background-position center

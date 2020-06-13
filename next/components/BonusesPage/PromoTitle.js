@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 
 
@@ -7,20 +7,20 @@ export default function PromoTitle(props) {
   const {title, icon, description, iconPadding = 0} = props
 
   const iconStyle = {
-    padding: `${ iconPadding }em`
+    padding: `${iconPadding}em`
   }
 
   return <>
     <h4 className='title'>
-      <img src={ icon } style={ iconStyle } className='icon'/>
-      <span className='text'>{ title }</span>
+      <img src={icon} style={iconStyle} className='icon'/>
+      <span className='text'>{title}</span>
     </h4>
 
     <div className='description'>
-      { description }
+      {description}
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </>
 }
 

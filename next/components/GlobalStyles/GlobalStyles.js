@@ -14,8 +14,8 @@ export default React.memo(function GlobalStyles() {
     <GlobalFontSize/>
     <GlobalScrollbars/>
 
-    { /* language=Stylus */ }
-    <style jsx global>{ `
+    { /* language=Stylus */}
+    <style jsx global>{`
       html, body {
         size 100%
         overflow hidden
@@ -44,7 +44,7 @@ export default React.memo(function GlobalStyles() {
       #__next {
         size 100%
       }
-    ` }</style>
+    `}</style>
   </>
 
 })

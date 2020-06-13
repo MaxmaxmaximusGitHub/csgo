@@ -1,11 +1,11 @@
 actions:
-- name: sendMessage
-  definition:
-    kind: synchronous
-    handler: http://api:5000/sendMessage
+  - name: sendMessage
+    definition:
+      kind: synchronous
+      handler: http://api:5000/sendMessage
 custom_types:
   enums: []
   input_objects: []
   objects:
-  - name: SendMessageOutput
+    - name: SendMessageOutput
   scalars: []

@@ -1,4 +1,0 @@
-FROM mhart/alpine-node:12
-
-WORKDIR /app/auth
-CMD yarn run dev

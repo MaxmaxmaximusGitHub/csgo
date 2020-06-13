@@ -15,7 +15,7 @@ export default function Chat() {
       <ChatInput/>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

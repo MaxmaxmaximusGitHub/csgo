@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 import BonusNickLevel from "./BonusNickLevel";
 
@@ -15,15 +15,15 @@ export default function BonusNickLevels({activeLevel = -1}) {
   ]
 
   return <div className='bonus-nick-levels'>
-    { bonusLevels.map(({percent, days}, index) =>
+    {bonusLevels.map(({percent, days}, index) =>
       <BonusNickLevel
-        key={ index }
-        active={ index <= activeLevel }
-        current={ index === activeLevel }
-        percent={ percent } days={ days }
+        key={index}
+        active={index <= activeLevel}
+        current={index === activeLevel}
+        percent={percent} days={days}
       />
-    ) }
-    <style jsx>{ style }</style>
+    )}
+    <style jsx>{style}</style>
   </div>
 }
 

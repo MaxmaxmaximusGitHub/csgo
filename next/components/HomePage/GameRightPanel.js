@@ -5,7 +5,7 @@ export default function GameRightPanel() {
 
   return <div className='game-right-panel'>
     GameRightPanel
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

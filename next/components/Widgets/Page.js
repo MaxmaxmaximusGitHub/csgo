@@ -1,13 +1,12 @@
 import css from 'styled-jsx/css'
-import classes from "../../lib/classes";
 
 
 export default function Page({children, className}) {
 
-  return <div className={ 'page ' + className || '' }>
-    { children }
+  return <div className={'page ' + className || ''}>
+    {children}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

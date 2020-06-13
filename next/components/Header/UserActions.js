@@ -2,8 +2,7 @@ import css from 'styled-jsx/css'
 import ActionButton from "./ActionButton"
 import notificationIcon from "../../res/images/notification.svg"
 import settingsIcon from "../../res/images/settings.svg"
-import logoutIcon from "../../res/images/logout.svg"
-
+import LogoutButton from "../../hooks/LogoutButton";
 
 
 export default function UserActions() {
@@ -11,11 +10,11 @@ export default function UserActions() {
 
   return <div className='user-actions'>
 
-    <ActionButton icon={ notificationIcon } indicator={ true }/>
-    <ActionButton icon={ settingsIcon }/>
-    <ActionButton icon={ logoutIcon } bg={ false }/>
+    <ActionButton icon={notificationIcon} indicator={true}/>
+    <ActionButton icon={settingsIcon}/>
+    <LogoutButton/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

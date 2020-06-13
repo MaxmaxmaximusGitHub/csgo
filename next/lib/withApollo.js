@@ -1,29 +1,28 @@
-import NextApp from "next/app"
-import { ApolloProvider } from '@apollo/react-hooks'
-import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
-import { WebSocketLink } from "apollo-link-ws";
-import { ApolloLink, split } from "apollo-link";
-import { getMainDefinition } from "apollo-utilities";
+import {ApolloProvider} from '@apollo/react-hooks'
+import {ApolloClient} from "apollo-client";
+import {InMemoryCache} from "apollo-cache-inmemory";
+import {HttpLink} from "apollo-link-http";
+import {WebSocketLink} from "apollo-link-ws";
+import {ApolloLink, split} from "apollo-link";
+import {getMainDefinition} from "apollo-utilities";
 import Head from 'next/head'
 
 
 export default function withApollo(App, options) {
 
-  function AppWithApollo({client, clientState, ctx, ...props}) {
+  function WithApollo({client, clientState, ctx, ...props}) {
 
     if (!client) {
       client = initApolloClient(options, ctx, clientState)
     }
 
-    return <ApolloProvider client={ client }>
-      <App { ...props }/>
+    return <ApolloProvider client={client}>
+      <App {...props}/>
     </ApolloProvider>
   }
 
 
-  AppWithApollo.getInitialProps = async function ({AppTree, ctx}) {
+  WithApollo.getInitialProps = async function ({AppTree, ctx}) {
     let pageProps = {}
     let clientState = {}
     let client = null
@@ -38,7 +37,7 @@ export default function withApollo(App, options) {
       client = initApolloClient(options, ctx)
 
       try {
-        await getDataFromTree(<AppTree  { ...{pageProps, client, ctx} }/>)
+        await getDataFromTree(<AppTree  {...{pageProps, client, ctx}}/>)
         clientState = client.cache.extract()
       } catch (error) {
         console.error(error)
@@ -51,10 +50,12 @@ export default function withApollo(App, options) {
     return {pageProps, clientState, client}
   }
 
-  // AppWithApollo.getInitialProps = NextApp.getInitialProps
-  // AppWithApollo.origGetInitialProps = NextApp.origGetInitialProps
+  // WithApollo.getInitialProps = NextApp.getInitialProps
+  // WithApollo.origGetInitialProps = NextApp.origGetInitialProps
 
-  return AppWithApollo
+  WithApollo.displayName = `WithApollo(${App.name})`
+
+  return WithApollo
 
 }
 
@@ -96,7 +97,7 @@ function createLink(options, ctx) {
     const cookie = ctx.req.headers.cookie || ''
 
     return new HttpLink({
-      uri: process.env.DOCKER_GRAPHQL_ENDPOINT,
+      uri: process.env.NEXT_GRAPHQL_SSR,
       fetch: (url, options) => {
         return fetch(url, {
           ...options,
@@ -114,11 +115,11 @@ function createLink(options, ctx) {
 function createBrowserLink() {
   const httpLink = new HttpLink({
     credentials: 'include',
-    uri: `//${ location.host }/graphql`,
+    uri: process.env.NEXT_PUBLIC_GRAPHQL,
   })
 
   const wsLink = new WebSocketLink({
-    uri: `ws://${ location.host }/graphql`,
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_SUBSCRIPTIONS,
     options: {
       reconnect: true,
     },

@@ -4,7 +4,7 @@ import React from "react"
 export default React.memo(function GlobalScrollbars() {
 
   // language=Stylus
-  return <style jsx global>{ `
+  return <style jsx global>{`
 
 		::-webkit-scrollbar {
 			width 1em
@@ -27,7 +27,7 @@ export default React.memo(function GlobalScrollbars() {
 		::-webkit-scrollbar-thumb:hover {
 			border-width 0.25em 
 		}
-  ` }</style>
+  `}</style>
 })
 
 

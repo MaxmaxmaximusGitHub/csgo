@@ -1,5 +1,5 @@
 import css from 'styled-jsx/css'
-import { useState } from "react";
+import {useState} from "react";
 import useBrowserEffect from "../../hooks/useBrowserEffect";
 
 
@@ -19,12 +19,12 @@ export default function GameHistoryItem() {
   return <div className='game-item'>
     <div className='game-id'>ID 1233</div>
 
-    { show && <>
-      <div className="game-x" style={ {color} }>{ x }x</div>
+    {show && <>
+      <div className="game-x" style={{color}}>{x}x</div>
       <div className="game-date">10 апреля 2020г. 23:20</div>
-    </> }
+    </>}
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

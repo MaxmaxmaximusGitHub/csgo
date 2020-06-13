@@ -1,7 +1,6 @@
-import { forwardRef, useImperativeHandle } from 'react'
+import {forwardRef} from 'react'
 import css from 'styled-jsx/css'
 import classes from "../../../lib/classes"
-import useSize from "../../../hooks/useSize"
 
 
 export default forwardRef(function TabTitle(props, ref) {
@@ -9,12 +8,12 @@ export default forwardRef(function TabTitle(props, ref) {
 
 
   return <div
-    className={ classes('tab-title', {__active: active}) }
-    ref={ ref } onClick={ onClick }>
+    className={classes('tab-title', {__active: active})}
+    ref={ref} onClick={onClick}>
 
-    <div className="text">{ children }</div>
+    <div className="text">{children}</div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 })
 

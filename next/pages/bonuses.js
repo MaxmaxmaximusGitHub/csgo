@@ -1,2 +1,2 @@
-export { default } from "../components/BonusesPage/BonusesPage"
+export {default} from "../components/BonusesPage/BonusesPage"
 

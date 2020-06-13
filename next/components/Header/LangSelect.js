@@ -7,7 +7,7 @@ export default function LangSelect() {
   return <div className='language-select'>
     <div className="current-lang">RU</div>
     <div className="show-all-languages-button"></div>
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 
@@ -39,7 +39,7 @@ const style = css`
       background-size contain
       background-position center
       background-repeat no-repeat
-      background-image url(${ arrowTopIcon })
+      background-image url(${arrowTopIcon})
     }
   }
 `

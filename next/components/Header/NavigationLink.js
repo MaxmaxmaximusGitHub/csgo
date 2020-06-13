@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import {useRouter} from "next/router"
 import css from 'styled-jsx/css'
 import Link from "next/link"
 
@@ -8,14 +8,14 @@ export default function NavigationLink({href, icon, children}) {
   const {pathname} = useRouter()
 
   return <>
-    <Link href={ href }>
-      <a className={ `link __active-${ pathname === href }` }>
-        <img className='icon' src={ icon }/>
-        <span className='text'>{ children }</span>
+    <Link href={href}>
+      <a className={`link __active-${pathname === href}`}>
+        <img className='icon' src={icon}/>
+        <span className='text'>{children}</span>
       </a>
     </Link>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </>
 }
 

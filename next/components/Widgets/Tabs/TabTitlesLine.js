@@ -5,17 +5,17 @@ export default function TabTitlesLine({size}) {
 
   const lineStyle = {
     width: size.width,
-    transform: `translateX(${ size.offsetLeft }px)`
+    transform: `translateX(${size.offsetLeft}px)`
   }
 
   return <div className='line-container'>
 
     <div
       className="line"
-      style={ lineStyle }>
+      style={lineStyle}>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

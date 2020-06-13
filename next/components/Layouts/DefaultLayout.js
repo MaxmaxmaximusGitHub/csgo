@@ -2,8 +2,6 @@ import css from 'styled-jsx/css'
 import Header from "../Header/Header"
 import Chat from "../Chat/Chat"
 import React from 'react'
-import useRepeat from "../../hooks/useRepeat"
-import Page from "../Widgets/Page";
 
 
 export default React.memo(function DefaultLayout({children}) {
@@ -12,11 +10,11 @@ export default React.memo(function DefaultLayout({children}) {
     <Header className='loolfd'/>
 
     <div className='content'>
-      { children }
+      {children}
       <Chat/>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 })
 

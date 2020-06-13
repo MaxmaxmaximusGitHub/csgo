@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import discountIcon from 'res/images/discount.svg'
 import Button from "../Widgets/Button"
 import PromoTitle from "./PromoTitle"
@@ -11,7 +11,7 @@ export default function PromoCode() {
   return <div className='promo-code'>
 
     <PromoTitle
-      icon={ discountIcon }
+      icon={discountIcon}
       title='Промокод'
       description="Если Вы знаете секретный промокод
       - введите его и получите бонусный предмет!"
@@ -22,7 +22,7 @@ export default function PromoCode() {
       <Button>Сохранить</Button>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

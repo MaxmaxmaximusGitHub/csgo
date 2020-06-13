@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import FAQ from "./FAQ";
 import css from 'styled-jsx/css'
 import Page from "../Widgets/Page"
@@ -6,7 +6,6 @@ import TermsOfUse from "./TermsOfUse"
 import Tab from "../Widgets/Tabs/Tab"
 import Tabs from "../Widgets/Tabs/Tabs"
 import Contacts from "./Contacts";
-import Tickets from "./Tickets/Tickets";
 
 
 export default function SupportPage() {
@@ -22,7 +21,7 @@ export default function SupportPage() {
       </Tabs>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </Page>
 }
 

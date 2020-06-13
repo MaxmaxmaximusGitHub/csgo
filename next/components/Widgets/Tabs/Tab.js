@@ -1,4 +1,4 @@
-import React, { forwardRef, memo } from 'react'
+import React from 'react'
 import classes from "../../../lib/classes"
 import css from 'styled-jsx/css'
 
@@ -12,9 +12,9 @@ export default function Tab(props) {
     __active: active,
   })
 
-  return <div className={ tabClass }>
-    { children }
-    <style jsx>{ style }</style>
+  return <div className={tabClass}>
+    {children}
+    <style jsx>{style}</style>
   </div>
 }
 

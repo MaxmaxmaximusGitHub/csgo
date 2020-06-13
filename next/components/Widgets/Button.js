@@ -5,13 +5,13 @@ export default React.forwardRef(
   function Button({onClick, icon, children}, ref) {
 
     return <div
-      ref={ ref }
-      className='button' onClick={ onClick }>
+      ref={ref}
+      className='button' onClick={onClick}>
 
-      <span className="text">{ children }</span>
-      { icon && <img className='icon' src={ icon }/> }
+      <span className="text">{children}</span>
+      {icon && <img className='icon' src={icon}/>}
 
-      <style jsx>{ style }</style>
+      <style jsx>{style}</style>
     </div>
 
   }

@@ -3,9 +3,4 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JSX" />
   </component>
-  <component name="StyledComponentsInjections">
-    <option name="prefixes">
-      <array />
-    </option>
-  </component>
 </project>

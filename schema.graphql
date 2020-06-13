@@ -4,7 +4,349 @@ schema {
   subscription: subscription_root
 }
 
+scalar bigint
+
+# expression to compare columns of type bigint. All fields are combined with logical 'AND'.
+input bigint_comparison_exp {
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _is_null: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
 type CreateUserOutput {
+  id: Int!
+}
+
+# columns and relationships of "current_user"
+type current_user {
+  avatar: String
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
+}
+
+# aggregated selection of "current_user"
+type current_user_aggregate {
+  aggregate: current_user_aggregate_fields
+  nodes: [current_user!]!
+}
+
+# aggregate fields of "current_user"
+type current_user_aggregate_fields {
+  avg: current_user_avg_fields
+  count(columns: [current_user_select_column!], distinct: Boolean): Int
+  max: current_user_max_fields
+  min: current_user_min_fields
+  stddev: current_user_stddev_fields
+  stddev_pop: current_user_stddev_pop_fields
+  stddev_samp: current_user_stddev_samp_fields
+  sum: current_user_sum_fields
+  var_pop: current_user_var_pop_fields
+  var_samp: current_user_var_samp_fields
+  variance: current_user_variance_fields
+}
+
+# order by aggregate values of table "current_user"
+input current_user_aggregate_order_by {
+  avg: current_user_avg_order_by
+  count: order_by
+  max: current_user_max_order_by
+  min: current_user_min_order_by
+  stddev: current_user_stddev_order_by
+  stddev_pop: current_user_stddev_pop_order_by
+  stddev_samp: current_user_stddev_samp_order_by
+  sum: current_user_sum_order_by
+  var_pop: current_user_var_pop_order_by
+  var_samp: current_user_var_samp_order_by
+  variance: current_user_variance_order_by
+}
+
+# input type for inserting array relation for remote table "current_user"
+input current_user_arr_rel_insert_input {
+  data: [current_user_insert_input!]!
+}
+
+# aggregate avg on columns
+type current_user_avg_fields {
+  id: Float
+  money: Float
+}
+
+# order by avg() on columns of table "current_user"
+input current_user_avg_order_by {
+  id: order_by
+  money: order_by
+}
+
+# Boolean expression to filter rows from the table "current_user". All fields are combined with a logical 'AND'.
+input current_user_bool_exp {
+  _and: [current_user_bool_exp]
+  _not: current_user_bool_exp
+  _or: [current_user_bool_exp]
+  avatar: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  lang: String_comparison_exp
+  money: Int_comparison_exp
+  nickname: String_comparison_exp
+  role: String_comparison_exp
+  steam_id: String_comparison_exp
+  steam_profile: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+# input type for incrementing integer column in table "current_user"
+input current_user_inc_input {
+  id: bigint
+  money: Int
+}
+
+# input type for inserting data into table "current_user"
+input current_user_insert_input {
+  avatar: String
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
+}
+
+# aggregate max on columns
+type current_user_max_fields {
+  avatar: String
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
+}
+
+# order by max() on columns of table "current_user"
+input current_user_max_order_by {
+  avatar: order_by
+  created_at: order_by
+  id: order_by
+  lang: order_by
+  money: order_by
+  nickname: order_by
+  role: order_by
+  steam_id: order_by
+  steam_profile: order_by
+  updated_at: order_by
+}
+
+# aggregate min on columns
+type current_user_min_fields {
+  avatar: String
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
+}
+
+# order by min() on columns of table "current_user"
+input current_user_min_order_by {
+  avatar: order_by
+  created_at: order_by
+  id: order_by
+  lang: order_by
+  money: order_by
+  nickname: order_by
+  role: order_by
+  steam_id: order_by
+  steam_profile: order_by
+  updated_at: order_by
+}
+
+# response of any mutation on the table "current_user"
+type current_user_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [current_user!]!
+}
+
+# input type for inserting object relation for remote table "current_user"
+input current_user_obj_rel_insert_input {
+  data: current_user_insert_input!
+}
+
+# ordering options when selecting data from "current_user"
+input current_user_order_by {
+  avatar: order_by
+  created_at: order_by
+  id: order_by
+  lang: order_by
+  money: order_by
+  nickname: order_by
+  role: order_by
+  steam_id: order_by
+  steam_profile: order_by
+  updated_at: order_by
+}
+
+# select columns of table "current_user"
+enum current_user_select_column {
+  # column name
+  avatar
+
+  # column name
+  created_at
+
+  # column name
+  id
+
+  # column name
+  lang
+
+  # column name
+  money
+
+  # column name
+  nickname
+
+  # column name
+  role
+
+  # column name
+  steam_id
+
+  # column name
+  steam_profile
+
+  # column name
+  updated_at
+}
+
+# input type for updating data in table "current_user"
+input current_user_set_input {
+  avatar: String
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
+}
+
+# aggregate stddev on columns
+type current_user_stddev_fields {
+  id: Float
+  money: Float
+}
+
+# order by stddev() on columns of table "current_user"
+input current_user_stddev_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate stddev_pop on columns
+type current_user_stddev_pop_fields {
+  id: Float
+  money: Float
+}
+
+# order by stddev_pop() on columns of table "current_user"
+input current_user_stddev_pop_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate stddev_samp on columns
+type current_user_stddev_samp_fields {
+  id: Float
+  money: Float
+}
+
+# order by stddev_samp() on columns of table "current_user"
+input current_user_stddev_samp_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate sum on columns
+type current_user_sum_fields {
+  id: bigint
+  money: Int
+}
+
+# order by sum() on columns of table "current_user"
+input current_user_sum_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate var_pop on columns
+type current_user_var_pop_fields {
+  id: Float
+  money: Float
+}
+
+# order by var_pop() on columns of table "current_user"
+input current_user_var_pop_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate var_samp on columns
+type current_user_var_samp_fields {
+  id: Float
+  money: Float
+}
+
+# order by var_samp() on columns of table "current_user"
+input current_user_var_samp_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate variance on columns
+type current_user_variance_fields {
+  id: Float
+  money: Float
+}
+
+# order by variance() on columns of table "current_user"
+input current_user_variance_order_by {
+  id: order_by
+  money: order_by
+}
+
+type Inp {
+  id: Int!
+}
+
+input Input {
   id: Int!
 }
 
@@ -36,291 +378,17 @@ input json_comparison_exp {
   _nin: [json!]
 }
 
-# columns and relationships of "message"
-type message {
-  # An object relationship
-  author: user!
-  author_id: Int!
+type Lol {
   id: Int!
-  text: String!
-}
-
-# aggregated selection of "message"
-type message_aggregate {
-  aggregate: message_aggregate_fields
-  nodes: [message!]!
-}
-
-# aggregate fields of "message"
-type message_aggregate_fields {
-  avg: message_avg_fields
-  count(columns: [message_select_column!], distinct: Boolean): Int
-  max: message_max_fields
-  min: message_min_fields
-  stddev: message_stddev_fields
-  stddev_pop: message_stddev_pop_fields
-  stddev_samp: message_stddev_samp_fields
-  sum: message_sum_fields
-  var_pop: message_var_pop_fields
-  var_samp: message_var_samp_fields
-  variance: message_variance_fields
-}
-
-# order by aggregate values of table "message"
-input message_aggregate_order_by {
-  avg: message_avg_order_by
-  count: order_by
-  max: message_max_order_by
-  min: message_min_order_by
-  stddev: message_stddev_order_by
-  stddev_pop: message_stddev_pop_order_by
-  stddev_samp: message_stddev_samp_order_by
-  sum: message_sum_order_by
-  var_pop: message_var_pop_order_by
-  var_samp: message_var_samp_order_by
-  variance: message_variance_order_by
-}
-
-# input type for inserting array relation for remote table "message"
-input message_arr_rel_insert_input {
-  data: [message_insert_input!]!
-  on_conflict: message_on_conflict
-}
-
-# aggregate avg on columns
-type message_avg_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by avg() on columns of table "message"
-input message_avg_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# Boolean expression to filter rows from the table "message". All fields are combined with a logical 'AND'.
-input message_bool_exp {
-  _and: [message_bool_exp]
-  _not: message_bool_exp
-  _or: [message_bool_exp]
-  author: user_bool_exp
-  author_id: Int_comparison_exp
-  id: Int_comparison_exp
-  text: String_comparison_exp
-}
-
-# unique or primary key constraints on table "message"
-enum message_constraint {
-  # unique or primary key constraint
-  message_pkey
-}
-
-# input type for incrementing integer column in table "message"
-input message_inc_input {
-  author_id: Int
-  id: Int
-}
-
-# input type for inserting data into table "message"
-input message_insert_input {
-  author: user_obj_rel_insert_input
-  author_id: Int
-  id: Int
-  text: String
-}
-
-# aggregate max on columns
-type message_max_fields {
-  author_id: Int
-  id: Int
-  text: String
-}
-
-# order by max() on columns of table "message"
-input message_max_order_by {
-  author_id: order_by
-  id: order_by
-  text: order_by
-}
-
-# aggregate min on columns
-type message_min_fields {
-  author_id: Int
-  id: Int
-  text: String
-}
-
-# order by min() on columns of table "message"
-input message_min_order_by {
-  author_id: order_by
-  id: order_by
-  text: order_by
-}
-
-# response of any mutation on the table "message"
-type message_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [message!]!
-}
-
-# input type for inserting object relation for remote table "message"
-input message_obj_rel_insert_input {
-  data: message_insert_input!
-  on_conflict: message_on_conflict
-}
-
-# on conflict condition type for table "message"
-input message_on_conflict {
-  constraint: message_constraint!
-  update_columns: [message_update_column!]!
-  where: message_bool_exp
-}
-
-# ordering options when selecting data from "message"
-input message_order_by {
-  author: user_order_by
-  author_id: order_by
-  id: order_by
-  text: order_by
-}
-
-# primary key columns input for table: "message"
-input message_pk_columns_input {
-  id: Int!
-}
-
-# select columns of table "message"
-enum message_select_column {
-  # column name
-  author_id
-
-  # column name
-  id
-
-  # column name
-  text
-}
-
-# input type for updating data in table "message"
-input message_set_input {
-  author_id: Int
-  id: Int
-  text: String
-}
-
-# aggregate stddev on columns
-type message_stddev_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by stddev() on columns of table "message"
-input message_stddev_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# aggregate stddev_pop on columns
-type message_stddev_pop_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by stddev_pop() on columns of table "message"
-input message_stddev_pop_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# aggregate stddev_samp on columns
-type message_stddev_samp_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by stddev_samp() on columns of table "message"
-input message_stddev_samp_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# aggregate sum on columns
-type message_sum_fields {
-  author_id: Int
-  id: Int
-}
-
-# order by sum() on columns of table "message"
-input message_sum_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# update columns of table "message"
-enum message_update_column {
-  # column name
-  author_id
-
-  # column name
-  id
-
-  # column name
-  text
-}
-
-# aggregate var_pop on columns
-type message_var_pop_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by var_pop() on columns of table "message"
-input message_var_pop_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# aggregate var_samp on columns
-type message_var_samp_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by var_samp() on columns of table "message"
-input message_var_samp_order_by {
-  author_id: order_by
-  id: order_by
-}
-
-# aggregate variance on columns
-type message_variance_fields {
-  author_id: Float
-  id: Float
-}
-
-# order by variance() on columns of table "message"
-input message_variance_order_by {
-  author_id: order_by
-  id: order_by
 }
 
 # mutation root
 type mutation_root {
-  # perform the action: "createUser"
-  createUser(avatar: String, nickname: String, steam_id: String): CreateUserOutput
-
-  # delete data from the table: "message"
-  delete_message(
+  # delete data from the table: "current_user"
+  delete_current_user(
     # filter the rows which have to be deleted
-    where: message_bool_exp!
-  ): message_mutation_response
-
-  # delete single row from the table: "message"
-  delete_message_by_pk(id: Int!): message
+    where: current_user_bool_exp!
+  ): current_user_mutation_response
 
   # delete data from the table: "user"
   delete_user(
@@ -329,25 +397,28 @@ type mutation_root {
   ): user_mutation_response
 
   # delete single row from the table: "user"
-  delete_user_by_pk(id: Int!): user
+  delete_user_by_pk(id: bigint!): user
 
-  # insert data into the table: "message"
-  insert_message(
+  # delete data from the table: "user_role"
+  delete_user_role(
+    # filter the rows which have to be deleted
+    where: user_role_bool_exp!
+  ): user_role_mutation_response
+
+  # delete single row from the table: "user_role"
+  delete_user_role_by_pk(value: String!): user_role
+
+  # insert data into the table: "current_user"
+  insert_current_user(
     # the rows to be inserted
-    objects: [message_insert_input!]!
+    objects: [current_user_insert_input!]!
+  ): current_user_mutation_response
 
-    # on conflict condition
-    on_conflict: message_on_conflict
-  ): message_mutation_response
-
-  # insert a single row into the table: "message"
-  insert_message_one(
+  # insert a single row into the table: "current_user"
+  insert_current_user_one(
     # the row to be inserted
-    object: message_insert_input!
-
-    # on conflict condition
-    on_conflict: message_on_conflict
-  ): message
+    object: current_user_insert_input!
+  ): current_user
 
   # insert data into the table: "user"
   insert_user(
@@ -367,27 +438,41 @@ type mutation_root {
     on_conflict: user_on_conflict
   ): user
 
-  # update data of the table: "message"
-  update_message(
+  # insert data into the table: "user_role"
+  insert_user_role(
+    # the rows to be inserted
+    objects: [user_role_insert_input!]!
+
+    # on conflict condition
+    on_conflict: user_role_on_conflict
+  ): user_role_mutation_response
+
+  # insert a single row into the table: "user_role"
+  insert_user_role_one(
+    # the row to be inserted
+    object: user_role_insert_input!
+
+    # on conflict condition
+    on_conflict: user_role_on_conflict
+  ): user_role
+
+  # perform the action: "moneyMinus"
+  moneyMinus(arg1: Input): Output
+
+  # perform the action: "moneyPlus"
+  moneyPlus(id: Int!): Output
+
+  # update data of the table: "current_user"
+  update_current_user(
     # increments the integer columns with given value of the filtered values
-    _inc: message_inc_input
+    _inc: current_user_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: message_set_input
+    _set: current_user_set_input
 
     # filter the rows which have to be updated
-    where: message_bool_exp!
-  ): message_mutation_response
-
-  # update single row of the table: "message"
-  update_message_by_pk(
-    # increments the integer columns with given value of the filtered values
-    _inc: message_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: message_set_input
-    pk_columns: message_pk_columns_input!
-  ): message
+    where: current_user_bool_exp!
+  ): current_user_mutation_response
 
   # update data of the table: "user"
   update_user(
@@ -410,6 +495,22 @@ type mutation_root {
     _set: user_set_input
     pk_columns: user_pk_columns_input!
   ): user
+
+  # update data of the table: "user_role"
+  update_user_role(
+    # sets the columns of the filtered rows to the given values
+    _set: user_role_set_input
+
+    # filter the rows which have to be updated
+    where: user_role_bool_exp!
+  ): user_role_mutation_response
+
+  # update single row of the table: "user_role"
+  update_user_role_by_pk(
+    # sets the columns of the filtered rows to the given values
+    _set: user_role_set_input
+    pk_columns: user_role_pk_columns_input!
+  ): user_role
 }
 
 # column ordering options
@@ -433,12 +534,16 @@ enum order_by {
   desc_nulls_last
 }
 
+type Output {
+  money: Int!
+}
+
 # query root
 type query_root {
-  # fetch data from the table: "message"
-  message(
+  # fetch data from the table: "current_user"
+  current_user(
     # distinct select on columns
-    distinct_on: [message_select_column!]
+    distinct_on: [current_user_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -447,16 +552,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [message_order_by!]
+    order_by: [current_user_order_by!]
 
     # filter the rows returned
-    where: message_bool_exp
-  ): [message!]!
+    where: current_user_bool_exp
+  ): [current_user!]!
 
-  # fetch aggregated fields from the table: "message"
-  message_aggregate(
+  # fetch aggregated fields from the table: "current_user"
+  current_user_aggregate(
     # distinct select on columns
-    distinct_on: [message_select_column!]
+    distinct_on: [current_user_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -465,14 +570,11 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [message_order_by!]
+    order_by: [current_user_order_by!]
 
     # filter the rows returned
-    where: message_bool_exp
-  ): message_aggregate!
-
-  # fetch data from the table: "message" using primary key columns
-  message_by_pk(id: Int!): message
+    where: current_user_bool_exp
+  ): current_user_aggregate!
 
   # fetch data from the table: "user"
   user(
@@ -511,12 +613,60 @@ type query_root {
   ): user_aggregate!
 
   # fetch data from the table: "user" using primary key columns
-  user_by_pk(id: Int!): user
+  user_by_pk(id: bigint!): user
+
+  # fetch data from the table: "user_role"
+  user_role(
+    # distinct select on columns
+    distinct_on: [user_role_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_role_order_by!]
+
+    # filter the rows returned
+    where: user_role_bool_exp
+  ): [user_role!]!
+
+  # fetch aggregated fields from the table: "user_role"
+  user_role_aggregate(
+    # distinct select on columns
+    distinct_on: [user_role_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_role_order_by!]
+
+    # filter the rows returned
+    where: user_role_bool_exp
+  ): user_role_aggregate!
+
+  # fetch data from the table: "user_role" using primary key columns
+  user_role_by_pk(value: String!): user_role
 }
 
 input SampleInput {
   password: String!
   username: String!
+}
+
+input SampleInputtttt {
+  password: String!
+  username: String!
+}
+
+type SampleInputttttpppp {
+  id: Int!
 }
 
 type SampleOutput {
@@ -544,10 +694,10 @@ input String_comparison_exp {
 
 # subscription root
 type subscription_root {
-  # fetch data from the table: "message"
-  message(
+  # fetch data from the table: "current_user"
+  current_user(
     # distinct select on columns
-    distinct_on: [message_select_column!]
+    distinct_on: [current_user_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -556,16 +706,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [message_order_by!]
+    order_by: [current_user_order_by!]
 
     # filter the rows returned
-    where: message_bool_exp
-  ): [message!]!
+    where: current_user_bool_exp
+  ): [current_user!]!
 
-  # fetch aggregated fields from the table: "message"
-  message_aggregate(
+  # fetch aggregated fields from the table: "current_user"
+  current_user_aggregate(
     # distinct select on columns
-    distinct_on: [message_select_column!]
+    distinct_on: [current_user_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -574,14 +724,11 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [message_order_by!]
+    order_by: [current_user_order_by!]
 
     # filter the rows returned
-    where: message_bool_exp
-  ): message_aggregate!
-
-  # fetch data from the table: "message" using primary key columns
-  message_by_pk(id: Int!): message
+    where: current_user_bool_exp
+  ): current_user_aggregate!
 
   # fetch data from the table: "user"
   user(
@@ -620,53 +767,75 @@ type subscription_root {
   ): user_aggregate!
 
   # fetch data from the table: "user" using primary key columns
-  user_by_pk(id: Int!): user
+  user_by_pk(id: bigint!): user
+
+  # fetch data from the table: "user_role"
+  user_role(
+    # distinct select on columns
+    distinct_on: [user_role_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_role_order_by!]
+
+    # filter the rows returned
+    where: user_role_bool_exp
+  ): [user_role!]!
+
+  # fetch aggregated fields from the table: "user_role"
+  user_role_aggregate(
+    # distinct select on columns
+    distinct_on: [user_role_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_role_order_by!]
+
+    # filter the rows returned
+    where: user_role_bool_exp
+  ): user_role_aggregate!
+
+  # fetch data from the table: "user_role" using primary key columns
+  user_role_by_pk(value: String!): user_role
 }
 
 scalar timestamptz
 
+# expression to compare columns of type timestamptz. All fields are combined with logical 'AND'.
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
 # columns and relationships of "user"
 type user {
-  avatar: String!
-  id: Int!
-
-  # An array relationship
-  messages(
-    # distinct select on columns
-    distinct_on: [message_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [message_order_by!]
-
-    # filter the rows returned
-    where: message_bool_exp
-  ): [message!]!
-
-  # An aggregated array relationship
-  messages_aggregate(
-    # distinct select on columns
-    distinct_on: [message_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [message_order_by!]
-
-    # filter the rows returned
-    where: message_bool_exp
-  ): message_aggregate!
-  nickname: String!
-  steam_id: String!
+  avatar: String
+  created_at: timestamptz!
+  id: bigint!
+  lang: String
+  money: Int!
+  nickname: String
+  role: user_role_enum!
+  steam_id: String
+  steam_profile: String
+  updated_at: timestamptz!
 }
 
 # aggregated selection of "user"
@@ -714,11 +883,13 @@ input user_arr_rel_insert_input {
 # aggregate avg on columns
 type user_avg_fields {
   id: Float
+  money: Float
 }
 
 # order by avg() on columns of table "user"
 input user_avg_order_by {
   id: order_by
+  money: order_by
 }
 
 # Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'.
@@ -727,65 +898,93 @@ input user_bool_exp {
   _not: user_bool_exp
   _or: [user_bool_exp]
   avatar: String_comparison_exp
-  id: Int_comparison_exp
-  messages: message_bool_exp
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  lang: String_comparison_exp
+  money: Int_comparison_exp
   nickname: String_comparison_exp
+  role: user_role_enum_comparison_exp
   steam_id: String_comparison_exp
+  steam_profile: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
 }
 
 # unique or primary key constraints on table "user"
 enum user_constraint {
   # unique or primary key constraint
   user_pkey
-
-  # unique or primary key constraint
-  user_steam_id_key
 }
 
 # input type for incrementing integer column in table "user"
 input user_inc_input {
-  id: Int
+  id: bigint
+  money: Int
 }
 
 # input type for inserting data into table "user"
 input user_insert_input {
   avatar: String
-  id: Int
-  messages: message_arr_rel_insert_input
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
   nickname: String
+  role: user_role_enum
   steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
 }
 
 # aggregate max on columns
 type user_max_fields {
   avatar: String
-  id: Int
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
   nickname: String
   steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
 }
 
 # order by max() on columns of table "user"
 input user_max_order_by {
   avatar: order_by
+  created_at: order_by
   id: order_by
+  lang: order_by
+  money: order_by
   nickname: order_by
   steam_id: order_by
+  steam_profile: order_by
+  updated_at: order_by
 }
 
 # aggregate min on columns
 type user_min_fields {
   avatar: String
-  id: Int
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
   nickname: String
   steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
 }
 
 # order by min() on columns of table "user"
 input user_min_order_by {
   avatar: order_by
+  created_at: order_by
   id: order_by
+  lang: order_by
+  money: order_by
   nickname: order_by
   steam_id: order_by
+  steam_profile: order_by
+  updated_at: order_by
 }
 
 # response of any mutation on the table "user"
@@ -813,15 +1012,192 @@ input user_on_conflict {
 # ordering options when selecting data from "user"
 input user_order_by {
   avatar: order_by
+  created_at: order_by
   id: order_by
-  messages_aggregate: message_aggregate_order_by
+  lang: order_by
+  money: order_by
   nickname: order_by
+  role: order_by
   steam_id: order_by
+  steam_profile: order_by
+  updated_at: order_by
 }
 
 # primary key columns input for table: "user"
 input user_pk_columns_input {
-  id: Int!
+  id: bigint!
+}
+
+# columns and relationships of "user_role"
+type user_role {
+  # An array relationship
+  users(
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): [user!]!
+
+  # An aggregated array relationship
+  users_aggregate(
+    # distinct select on columns
+    distinct_on: [user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_order_by!]
+
+    # filter the rows returned
+    where: user_bool_exp
+  ): user_aggregate!
+  value: String!
+}
+
+# aggregated selection of "user_role"
+type user_role_aggregate {
+  aggregate: user_role_aggregate_fields
+  nodes: [user_role!]!
+}
+
+# aggregate fields of "user_role"
+type user_role_aggregate_fields {
+  count(columns: [user_role_select_column!], distinct: Boolean): Int
+  max: user_role_max_fields
+  min: user_role_min_fields
+}
+
+# order by aggregate values of table "user_role"
+input user_role_aggregate_order_by {
+  count: order_by
+  max: user_role_max_order_by
+  min: user_role_min_order_by
+}
+
+# input type for inserting array relation for remote table "user_role"
+input user_role_arr_rel_insert_input {
+  data: [user_role_insert_input!]!
+  on_conflict: user_role_on_conflict
+}
+
+# Boolean expression to filter rows from the table "user_role". All fields are combined with a logical 'AND'.
+input user_role_bool_exp {
+  _and: [user_role_bool_exp]
+  _not: user_role_bool_exp
+  _or: [user_role_bool_exp]
+  users: user_bool_exp
+  value: String_comparison_exp
+}
+
+# unique or primary key constraints on table "user_role"
+enum user_role_constraint {
+  # unique or primary key constraint
+  user_role_pkey
+}
+
+enum user_role_enum {
+  admin
+  anonymous
+  user
+}
+
+# expression to compare columns of type user_role_enum. All fields are combined with logical 'AND'.
+input user_role_enum_comparison_exp {
+  _eq: user_role_enum
+  _in: [user_role_enum!]
+  _is_null: Boolean
+  _neq: user_role_enum
+  _nin: [user_role_enum!]
+}
+
+# input type for inserting data into table "user_role"
+input user_role_insert_input {
+  users: user_arr_rel_insert_input
+  value: String
+}
+
+# aggregate max on columns
+type user_role_max_fields {
+  value: String
+}
+
+# order by max() on columns of table "user_role"
+input user_role_max_order_by {
+  value: order_by
+}
+
+# aggregate min on columns
+type user_role_min_fields {
+  value: String
+}
+
+# order by min() on columns of table "user_role"
+input user_role_min_order_by {
+  value: order_by
+}
+
+# response of any mutation on the table "user_role"
+type user_role_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [user_role!]!
+}
+
+# input type for inserting object relation for remote table "user_role"
+input user_role_obj_rel_insert_input {
+  data: user_role_insert_input!
+  on_conflict: user_role_on_conflict
+}
+
+# on conflict condition type for table "user_role"
+input user_role_on_conflict {
+  constraint: user_role_constraint!
+  update_columns: [user_role_update_column!]!
+  where: user_role_bool_exp
+}
+
+# ordering options when selecting data from "user_role"
+input user_role_order_by {
+  users_aggregate: user_aggregate_order_by
+  value: order_by
+}
+
+# primary key columns input for table: "user_role"
+input user_role_pk_columns_input {
+  value: String!
+}
+
+# select columns of table "user_role"
+enum user_role_select_column {
+  # column name
+  value
+}
+
+# input type for updating data in table "user_role"
+input user_role_set_input {
+  value: String
+}
+
+# update columns of table "user_role"
+enum user_role_update_column {
+  # column name
+  value
 }
 
 # select columns of table "user"
@@ -830,61 +1206,93 @@ enum user_select_column {
   avatar
 
   # column name
+  created_at
+
+  # column name
   id
+
+  # column name
+  lang
+
+  # column name
+  money
 
   # column name
   nickname
 
   # column name
+  role
+
+  # column name
   steam_id
+
+  # column name
+  steam_profile
+
+  # column name
+  updated_at
 }
 
 # input type for updating data in table "user"
 input user_set_input {
   avatar: String
-  id: Int
+  created_at: timestamptz
+  id: bigint
+  lang: String
+  money: Int
   nickname: String
+  role: user_role_enum
   steam_id: String
+  steam_profile: String
+  updated_at: timestamptz
 }
 
 # aggregate stddev on columns
 type user_stddev_fields {
   id: Float
+  money: Float
 }
 
 # order by stddev() on columns of table "user"
 input user_stddev_order_by {
   id: order_by
+  money: order_by
 }
 
 # aggregate stddev_pop on columns
 type user_stddev_pop_fields {
   id: Float
+  money: Float
 }
 
 # order by stddev_pop() on columns of table "user"
 input user_stddev_pop_order_by {
   id: order_by
+  money: order_by
 }
 
 # aggregate stddev_samp on columns
 type user_stddev_samp_fields {
   id: Float
+  money: Float
 }
 
 # order by stddev_samp() on columns of table "user"
 input user_stddev_samp_order_by {
   id: order_by
+  money: order_by
 }
 
 # aggregate sum on columns
 type user_sum_fields {
-  id: Int
+  id: bigint
+  money: Int
 }
 
 # order by sum() on columns of table "user"
 input user_sum_order_by {
   id: order_by
+  money: order_by
 }
 
 # update columns of table "user"
@@ -893,43 +1301,67 @@ enum user_update_column {
   avatar
 
   # column name
+  created_at
+
+  # column name
   id
+
+  # column name
+  lang
+
+  # column name
+  money
 
   # column name
   nickname
 
   # column name
+  role
+
+  # column name
   steam_id
+
+  # column name
+  steam_profile
+
+  # column name
+  updated_at
 }
 
 # aggregate var_pop on columns
 type user_var_pop_fields {
   id: Float
+  money: Float
 }
 
 # order by var_pop() on columns of table "user"
 input user_var_pop_order_by {
   id: order_by
+  money: order_by
 }
 
 # aggregate var_samp on columns
 type user_var_samp_fields {
   id: Float
+  money: Float
 }
 
 # order by var_samp() on columns of table "user"
 input user_var_samp_order_by {
   id: order_by
+  money: order_by
 }
 
 # aggregate variance on columns
 type user_variance_fields {
   id: Float
+  money: Float
 }
 
 # order by variance() on columns of table "user"
 input user_variance_order_by {
   id: order_by
+  money: order_by
 }
 
 scalar uuid

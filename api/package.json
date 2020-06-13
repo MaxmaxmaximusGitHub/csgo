@@ -16,12 +16,18 @@
     "webpack-node-externals": "*"
   },
   "dependencies": {
+    "pg": "^8.2.1",
+    "sql-tag": "^1.0.1",
     "@csshot/gql": "*",
     "@csshot/catch-exceptions": "*",
     "body-parser": "^1.19.0",
+    "connect-redis": "^4.0.4",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
-    "node-fetch": "latest"
+    "express-session": "^1.17.1",
+    "passport": "^0.4.1",
+    "passport-steam": "^1.0.14",
+    "redis": "^3.0.2"
   }
 }

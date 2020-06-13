@@ -1,2 +1,2 @@
-export { default } from "../components/HistoryPage/HistoryPage"
+export {default} from "../components/HistoryPage/HistoryPage"
 

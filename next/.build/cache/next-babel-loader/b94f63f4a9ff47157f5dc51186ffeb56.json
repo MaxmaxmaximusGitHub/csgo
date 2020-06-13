@@ -1,1 +1,0 @@
-{"ast":null,"code":"export*from\"../components/HistoryPage/HistoryPage\";","map":{"version":3,"sources":["C:/localhost/csshot/web/pages/history.js"],"names":[],"mappings":"AAAA,WAAc,uCAAd","sourcesContent":["export * from \"../components/HistoryPage/HistoryPage\"\r\n\r\n"]},"metadata":{},"sourceType":"module"}

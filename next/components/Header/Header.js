@@ -8,10 +8,12 @@ export default function Header() {
 
   return <header className='header'>
     <LeftTray/>
+
     <Nav/>
+
     <RightTray/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </header>
 }
 

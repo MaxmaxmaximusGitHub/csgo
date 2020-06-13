@@ -1,1 +1,0 @@
-{"ast":null,"code":"export{default}from\"../components/BonusesPage/BonusesPage\";","map":{"version":3,"sources":["C:/localhost/csshot/services/html/pages/bonuses.js"],"names":["default"],"mappings":"AAAA,OAASA,OAAT,KAAwB,uCAAxB","sourcesContent":["export { default } from \"../components/BonusesPage/BonusesPage\"\r\n\r\n"]},"metadata":{},"sourceType":"module"}

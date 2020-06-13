@@ -195,7 +195,7 @@ function excludeDir(excludedDirs = []) {
     })
 
     if (fileInExcludedDir) {
-      return callback(null, `commonjs ${ request }`)
+      return callback(null, `commonjs ${request}`)
     }
 
     callback()

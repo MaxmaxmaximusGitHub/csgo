@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react'
 import css from 'styled-jsx/css'
 import TabTitle from "./TabTitle"
 import useSize from "../../../hooks/useSize";
@@ -11,21 +10,21 @@ export default function TabTitles({tabs, onTitleClick}) {
 
   const titles = tabs.map((tab, index) =>
     <TabTitle
-      key={ index }
-      active={ tab.props.active }
-      ref={ tab.props.active ? activeTabRef : null }
-      onClick={ () => onTitleClick(index) }>
-      { tab.props.title }
+      key={index}
+      active={tab.props.active}
+      ref={tab.props.active ? activeTabRef : null}
+      onClick={() => onTitleClick(index)}>
+      {tab.props.title}
     </TabTitle>
   )
 
 
   return <div className='tab-titles'>
 
-    <div className="titles">{ titles }</div>
-    <TabTitlesLine size={ activeTabSize }/>
+    <div className="titles">{titles}</div>
+    <TabTitlesLine size={activeTabSize}/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

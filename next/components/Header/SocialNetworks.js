@@ -9,11 +9,11 @@ export default function SocialNetworks() {
 
   return <div className='social-networks'>
 
-    <SocialNetwork icon={ vkIcon } href='//vk.com'/>
-    <SocialNetwork icon={ telegramIcon } href='//vk.com'/>
-    <SocialNetwork icon={ discordIcon } href='//vk.com'/>
+    <SocialNetwork icon={vkIcon} href='//vk.com'/>
+    <SocialNetwork icon={telegramIcon} href='//vk.com'/>
+    <SocialNetwork icon={discordIcon} href='//vk.com'/>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

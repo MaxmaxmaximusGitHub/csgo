@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="me">
     <words>
+      <w>avatarfull</w>
       <w>baseurl</w>
       <w>callsite</w>
       <w>csgo</w>
@@ -8,6 +9,7 @@
       <w>hasura</w>
       <w>hasurahook</w>
       <w>inited</w>
+      <w>loccountrycode</w>
       <w>myadminsecretkey</w>
       <w>narut</w>
       <w>naruto</w>
@@ -15,15 +17,19 @@
       <w>nginx</w>
       <w>nodemon</w>
       <w>ololo</w>
+      <w>personaname</w>
       <w>preact</w>
       <w>prerender</w>
       <w>prisma</w>
       <w>privkey</w>
+      <w>profileurl</w>
       <w>pubsub</w>
       <w>quasis</w>
+      <w>realname</w>
       <w>refetch</w>
       <w>resave</w>
       <w>serverless</w>
+      <w>steamid</w>
       <w>trololo</w>
       <w>webhook</w>
     </words>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import Roll from "../Widgets/Roll";
 import css from 'styled-jsx/css'
 
@@ -19,11 +19,11 @@ export default function BonusesFAQ() {
       <h3>Как работает бонусная система</h3>
 
       <Roll title='Lorem ipsum dolor?'>
-        { text }{ text }{ text }{ text }{ text }{ text }{ text }{ text }
+        {text}{text}{text}{text}{text}{text}{text}{text}
       </Roll>
 
       <Roll title='Lorem ipsum dolor?'>
-        { text }
+        {text}
       </Roll>
     </div>
 
@@ -41,11 +41,11 @@ export default function BonusesFAQ() {
       </Roll>
 
       <Roll title='Lorem ipsum dolor?'>
-        { text }
+        {text}
       </Roll>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

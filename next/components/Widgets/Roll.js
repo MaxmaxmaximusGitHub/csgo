@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, {useState} from 'react'
 import css from 'styled-jsx/css'
 import classes from "../../lib/classes";
 import useSize from "../../hooks/useSize";
@@ -19,15 +19,15 @@ export default function Roll({title, children, ...props}) {
   }
 
 
-  return <div className={ rollClasses }>
+  return <div className={rollClasses}>
 
-    <h6 className="title" onClick={ toggleState }>{ title }</h6>
+    <h6 className="title" onClick={toggleState}>{title}</h6>
 
-    <div className="wrapper" style={ wrapperStyles }>
-      <div className="content" ref={ contentRef }>{ children }</div>
+    <div className="wrapper" style={wrapperStyles}>
+      <div className="content" ref={contentRef}>{children}</div>
     </div>
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </div>
 }
 

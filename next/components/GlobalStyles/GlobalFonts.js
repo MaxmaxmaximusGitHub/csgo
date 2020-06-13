@@ -4,7 +4,7 @@ import css from 'styled-jsx/css'
 
 export default React.memo(function GlobalFonts() {
 
-  return <style jsx global>{ style }</style>
+  return <style jsx global>{style}</style>
 })
 
 

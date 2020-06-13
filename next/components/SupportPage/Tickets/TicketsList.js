@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import css from 'styled-jsx/css'
 import List from "../../Widgets/List";
 
@@ -10,7 +10,7 @@ export default function TicketsList() {
     dfdffdfdfd
     dfdffdfdfd
 
-    <style jsx>{ style }</style>
+    <style jsx>{style}</style>
   </List>
 }
 
