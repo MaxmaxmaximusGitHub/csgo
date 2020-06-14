@@ -3,7 +3,9 @@ import toDate from "../../filters/toDate"
 import ClientRender from "../Widgets/ClientRender";
 
 
-export default function ChatMessage({message: {avatar, nickname, text, createdAt}}) {
+export default function ChatMessage({message}) {
+
+  const {text, created_at, author: {nickname, avatar}} = message
 
   return <li className='message'>
 
@@ -12,7 +14,7 @@ export default function ChatMessage({message: {avatar, nickname, text, createdAt
       <div className="info-row">
         <div className="nickname">{nickname}</div>
         <div className="time">
-          <ClientRender>{toDate(createdAt, "h:MM")}</ClientRender>
+          <ClientRender>{toDate(created_at, "h:MM")}</ClientRender>
         </div>
       </div>
 

@@ -6,6 +6,7 @@ import useCurrentUser from "../../hooks/useCurrentUser"
 import {useEffect, useState} from "react";
 import {CURRENT_USER_QUERY} from "../../lib/withCurrentUser";
 import useLiveQuery from "../../hooks/useLiveQuery";
+import useNotificator from "../../hooks/useNotificator";
 
 const MONEY_PLUS_MUTATION = gql`
   mutation ($id: Int!) {
@@ -57,8 +58,16 @@ function Users() {
 
 export default function RefsPage() {
 
+  const {alert, error} = useNotificator()
+
+  function onClick() {
+    alert('Lol')
+  }
+
   return <Page>
     <Users/>
+
+    <Button onClick={onClick}>alert</Button>
   </Page>
 }
 

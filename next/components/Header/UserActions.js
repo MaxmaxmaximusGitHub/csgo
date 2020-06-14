@@ -2,7 +2,7 @@ import css from 'styled-jsx/css'
 import ActionButton from "./ActionButton"
 import notificationIcon from "../../res/images/notification.svg"
 import settingsIcon from "../../res/images/settings.svg"
-import LogoutButton from "../../hooks/LogoutButton";
+import LogoutButton from "./LogoutButton";
 
 
 export default function UserActions() {

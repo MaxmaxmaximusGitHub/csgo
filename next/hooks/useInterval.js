@@ -14,7 +14,9 @@ export default function useInterval(handler, time) {
       return
     }
 
-    let id = setInterval(handlerRef.current, time)
+    let id = setInterval(() => {
+      handlerRef.current()
+    }, time)
 
     return () => {
       clearInterval(id)

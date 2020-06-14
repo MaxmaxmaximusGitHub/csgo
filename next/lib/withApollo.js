@@ -5,6 +5,7 @@ import {HttpLink} from "apollo-link-http";
 import {WebSocketLink} from "apollo-link-ws";
 import {ApolloLink, split} from "apollo-link";
 import {getMainDefinition} from "apollo-utilities";
+import {onError} from 'apollo-link-error'
 import Head from 'next/head'
 
 
@@ -82,7 +83,20 @@ function createApolloClient(options, ctx, clientState = null) {
   const client = new ApolloClient({
     ssrMode: !process.browser,
     cache: cache.restore(clientState),
-    link
+    link: link,
+
+    defaultOptions: {
+      mutate: {
+        errorPolicy: "ignore"
+      },
+      query: {
+        errorPolicy: "ignore"
+      },
+      watchQuery: {
+        errorPolicy: "ignore"
+      }
+
+    }
   })
 
   client.toJSON = () => null
@@ -90,27 +104,51 @@ function createApolloClient(options, ctx, clientState = null) {
 }
 
 
-function createLink(options, ctx) {
+function createErrorLink(options) {
 
-  if (!process.browser) {
-    const fetch = require('isomorphic-fetch')
-    const cookie = ctx.req.headers.cookie || ''
+  return new onError(({response}) => {
+    if (options.onError && response && response.errors.length) {
+      options.onError(response.errors)
+    }
+  })
 
-    return new HttpLink({
-      uri: process.env.NEXT_GRAPHQL_SSR,
-      fetch: (url, options) => {
-        return fetch(url, {
-          ...options,
-          compress: false,
-          headers: {"Cookie": cookie}
-        })
-      }
-    })
-  }
-
-  return createBrowserLink()
 }
 
+
+function createLink(options, ctx) {
+
+  if (process.browser) {
+    var transportLink = createBrowserLink(options, ctx)
+  } else {
+    var transportLink = createServerLink(options, ctx)
+  }
+
+  var errorLink = createErrorLink(options, ctx)
+
+  return ApolloLink.from([
+    errorLink,
+    transportLink
+  ])
+}
+
+
+function createServerLink(options, ctx) {
+  if (process.browser) return null
+
+  const fetch = require('isomorphic-fetch')
+  const cookie = ctx.req.headers.cookie || ''
+
+  return new HttpLink({
+    uri: process.env.NEXT_GRAPHQL_SSR,
+    fetch: (url, options) => {
+      return fetch(url, {
+        ...options,
+        compress: false,
+        headers: {"Cookie": cookie}
+      })
+    }
+  })
+}
 
 function createBrowserLink() {
   const httpLink = new HttpLink({
@@ -130,7 +168,7 @@ function createBrowserLink() {
     return (kind === 'OperationDefinition' && operation === 'subscription');
   }, wsLink, httpLink)
 
-  return ApolloLink.from([terminatingLink])
+  return terminatingLink
 }
 
 
