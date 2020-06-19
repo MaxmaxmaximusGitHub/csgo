@@ -9,8 +9,8 @@
       <excludeFolder url="file://$MODULE_DIR$/api/.build" />
       <excludeFolder url="file://$MODULE_DIR$/auth/.build" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/html/build" />
       <excludeFolder url="file://$MODULE_DIR$/next/.build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/examples" />
       <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/examples/with-flow/flow-typed" />
       <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/packages/next/dist" />
@@ -29,13 +29,11 @@
     <content url="file://$MODULE_DIR$/packages/webpack-node-externals" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="@types/webpack" level="application" />
     <orderEntry type="library" name="@types/babel-core" level="application" />
     <orderEntry type="library" name="@types/babel-plugin-syntax-jsx" level="application" />
     <orderEntry type="library" name="@types/express" level="application" />
     <orderEntry type="library" name="@types/gulp" level="application" />
     <orderEntry type="library" name="@types/gulp-watch" level="application" />
-    <orderEntry type="library" name="next" level="project" />
-    <orderEntry type="library" name="styled-jsx" level="project" />
+    <orderEntry type="library" name="@types/passport" level="application" />
   </component>
 </module>

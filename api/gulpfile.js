@@ -46,7 +46,6 @@ async function devServer() {
       return
     }
 
-
     childProcess = child_process.spawn('node', [
       `--inspect=0.0.0.0:${process.env.DEBUG_PORT}`,
       '--trace-warnings', '.'

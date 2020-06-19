@@ -13,7 +13,6 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-
   redis:
     image: redis:6.0.4
     restart: always
@@ -21,48 +20,25 @@ services:
       - ${REDIS_PORT}:${REDIS_PORT}
     command: redis-server --port ${REDIS_PORT} --requirepass ${REDIS_PASS}
 
-
   hasura:
     image: hasura/graphql-engine:v1.2.2
     ports:
-      - 8080:8080
+      - ${HASURA_GRAPHQL_SERVER_PORT}:${HASURA_GRAPHQL_SERVER_PORT}
     restart: always
     environment:
+      HASURA_GRAPHQL_SERVER_PORT: ${HASURA_GRAPHQL_SERVER_PORT}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${PG_PASSWORD}@${PG_USER}:${PG_PORT}/${PG_DB_NAME}
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
       HASURA_GRAPHQL_DEV_MODE: "true"
-      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: 1000
+      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: ${HASURA_GRAPHQL_RATE_LIMIT}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_ACTION_SECRET: ${HASURA_GRAPHQL_ACTION_SECRET}
       HASURA_GRAPHQL_AUTH_HOOK: ${HASURA_GRAPHQL_AUTH_HOOK}
     depends_on:
       - postgres
       - api
-
-
-  next:
-    build:
-      context: .
-      dockerfile: ./next/Dockerfile.dev
-    volumes:
-      - ./:/app
-    restart: always
-    ports:
-      - ${NEXT_PORT}:${NEXT_PORT}
-      - ${NEXT_DEBUG_PORT}:${NEXT_DEBUG_PORT}
-    environment:
-      NEXT_PUBLIC_GRAPHQL: ${NEXT_PUBLIC_GRAPHQL}
-      NEXT_PUBLIC_GRAPHQL_SUBSCRIPTIONS: ${NEXT_PUBLIC_GRAPHQL_SUBSCRIPTIONS}
-
-      NEXT_GRAPHQL_SSR: ${NEXT_GRAPHQL_SSR}
-      NEXT_DEBUG_PORT: ${NEXT_DEBUG_PORT}
-      NEXT_PORT: ${NEXT_PORT}
-
-    depends_on:
-      - hasura
-
 
   api:
     build:
@@ -98,21 +74,33 @@ services:
       - postgres
       - redis
 
-
   nginx:
     build:
       context: .
       dockerfile: ./nginx/Dockerfile.dev
     restart: always
     ports:
-      - 80:80
-      - 443:443
+      - ${NGINX_HTTP_PORT}:${NGINX_HTTP_PORT}
+      - ${NGINX_HTTPS_PORT}:${NGINX_HTTPS_PORT}
     volumes:
       - ./nginx/conf.dev/:/etc/nginx/conf.d/
       - ./nginx/logs/:/var/log/nginx/
     depends_on:
-      - next
       - api
+      - html
+
+  html:
+    build:
+      context: .
+      dockerfile: ./html/Dockerfile.dev
+    restart: always
+    ports:
+      - ${HTML_PORT}:${HTML_PORT}
+    volumes:
+      - ./html/:/app/
+    environment:
+      HTML_PORT: ${HTML_PORT}
+
 
 volumes:
   db_data:

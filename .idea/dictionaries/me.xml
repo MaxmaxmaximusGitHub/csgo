@@ -4,8 +4,11 @@
       <w>avatarfull</w>
       <w>baseurl</w>
       <w>callsite</w>
+      <w>contenthash</w>
       <w>csgo</w>
+      <w>csshot</w>
       <w>etags</w>
+      <w>gqless</w>
       <w>hasura</w>
       <w>hasurahook</w>
       <w>inited</w>
@@ -29,9 +32,11 @@
       <w>realname</w>
       <w>refetch</w>
       <w>resave</w>
+      <w>sasuke</w>
       <w>serverless</w>
       <w>steamid</w>
       <w>trololo</w>
+      <w>tsdx</w>
       <w>webhook</w>
     </words>
   </dictionary>

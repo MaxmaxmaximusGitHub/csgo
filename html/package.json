@@ -1,0 +1,51 @@
+{
+  "name": "@csshot/html",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --host 0.0.0.0 --port $HTML_PORT",
+    "build": "webpack --mode production",
+    "download:schema": "gq http://localhost/graphql -H \"X-Hasura-Admin-Secret: pass\" --introspect > src/graphql/schema.graphql"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-ws": "^1.0.20",
+    "graphql": "^15.1.0",
+    "graphql-tag": "^2.10.3",
+    "nib": "^1.1.2",
+    "react": "0.0.0-experimental-33c3af284",
+    "react-dom": "0.0.0-experimental-33c3af284",
+    "subscriptions-transport-ws": "^0.9.16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.3",
+    "@types/react": "^16.9.36",
+    "@types/react-dom": "^16.9.8",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-auto-import": "^1.0.5",
+    "babel-plugin-graphql-tag": "^2.5.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.6.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "react-refresh": "^0.8.3",
+    "source-map-loader": "^1.0.0",
+    "style-loader": "^1.2.1",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "terser-webpack-plugin": "^3.0.5",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
+    "typescript-plugin-css-modules": "^2.3.0",
+    "typings-for-css-modules-loader": "^1.7.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

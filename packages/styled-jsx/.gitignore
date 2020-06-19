@@ -1,8 +1,0 @@
-# dependencies
-node_modules
-
-# build output
-dist
-
-# logs
-npm-debug.log

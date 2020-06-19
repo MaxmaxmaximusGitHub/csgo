@@ -1,21 +1,6 @@
 {
-  "name": "csshot",
   "private": true,
   "scripts": {
-    "apply": "yarn run hasura:apply && yarn run compose:dev",
-    "update:version": "lerna version --no-push",
-    "reinstall": "lerna clean --yes && yarn",
-    "docker:dev": "docker-compose -f docker-compose.dev.yaml up --build -d",
-    "docker:prod": "docker-compose up --build -d",
-    "apply:hasura": "cd hasura && hasura metadata apply",
-    "download:hasura": "cd hasura && hasura metadata export && yarn run export:schema",
-    "update-local-graphql-schema": "gq http://localhost:8080/v1/graphql -H \"X-Hasura-Admin-Secret: pass\" --introspect > schema.graphql"
-  },
-  "workspaces": [
-    "packages/*",
-    "*"
-  ],
-  "devDependencies": {
-    "lerna": "^3.20.2"
+    "docker:dev": "docker-compose -f docker-compose.dev.yaml up --build -d"
   }
 }

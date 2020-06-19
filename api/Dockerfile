@@ -2,7 +2,7 @@ FROM node:12 AS builder
 
 WORKDIR /app
 COPY ./packages/webpack-node-externals ./packages/webpack-node-externals
-COPY ./auth/ ./auth/
+COPY src/auth ./auth/
 COPY ./package.json ./
 COPY ./yarn.lock ./
 
