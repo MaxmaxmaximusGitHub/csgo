@@ -14,7 +14,8 @@ const ROLES = {
 
 
 
-passport.use(SteamStrategy({
+// @ts-ignore
+passport.use(new SteamStrategy({
     returnURL: `${process.env.API_STEAM_REALM}/auth/steam/return`,
     realm: process.env.API_STEAM_REALM,
     apiKey: process.env.API_STEAM_API_KEY

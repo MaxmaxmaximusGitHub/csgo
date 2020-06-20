@@ -1,7 +1,12 @@
-export default function useInput(initValue) {
+export default function useInput(initValue = '') {
   const [value, setValue] = useState(initValue)
 
-  function setValueFromEvent(event) {
+  const setValueFromEvent = useCallback((event) => {
+    if(typeof event !== 'object'){
+      setValue(event)
+      return
+    }
+
     const input = event.target
 
     if (input.type === 'checkbox') {
@@ -9,7 +14,7 @@ export default function useInput(initValue) {
     } else {
       setValue(input.value)
     }
-  }
+  }, [setValue])
 
-  return [value, setValueFromEvent, setValue]
+  return [value, setValueFromEvent]
 }

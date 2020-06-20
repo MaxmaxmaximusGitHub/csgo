@@ -1,13 +1,16 @@
 import withCurrentUser from "../lib/withCurrentUser";
 import withApollo from "../lib/withApollo";
-import Game from "./AdminPanel/AdminPanel";
+import AdminPanel from "./AdminPanel/AdminPanel";
+import styles from './App.styl'
 import Header from "./Header";
+import Chat from "./Chat/Chat";
 
 
 function App() {
   return <>
     <Header/>
-    <Game/>
+    <Chat/>
+    <Chat/>
   </>
 }
 

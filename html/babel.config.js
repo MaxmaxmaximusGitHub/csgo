@@ -21,7 +21,8 @@ module.exports = (api) => {
             default: 'React',
             members: [
               'Component', 'Suspend',
-              'useState', 'useHook', 'useEffect', 'useContext'
+              'useRef', 'useMemo', 'useState',
+              'useEffect', 'useContext', 'useCallback', 'useLayoutEffect',
             ]
           }
         ]

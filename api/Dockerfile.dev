@@ -1,4 +1,4 @@
 FROM mhart/alpine-node:12
 
-WORKDIR /app/api
-CMD yarn run dev
+WORKDIR /app
+CMD npm run dev

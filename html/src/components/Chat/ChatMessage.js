@@ -12,8 +12,8 @@ export default function ChatMessage({message}) {
   })
 
   return <li
-    key={message.id}
-    className={styles.message}>
+    className={styles.naruto}
+    key={message.id}>
     <button onClick={deleteMessage}>delete</button>
     {message.text}
   </li>

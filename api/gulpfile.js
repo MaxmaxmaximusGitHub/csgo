@@ -1,38 +1,55 @@
 const gulp = require('gulp')
 const nodePath = require('path')
 const webpack = require('webpack')
-const child_process = require('child_process')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const child_process = require('child_process')
 
-const MAIN = './index.js'
 
-const serverWebpackConfig = {
+const webpackConfig = {
   target: "node",
-  mode: "production",
+  devtool: "source-map",
+
+  entry: './src/index.ts',
+
+  output: {
+    path: nodePath.resolve(__dirname, './build/'),
+    filename: 'index.js'
+  },
+
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
 
   externals: [nodeExternals()],
 
-  devtool: "source-map",
-  entry: MAIN,
-  output: {
-    path: nodePath.resolve(__dirname, './.build/'),
-    filename: 'index.js'
+  module: {
+    rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "ts-loader"
+          }
+        ]
+      },
+    ]
   },
 
   plugins: [
     new CleanWebpackPlugin(),
-    new FriendlyErrorsWebpackPlugin()
+    new FriendlyErrorsWebpackPlugin(),
   ]
 }
 
 
-async function devServer() {
-  let childProcess = null
+async function dev() {
+  var childProcess = null
 
   webpack({
-    ...serverWebpackConfig,
+    ...webpackConfig,
     watch: true,
     mode: 'development',
   }, (err) => {
@@ -41,33 +58,27 @@ async function devServer() {
       childProcess.kill('SIGINT')
     }
 
-    if (err) {
-      console.error(err)
-      return
-    }
+    childProcess = child_process.spawn(
+      `node --inspect=0.0.0.0:${process.env.API_DEBUG_PORT} ./build/index.js`, {
+        shell: true,
+        stdio: [process.stdin, process.stdout, process.stderr],
+      }
+    )
 
-    childProcess = child_process.spawn('node', [
-      `--inspect=0.0.0.0:${process.env.DEBUG_PORT}`,
-      '--trace-warnings', '.'
-    ], {
-      shell: true,
-      stdio: "inherit",
-      env: {
-        ...process.env,
-        NODE_ENV: 'development'
-      },
-    })
   })
 }
 
 
-async function buildServer(done) {
-  webpack(serverWebpackConfig, done)
+function build(done) {
+  webpack({
+    ...webpackConfig,
+    mode: "production"
+  }, done)
 }
 
 
-gulp.task('dev', devServer)
-gulp.task('build', buildServer)
+gulp.task('dev', dev)
+gulp.task('build', build)
 
 
 

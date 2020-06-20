@@ -41,17 +41,18 @@ services:
       - api
 
   api:
+    restart: always
+
     build:
       context: .
       dockerfile: ./api/Dockerfile.dev
 
     volumes:
-      - ./:/app
+      - ./api/:/app/
 
-    restart: always
     environment:
-      PORT: ${API_PORT}
-      DEBUG_PORT: ${API_DEBUG_PORT}
+      API_PORT: ${API_PORT}
+      API_DEBUG_PORT: ${API_DEBUG_PORT}
       API_STEAM_REALM: ${API_STEAM_REALM}
       API_STEAM_API_KEY: ${API_STEAM_API_KEY}
       API_SESSIONS_SECRET_KEY: ${API_SESSIONS_SECRET_KEY}
@@ -74,6 +75,18 @@ services:
       - postgres
       - redis
 
+  html:
+    build:
+      context: .
+      dockerfile: ./html/Dockerfile.dev
+    restart: always
+    ports:
+      - ${HTML_PORT}:${HTML_PORT}
+    volumes:
+      - ./html/:/app/
+    environment:
+      HTML_PORT: ${HTML_PORT}
+
   nginx:
     build:
       context: .
@@ -88,18 +101,6 @@ services:
     depends_on:
       - api
       - html
-
-  html:
-    build:
-      context: .
-      dockerfile: ./html/Dockerfile.dev
-    restart: always
-    ports:
-      - ${HTML_PORT}:${HTML_PORT}
-    volumes:
-      - ./html/:/app/
-    environment:
-      HTML_PORT: ${HTML_PORT}
 
 
 volumes:

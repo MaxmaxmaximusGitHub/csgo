@@ -18,7 +18,7 @@ const redisUrl = `redis://${
 const redisClient = redis.createClient(redisUrl)
 const RedisStore = connectRedis(session)
 const app = express()
-
+const PORT = process.env.API_PORT
 
 app.set('trust proxy', 1) // trust nginx
 
@@ -29,6 +29,7 @@ app.use(cookieParser())
 app.use(session({
   store: new RedisStore({client: redisClient}),
   secret: process.env.API_SESSIONS_SECRET_KEY,
+  saveUninitialized: false,
   resave: false,
   name: 'authToken',
   cookie: {
@@ -52,13 +53,12 @@ passport.deserializeUser(async (id, done) => {
 })
 
 
-app.listen(process.env.PORT, (error) => {
+app.listen(PORT, (error) => {
   if (error) {
     console.error(error)
     return
   }
-
-  console.log(`Auth server started on http://localhost:${process.env.PORT}`)
+  console.log(`Auth server started on http://localhost:${PORT}`)
 })
 
 

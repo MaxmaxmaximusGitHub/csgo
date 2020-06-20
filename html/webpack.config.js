@@ -5,9 +5,10 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const nodePath = require('path');
+const glob = require('glob-all')
+
 
 const isDev = Boolean(process.env.WEBPACK_DEV_SERVER);
-
 
 
 module.exports = {
@@ -48,35 +49,7 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "ts-loader"
-          }
-        ]
-      },
-
-      {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: true,
-              hmr: isDev ? true : false,
-            }
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              esModule: true,
-              sourceMap: isDev ? true : false,
-              localsConvention: 'camelCaseOnly',
-              modules: {
-                localIdentName: '[name]-[local]',
-              },
-            }
-          }
-        ],
+        use: 'ts-loader'
       },
 
       {
@@ -93,13 +66,37 @@ module.exports = {
             loader: 'css-loader',
             options: {
               esModule: true,
+              importLoaders: 2,
               sourceMap: isDev ? true : false,
               localsConvention: 'camelCaseOnly',
               modules: {
-                localIdentName: '[name]-[local]',
+                localIdentName: '[name]_[local]',
               },
             }
           },
+
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                require('postcss-preset-env')(),
+                require('postcss-normalize'),
+
+                require('@fullhuman/postcss-purgecss')({
+                  content: glob.sync(
+                    'src/**/*.{js,jsx,ts,tsx}', {nodir: true}
+                  ),
+                  keyframes: true,
+                  fontFace: true,
+                  variables: true,
+                  rejected: true,
+                }),
+              ]
+            }
+          },
+
           {
             loader: 'stylus-loader',
             options: {
@@ -135,7 +132,17 @@ module.exports = {
   .filter(p => typeof p !== 'boolean'),
 
 
-  stats: isDev ? 'errors-only' : 'normal',
+  stats: {
+    entrypoints: false,
+    children: false
+  },
+
+  performance: {
+    hints: isDev ? false : 'warning',
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
+
 
   optimization: {
     usedExports: true,

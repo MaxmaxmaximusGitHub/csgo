@@ -1,24 +1,21 @@
-import Actions from "../lib/Actions"
+import ActionsController from "../lib/actionsController"
 import db from '../lib/db'
 import sql from 'sql-tag'
 
 
-Actions.add('send_message', async (data, user) => {
-
-  console.log('data, user', data, user)
+ActionsController.add('send_message', async (data, user) => {
 
   const {text} = data
+  const userId = user.id
 
   const {rows} = await db.query(sql`
     INSERT INTO "chat_message" 
-    (text)
-    VALUES (${text})
+    (text, author_id)
+    VALUES (${text}, ${userId})
     RETURNING id
   `)
 
-  console.log('rows', rows)
-
-  return {id: 11}
+  return {id: rows[0].id}
 })
 
 

@@ -1,13 +1,19 @@
 <component name="ProjectDictionaryState">
   <dictionary name="me">
     <words>
+      <w>americanexpress</w>
+      <w>autoprefixer</w>
       <w>avatarfull</w>
       <w>baseurl</w>
       <w>callsite</w>
       <w>contenthash</w>
       <w>csgo</w>
       <w>csshot</w>
+      <w>entrypoint</w>
+      <w>entrypoints</w>
       <w>etags</w>
+      <w>flexbox</w>
+      <w>flexbugs</w>
       <w>gqless</w>
       <w>hasura</w>
       <w>hasurahook</w>
@@ -19,6 +25,7 @@
       <w>nextjs</w>
       <w>nginx</w>
       <w>nodemon</w>
+      <w>nodir</w>
       <w>notif</w>
       <w>ololo</w>
       <w>personaname</w>
@@ -28,6 +35,7 @@
       <w>privkey</w>
       <w>profileurl</w>
       <w>pubsub</w>
+      <w>purgecss</w>
       <w>quasis</w>
       <w>realname</w>
       <w>refetch</w>
@@ -37,6 +45,7 @@
       <w>steamid</w>
       <w>trololo</w>
       <w>tsdx</w>
+      <w>vendorize</w>
       <w>webhook</w>
     </words>
   </dictionary>
