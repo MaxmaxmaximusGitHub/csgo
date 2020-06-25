@@ -1,6 +1,6 @@
 import styles from './Chat.styl'
 import useLiveQuery from "../../hooks/useLiveQuery";
-import {GET_CHAT_MESSAGES} from "../../graphql/queries";
+import {GET_CHAT_MESSAGES} from "../../apps/desktop/graphql/queries";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 

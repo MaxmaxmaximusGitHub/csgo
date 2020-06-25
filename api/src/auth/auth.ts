@@ -4,14 +4,16 @@ import app from "../lib/expressApp";
 import passport from "passport";
 
 
-const OWNER_ROLES_STEAM_IDS = ['76561198823843713']
+const OWNER_ROLES_STEAM_IDS = [
+  '76561198823843713'
+]
+
 
 const ROLES = {
   owner: 'owner',
   user: 'user',
   anonymous: 'anonymous',
 }
-
 
 
 // @ts-ignore

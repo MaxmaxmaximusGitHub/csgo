@@ -3,7 +3,7 @@
     <option name="myName" value="Project Default" />
     <inspection_tool class="AssignmentResultUsedJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AssignmentToForLoopParameterJS" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="AssignmentToFunctionParameterJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BadExpressionStatementJS" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="BlockStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="BreakStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="BreakStatementWithLabelJS" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -22,7 +22,9 @@
     <inspection_tool class="DivideByZeroJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DocumentWriteJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DuplicateConditionJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DuplicatedCode" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="DynamicallyGeneratedCodeJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ES6CheckImport" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ES6ConvertVarToLetConst" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="EmptyCatchBlockJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="EmptyFinallyBlockJS" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -34,8 +36,6 @@
       <option name="m_ignoreLoopsWithoutConditions" value="false" />
     </inspection_tool>
     <inspection_tool class="ForLoopThatDoesntUseLoopVariableJS" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="FunctionWithInconsistentReturnsJS" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="FunctionWithMultipleLoopsJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="HtmlNonExistentInternetResource" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="HtmlPresentationalElement" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="HtmlRequiredSummaryAttribute" enabled="true" level="INFORMATION" enabled_by_default="true" />
@@ -56,13 +56,16 @@
     <inspection_tool class="IfStatementWithTooManyBranchesJS" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_limit" value="3" />
     </inspection_tool>
-    <inspection_tool class="IncrementDecrementResultUsedJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InfiniteLoopJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="InnerHTMLJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="JSCheckFunctionSignatures" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="JSClassNamingConvention" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSConstructorReturnsPrimitive" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSDuplicatedDeclaration" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JSIgnoredPromiseFromCall" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="JSNonStrictModeUsed" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="JSUnresolvedFunction" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnresolvedVariable" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="JSUnusedGlobalSymbols" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JSValidateTypes" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="JSXNamespaceValidation" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
@@ -72,9 +75,6 @@
     <inspection_tool class="NegatedIfStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NestedAssignmentJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NestedConditionalExpressionJS" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="NestedFunctionJS" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="m_includeAnonymousFunctions" value="false" />
-    </inspection_tool>
     <inspection_tool class="NestedSwitchStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NestingDepthJS" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_limit" value="5" />
@@ -109,6 +109,10 @@
     <inspection_tool class="ThreeNegationsPerFunctionJS" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TodoComment" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TrivialConditionalJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLocalVariableJS" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_ignoreImmediatelyReturnedVariables" value="false" />
+      <option name="m_ignoreAnnotatedVariables" value="false" />
+    </inspection_tool>
     <inspection_tool class="UnterminatedStatementJS" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="ignoreSemicolonAtEndOfBlock" value="true" />
     </inspection_tool>

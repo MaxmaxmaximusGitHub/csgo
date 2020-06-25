@@ -1,7 +1,8 @@
-import {GET_CHAT_MESSAGES} from "../../graphql/queries"
-import {SEND_MESSAGE} from '../../graphql/mutations'
+import {GET_CHAT_MESSAGES} from "../../apps/desktop/graphql/queries"
+import {SEND_MESSAGE} from '../../apps/desktop/graphql/mutations'
 import {useMutation} from "@apollo/react-hooks"
 import useInput from "../../hooks/useInput"
+import Button from "../Button";
 
 
 export default function ChatInput() {
@@ -25,7 +26,7 @@ export default function ChatInput() {
     <input type="text" value={text}
            onKeyDown={onKeyDown}
            onChange={setText}/>
-    <button onClick={sendMessage}>Отправить</button>
+    <Button onClick={sendMessage}>Отправить</Button>
   </div>
 }
 

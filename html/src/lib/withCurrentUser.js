@@ -1,6 +1,5 @@
-import {GET_CURRENT_USER} from "../graphql/queries";
+import {GET_CURRENT_USER} from "../apps/desktop/graphql/queries";
 import useLiveQuery from "../hooks/useLiveQuery";
-import {useRef, useState} from 'react'
 
 
 export const CurrentUserContext = React.createContext(null)
@@ -20,7 +19,7 @@ export default function withCurrentUser(Component) {
       return null
     }
 
-    const user = data['current_user'][0] || null
+    const user = data['user_current'][0] || null
 
     return <CurrentUserContext.Provider value={user}>
       <Component {...props}/>

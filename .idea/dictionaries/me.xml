@@ -8,12 +8,14 @@
       <w>callsite</w>
       <w>contenthash</w>
       <w>csgo</w>
+      <w>cssh</w>
       <w>csshot</w>
       <w>entrypoint</w>
       <w>entrypoints</w>
       <w>etags</w>
       <w>flexbox</w>
       <w>flexbugs</w>
+      <w>fullhuman</w>
       <w>gqless</w>
       <w>hasura</w>
       <w>hasurahook</w>
@@ -42,6 +44,7 @@
       <w>resave</w>
       <w>sasuke</w>
       <w>serverless</w>
+      <w>setimmediate</w>
       <w>steamid</w>
       <w>trololo</w>
       <w>tsdx</w>

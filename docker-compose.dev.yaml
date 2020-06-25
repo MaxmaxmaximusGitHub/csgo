@@ -81,11 +81,13 @@ services:
       dockerfile: ./html/Dockerfile.dev
     restart: always
     ports:
-      - ${HTML_PORT}:${HTML_PORT}
+      - ${HTML_ADMIN_PORT}:${HTML_ADMIN_PORT}
+      - ${HTML_PUBLIC_PORT}:${HTML_PUBLIC_PORT}
     volumes:
       - ./html/:/app/
     environment:
-      HTML_PORT: ${HTML_PORT}
+      HTML_ADMIN_PORT: ${HTML_ADMIN_PORT}
+      HTML_PUBLIC_PORT: ${HTML_PUBLIC_PORT}
 
   nginx:
     build:
