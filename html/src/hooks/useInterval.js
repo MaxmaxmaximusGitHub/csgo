@@ -18,9 +18,7 @@ export default function useInterval(handler, time) {
       handlerRef.current()
     }, time)
 
-    return () => {
-      clearInterval(id)
-    }
+    return () => clearInterval(id)
   }, [time])
 
 }

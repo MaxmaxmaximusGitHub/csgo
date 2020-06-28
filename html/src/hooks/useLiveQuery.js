@@ -11,7 +11,7 @@ export default function useLiveQuery(query, options = {}) {
     }
   })
 
-  return queryResult
+  return getQueryResultData(queryResult)
 }
 
 
@@ -29,4 +29,17 @@ function toSubscription(query) {
 }
 
 
+function getQueryResultData({data}) {
+  if (!data) {
+    return []
+  }
+
+  const keys = Object.keys(data)
+
+  if (keys.length > 1) {
+    return data
+  }
+
+  return data[keys[0]]
+}
 

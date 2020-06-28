@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import Notification from "./Notification";
+import Notify from "./Notify";
 import style from './Notificator.styl'
 
 const NOTIFICATOR_HANDLERS = []
@@ -69,7 +69,7 @@ export default function Notificator() {
 
     <ul className={style.notifications}>
       {notifications.map(notification =>
-        <Notification
+        <Notify
           key={notification.id}
           notification={notification}
           onClose={onNotificationClose}

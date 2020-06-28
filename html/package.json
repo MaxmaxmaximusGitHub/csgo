@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "download:schema": "gq http://localhost/graphql -H \"X-Hasura-Admin-Secret: pass\" --introspect > src/schema.graphql"
+    "download:schema": "gq http://localhost/graphql -H \"X-Hasura-Admin-Secret: pass\" --introspect > src/graphql/schema.graphql",
+    "ngrok": "ngrok start -config ./ngrok.yml 80"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -18,6 +19,7 @@
     "graphql-tag": "^2.10.3",
     "nib": "^1.1.2",
     "react": "0.0.0-experimental-33c3af284",
+    "react-confetti": "^5.1.0",
     "react-dom": "0.0.0-experimental-33c3af284",
     "react-hook-form": "^5.7.2",
     "react-router-dom": "^5.2.0",
@@ -39,9 +41,11 @@
     "babel-plugin-graphql-tag": "^2.5.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob-all": "^3.2.1",
     "html-webpack-plugin": "^4.3.0",
+    "image-webpack-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-flexbugs-fixes": "^4.2.1",

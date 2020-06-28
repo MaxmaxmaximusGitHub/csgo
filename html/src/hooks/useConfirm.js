@@ -1,4 +1,4 @@
-import {ConfirmContext} from "../components/Confirm/Confirm";
+import {ConfirmContext} from "../components/Confirm";
 
 
 export default function useConfirm(...args) {
@@ -57,3 +57,4 @@ function normalizeOptions(args) {
   }
 
 }
+

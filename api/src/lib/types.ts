@@ -9,7 +9,6 @@ export type User = {
 }
 
 
-
 export interface UserInput {
   steam_id: String
   steam_profile: String
@@ -18,4 +17,5 @@ export interface UserInput {
   lang: String
   role: String
 }
+
 

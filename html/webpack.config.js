@@ -8,28 +8,36 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const nodePath = require('path');
 const glob = require('glob-all');
+const fs = require('fs')
 
 
-const isDev = Boolean(process.env.WEBPACK_DEV_SERVER)
-const staticDir = 'static'
+const IS_DEV = Boolean(process.env.WEBPACK_DEV_SERVER)
+const HTML_PUBLIC_PORT = process.env.HTML_PUBLIC_PORT
+const HTML_ADMIN_PORT = process.env.HTML_ADMIN_PORT
+const INDEX_STYLE = './src/styles/index.styl'
+const INDEX_HTML = './src/lib/index.html'
+const STATIC_DIR = 'static'
 
+const ALIASES = {
+  res: nodePath.resolve(__dirname, './src/res/')
+}
 
 
 module.exports = [
   createWebpackConfig({
     name: 'public',
-    port: process.env.HTML_PUBLIC_PORT,
+    port: HTML_PUBLIC_PORT,
     entry: {
-      // mobile: './src/apps/mobile/mobile.js',
-      index: './src/apps/desktop/desktop.js',
+      // mobile: './src/apps/Mobile/Mobile.js',
+      index: './src/apps/Desktop/Desktop.js',
     },
   }),
 
   // createWebpackConfig({
   //   name: 'admin',
-  //   port: process.env.HTML_ADMIN_PORT,
+  //   port: HTML_ADMIN_PORT,
   //   entry: {
-  //     index: './src/apps/admin/admin.js'
+  //     index: './src/apps/Admin/Admin.js'
   //   },
   // })
 ]
@@ -37,28 +45,32 @@ module.exports = [
 
 function createWebpackConfig({name, entry, port}) {
 
+  entry = addStyleToEntry(entry, INDEX_STYLE)
 
   return {
     target: 'web',
 
-    mode: isDev ? 'development' : 'production',
-    devtool: isDev ? 'inline-source-map' : 'none',
+    mode: IS_DEV ? 'development' : 'production',
+    devtool: IS_DEV ? 'inline-source-map' : 'none',
     entry: entry,
 
     output: {
       path: nodePath.resolve(__dirname, `build/${name}`),
+      publicPath: `/`,
       filename:
-        isDev
-          ? `${staticDir}/[name].js`
-          : `${staticDir}/[name].[contenthash].js`
+        IS_DEV
+          ? `${STATIC_DIR}/scripts/[name].js`
+          : `${STATIC_DIR}/scripts/[name].[contenthash].js`
     },
 
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      alias: ALIASES,
     },
 
     module: {
+
       rules: [
         {
           test: /\.(js(x?))$/,
@@ -81,7 +93,7 @@ function createWebpackConfig({name, entry, port}) {
               loader: MiniCssExtractPlugin.loader,
               options: {
                 esModule: true,
-                hmr: isDev ? true : false,
+                hmr: IS_DEV ? true : false,
               }
             },
             {
@@ -89,14 +101,13 @@ function createWebpackConfig({name, entry, port}) {
               options: {
                 esModule: true,
                 importLoaders: 2,
-                sourceMap: isDev ? true : false,
+                sourceMap: IS_DEV ? true : false,
                 localsConvention: 'camelCase',
                 modules: {
                   localIdentName: '[name]_[local]',
                 },
               }
             },
-
             {
               loader: require.resolve('postcss-loader'),
               options: {
@@ -118,7 +129,6 @@ function createWebpackConfig({name, entry, port}) {
                 ]
               }
             },
-
             {
               loader: 'stylus-loader',
               options: {
@@ -130,6 +140,33 @@ function createWebpackConfig({name, entry, port}) {
             }
           ],
         },
+
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: `[name].[ext]`,
+                outputPath: `${STATIC_DIR}/fonts/`
+              }
+            }
+          ]
+        },
+
+        {
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                disable: true, // webpack@2.x and newer
+              },
+            },
+          ],
+        }
+
       ]
     },
 
@@ -139,26 +176,26 @@ function createWebpackConfig({name, entry, port}) {
 
       ...Object.keys(entry).map(chunk => (
         new HtmlWebpackPlugin({
-          template: 'src/lib/index.html',
+          template: INDEX_HTML,
           chunks: [chunk],
           filename: `${chunk}.html`
         })
       )),
 
       new MiniCssExtractPlugin({
-        filename: isDev
-          ? `${staticDir}/[name].css`
-          : `${staticDir}/[name].[contenthash].css`
+        filename: IS_DEV
+          ? `${STATIC_DIR}/styles/[name].css`
+          : `${STATIC_DIR}/styles/[name].[contenthash].css`
         ,
       }),
 
-      isDev && new ReactRefreshWebpackPlugin({
+      IS_DEV && new ReactRefreshWebpackPlugin({
         overlay: false
       }),
 
-      !isDev && new FriendlyErrorsWebpackPlugin(),
+      IS_DEV && new FriendlyErrorsWebpackPlugin(),
 
-      // !isDev && new BundleAnalyzerPlugin({
+      // !IS_DEV && new BundleAnalyzerPlugin({
       //   analyzerPort: 'auto'
       // }),
     ]
@@ -173,7 +210,7 @@ function createWebpackConfig({name, entry, port}) {
     },
 
     performance: {
-      hints: isDev ? false : 'warning',
+      hints: IS_DEV ? false : 'warning',
       maxEntrypointSize: 512000,
       maxAssetSize: 512000
     },
@@ -193,7 +230,7 @@ function createWebpackConfig({name, entry, port}) {
         },
       },
 
-      minimize: isDev ? false : true,
+      minimize: IS_DEV ? false : true,
 
       minimizer: [
         new TerserPlugin({
@@ -229,8 +266,40 @@ function createWebpackConfig({name, entry, port}) {
       overlay: true,
       clientLogLevel: 'none',
       historyApiFallback: true,
+      disableHostCheck: true,
     },
 
   }
+}
+
+
+function addStyleToEntry(entry, stylePath) {
+  const newEntry = {}
+
+  for (let key in entry) if (entry.hasOwnProperty(key)) {
+    let entryItem = entry[key]
+    if (!Array.isArray(entryItem)) {
+      entryItem = [entryItem]
+    }
+    newEntry[key] = [stylePath, ...entryItem]
+  }
+
+  return newEntry
+}
+
+
+function getDirAliases(path) {
+  const aliases = {}
+  path = nodePath.resolve(__dirname, path)
+
+  const dirNames = fs.readdirSync(path, {withFileTypes: true})
+  .filter(dirEnt => dirEnt.isDirectory())
+  .map(dirEnt => dirEnt.name)
+
+  dirNames.forEach(dirName => {
+    aliases[dirName] = nodePath.join(path, dirName)
+  })
+
+  return aliases
 }
 

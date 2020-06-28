@@ -11,6 +11,11 @@ const webpackConfig = {
   target: "node",
   devtool: "source-map",
 
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+
   entry: './src/index.ts',
 
   output: {
