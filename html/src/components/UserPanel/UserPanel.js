@@ -3,12 +3,26 @@ import useCurrentUser from "../../hooks/useCurrentUser";
 import useConfirm from "../../hooks/useConfirm";
 import Button from "../Button";
 import useInterval from "../../hooks/useInterval";
+import toMoney from "../../filters/toMoney";
+import {useMutation} from "@apollo/react-hooks";
+import {MONEY_MINUS, MONEY_PLUS} from "../../graphql/mutations";
+import {GET_CURRENT_USER} from "../../graphql/queries";
 
 
 export default function UserPanel() {
 
   const user = useCurrentUser()
+
   const [confirmLogout] = useConfirm(`Выйти?`, logout)
+
+  const [moneyMinus] = useMutation(MONEY_MINUS, {
+    refetchQueries: [{query: GET_CURRENT_USER}]
+  })
+
+  const [moneyPlus] = useMutation(MONEY_PLUS, {
+    refetchQueries: [{query: GET_CURRENT_USER}]
+  })
+
 
   function logout() {
     location.href = '/auth/logout'
@@ -30,8 +44,15 @@ export default function UserPanel() {
     </div>
   }
 
+
+  const {money, avatar, nickname} = user
+
   return <div className={styles.userPanel}>
-    <img className={styles.avatar} src={user.avatar} alt={user.nickname}/>
+    <Button onClick={moneyMinus}>-</Button>
+    <div className={styles.money}>{toMoney(money)}</div>
+    <Button onClick={moneyPlus}>+</Button>
+
+    <img className={styles.avatar} src={avatar} alt={nickname}/>
     <Button onClick={onLogoutClick}>logout</Button>
   </div>
 }

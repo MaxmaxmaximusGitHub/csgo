@@ -42,14 +42,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-passport.serializeUser<User, String>((user, done) => {
-  done(null, user.id)
+passport.serializeUser<String, String>((userId, done) => {
+  done(null, userId)
 })
 
 
-passport.deserializeUser(async (id, done) => {
-  const user = await getUserById(id)
-  done(null, user)
+passport.deserializeUser(async (userId, done) => {
+  done(null, userId)
 })
 
 

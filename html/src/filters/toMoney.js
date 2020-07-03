@@ -1,21 +1,20 @@
+const SEPARATOR = ''
+
 export default function toMoney(money, currency = '$') {
-  // parse negative
-  var negativeSign = (money < 0) ? '-' : ''
+  const negativeSign = (money < 0) ? '-' : ''
   money = Math.abs(money)
 
-  // to string
-  let moneyString = money.toFixed()
+  const moneyString = (money / 100).toString()
 
-  // parse dollars
-  let dollars = moneyString.substring(0, moneyString.length - 2) || '0'
+  let [dollars, cents = '0'] = moneyString.split('.')
+
   dollars = dollars.split('').reverse().join('')
-  dollars = dollars.match(/.{1,3}/g).join(',')
+  dollars = dollars.match(/.{1,3}/g).join(SEPARATOR)
   dollars = dollars.split('').reverse().join('')
 
-  // parse cents
-  let cents = moneyString.substring(moneyString.length - 2)
   if (cents.length < 2) cents = `0${cents}`
 
   return `${negativeSign}${currency}${dollars}.${cents}`
+
 }
 

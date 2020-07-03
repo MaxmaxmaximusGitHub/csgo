@@ -1,6 +1,5 @@
-import {useCallback, useEffect, useState} from "react";
-import Notify from "./Notify";
 import style from './Notificator.styl'
+import Notify from "./Notify";
 
 const NOTIFICATOR_HANDLERS = []
 

@@ -12,6 +12,7 @@ import AboutPage from "./AboutPage/AboutPage"
 import Notificator from "../../components/Notificator/Notificator"
 import DesktopHeader from "../../components/DesktopHeader/DesktopHeader";
 import Chat from "../../components/Chat/Chat";
+import MarketSkins from "../../components/MarketSkins/MarketSkins";
 
 
 export const pages = [

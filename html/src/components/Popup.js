@@ -2,11 +2,18 @@ import classes from "../lib/classes";
 import styles from './Popup.styl'
 
 
-export default function Popup({opened, onClose, className, children}) {
+export default function Popup(props) {
+
+  const {opened, onClose, fullSize = false, children} = props
 
   const popupRef = useRef(null)
-  const popupClassName = classes(styles.popup, [styles.__opened, opened])
-  const contentClassName = classes(styles.content, className)
+
+  const popupClassName = classes(styles.popup, [
+    styles.__opened, opened,
+    styles['__full-size'], fullSize,
+  ])
+
+  const contentClassName = classes(styles.content)
 
   function closePopup() {
     if (onClose) {

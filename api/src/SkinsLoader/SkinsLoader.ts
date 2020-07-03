@@ -1,7 +1,6 @@
 import fetch from 'node-fetch'
 import cheerio from 'cheerio'
 import url from 'url'
-import ITEMS from './items.json'
 import db from "../lib/db"
 import sql from 'sql-tag'
 import ActionsController from "../lib/ActionsController"
@@ -9,17 +8,18 @@ import ActionsController from "../lib/ActionsController"
 
 ActionsController.add('update_skins', async () => {
   await SkinsLoader.load()
-  return {id: 0}
+  return {id: 1}
 })
 
 
 class SkinsLoader {
 
   static steamListingUrl = 'https://steamcommunity.com/market/listings/730/'
-  static marketJson = 'https://market.csgo.com/api/v2/prices/USD.json'
+  static marketJson = 'https://market.csgo.com/api/v2/prices/class_instance/USD.json'
   static haveNotLoadedImages = false
   static tryLoadNotLoadedImagesTimeoutId = null
-  static TRY_LOAD_NOT_LOADED_IMAGES_INTERVAL = 61000
+  static loadingImages = false
+  static TRY_LOAD_NOT_LOADED_IMAGES_INTERVAL = 10000
 
 
   static async init() {
@@ -51,11 +51,10 @@ class SkinsLoader {
     const skins = await this.getMarketSkins()
     await this.setLoaderTotal(skins.length)
 
-    console.log('skins.length', skins.length)
-
     for (let i = 0; i < skins.length; i++) {
       try {
-        await this.saveSkin(skins[i])
+        const skin = skins[i]
+        await this.saveSkin(skin)
         await this.setLoaderCompleted(i + 1)
       } catch (error) {
         console.error(error)
@@ -66,33 +65,42 @@ class SkinsLoader {
   }
 
 
-  static async saveSkin(item) {
-    const {
-      avg_price, bg_color, buy_order, market_hash_name,
-      popularity_7d, price, ru_name, ru_quality, ru_rarity,
-      text_color
-    } = item
+  static async saveSkin(skin) {
+    let {market_hash_name, max_ask, min_bid, price, volume} = skin
 
     await db.query(sql`
       INSERT INTO game.skin
-      (avg_price, bg_color, buy_order, market_hash_name,
-       popularity_7d, price, ru_name, ru_quality, ru_rarity,
-       text_color)
+      (market_hash_name, max_ask, min_bid, price, volume)
       VALUES 
-       (${avg_price}, ${bg_color}, ${buy_order}, ${market_hash_name},
-        ${popularity_7d}, ${price}, ${ru_name}, ${ru_quality}, ${ru_rarity},
-        ${text_color})
-        
+       (${market_hash_name}, ${max_ask}, ${min_bid}, ${price}, ${volume})
       ON CONFLICT (market_hash_name)
         
-      DO UPDATE set (avg_price, bg_color, buy_order, market_hash_name,
-       popularity_7d, price, ru_name, ru_quality, ru_rarity,
-       text_color) =
-        
-      (${avg_price}, ${bg_color}, ${buy_order}, ${market_hash_name},
-      ${popularity_7d}, ${price}, ${ru_name}, ${ru_quality}, ${ru_rarity},
-      ${text_color})
+      DO UPDATE set  (market_hash_name, max_ask, min_bid, price, volume) =
+      (${market_hash_name}, ${max_ask}, ${min_bid}, ${price}, ${volume})
     `)
+  }
+
+
+  static getMaxBuyOrder(itemOrders) {
+    let maxByOrder = 0
+    for (let {buy_order} of itemOrders) {
+      if (buy_order > maxByOrder) {
+        maxByOrder = buy_order
+      }
+    }
+    return Math.ceil(maxByOrder * 100)
+  }
+
+
+  static getMinPrice(itemOrders) {
+    let minPrice = Infinity
+    for (let {price} of itemOrders) {
+      price = Number(price)
+      if (price < minPrice) {
+        minPrice = price
+      }
+    }
+    return Math.ceil(minPrice * 100)
   }
 
 
@@ -104,39 +112,79 @@ class SkinsLoader {
   }
 
 
-  static async tryLoadNotLoadedImages() {
-    console.log('tryLoadNotLoadedImages')
-    await this.setTryImagesLoading(true)
+  static async updateLoadedImagesCount() {
+    await db.query(sql`
+      UPDATE game.skin_loader
 
+      SET completed_images = (
+        SELECT count(*)
+        FROM game.skin
+        WHERE image_url IS NOT NULL
+      ),
+
+          total_images     = (
+            SELECT count(*)
+            FROM game.skin
+          )
+
+    `)
+  }
+
+
+  static async tryLoadNotLoadedImages() {
+    if (this.loadingImages) return
+
+    console.log('tryLoadNotLoadedImages')
+
+    this.loadingImages = true
     this.haveNotLoadedImages = false
 
-    const {rows} = await db.query(sql`
+    await this.setTryImagesLoading(true)
+
+    const {rows: skinsWithoutImages} = await db.query(sql`
       SELECT id, market_hash_name
       FROM game.skin
       WHERE image_url IS NULL
+      ORDER BY price DESC
     `)
 
-    for (let i = 0; i < rows.length; i++) {
-      const {id, market_hash_name} = rows[i]
-      const image_url = await this.getImageUrl(market_hash_name)
+    await this.updateLoadedImagesCount()
 
-      if (!image_url) {
-        this.setNotAllImageLoaded()
-        return
+    for (let i = 0; i < skinsWithoutImages.length; i++) {
+
+      try {
+        const res = await this.loadImageForSkin(skinsWithoutImages[i])
+        // if (res === false) return
+        await this.updateLoadedImagesCount()
+      } catch (error) {
+        console.error(error)
       }
 
-      console.log('image loaded', image_url)
-
-      await db.query(sql`
-        UPDATE game.skin
-        SET image_url = ${image_url}
-        WHERE id = ${id}
-      `)
     }
 
-    console.log('not loaded images rows', rows)
-    console.log('set try loading to false')
     await this.setTryImagesLoading(false)
+    this.loadingImages = false
+  }
+
+
+  static async loadImageForSkin({id, market_hash_name}) {
+    await this.time(5000)
+    const image_url = await this.getImageUrl(market_hash_name)
+    console.log('load image', image_url)
+
+    if (!image_url) {
+      this.setNotAllImageLoaded()
+      this.loadingImages = false
+      return false
+    }
+
+    await db.query(sql`
+      UPDATE game.skin
+      SET image_url = ${image_url}
+      WHERE id = ${id}
+    `)
+
+    return true
   }
 
 
@@ -169,24 +217,62 @@ class SkinsLoader {
     this.haveNotLoadedImages = true
 
     this.tryLoadNotLoadedImagesTimeoutId = setTimeout(() => {
-      this.tryLoadNotLoadedImages()
+      // this.tryLoadNotLoadedImages()
     }, this.TRY_LOAD_NOT_LOADED_IMAGES_INTERVAL)
   }
 
 
-  static async getMarketSkins() {
-    // const res = await fetch(this.marketJson)
+  static async getMarketJSON() {
     // const json = await res.json()
+    // const res = await fetch(this.marketJson)
+    const json = require('./USD.json')
+    return json
+  }
 
-    const json = ITEMS as any
-    const {success, items} = json
 
-    if (!success) {
-      console.error(json)
-      throw new Error('Cant load items')
+  static async getMarketSkins() {
+    const json = await this.getMarketJSON()
+
+    const itemsArr = Object.keys(json.items).map(key => json.items[key])
+    const formatedItems = {}
+
+    itemsArr.forEach(item => {
+      if (!formatedItems[item.market_hash_name]) {
+        formatedItems[item.market_hash_name] = []
+      }
+      const itemsByHashName = formatedItems[item.market_hash_name]
+      itemsByHashName.push(item)
+    })
+
+    let items = Object.keys(formatedItems).map(market_hash_name => {
+      const itemOrders = formatedItems[market_hash_name]
+      return this.processItem(market_hash_name, itemOrders)
+    })
+
+    items = this.filterLowPriceItems(items, 25)
+
+    return items
+  }
+
+
+  static filterLowPriceItems(items, minPrice) {
+    return items.filter(({price}) => price >= minPrice)
+  }
+
+
+  static processItem(market_hash_name, itemOrders) {
+    const max_ask = this.getMaxBuyOrder(itemOrders)
+    const min_bid = this.getMinPrice(itemOrders)
+    const volume = itemOrders.length
+    const price = Math.ceil(max_ask * 1.55)
+
+    return {
+      market_hash_name,
+      max_ask,
+      min_bid,
+      price,
+      volume,
     }
-
-    return Object.keys(items).map(key => items[key])
   }
 
 

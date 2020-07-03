@@ -43,7 +43,7 @@ passport.use(new SteamStrategy({
       })
     }
 
-    done(null, user)
+    done(null, user.id)
   }
 ))
 

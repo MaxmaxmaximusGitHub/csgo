@@ -11,17 +11,29 @@ export default function SkinsControls() {
   const [updateSkins] = useMutation(UPDATE_SKINS)
   const skinLoadingState = useSkinLoadingState()
 
-  const {loading, completed, total} = skinLoadingState
+  const {
+    loading, completed, total,
+    try_images_loading, completed_images, total_images
+  } = skinLoadingState
+
+  const loadingProgress = completed / total
+  const imagesProgress = completed_images / total_images
 
   return <div className={styles.skinsPanel}>
-    {loading && <ProgressBar value={completed / total}/>}
 
     <div className={styles.controls}>
       <Button onClick={updateSkins}>updateSkins</Button>
 
       {loading && <div className={styles.loadingState}>
-        loading... {completed}/{total}
+        Loading skins: {completed}/{total}
+        <ProgressBar value={completed / total}/>
       </div>}
+
+      {try_images_loading && <div className={styles.imagesLoadingState}>
+        Loading images: {completed_images}/{total_images}
+        <ProgressBar value={completed_images / total_images}/>
+      </div>}
+
     </div>
 
   </div>

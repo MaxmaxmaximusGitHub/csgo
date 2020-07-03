@@ -1,20 +1,17 @@
 import styles from './Skin.styl'
-import Button from "../Button"
-import {useMutation} from "@apollo/react-hooks";
-import {REMOVE_SKIN} from "../../graphql/mutations";
+import toMoney from "../../filters/toMoney";
 
 
 export default function Skin({skin}) {
 
-  const {image_url, market_hash_name} = skin
-
-  const [removeSkin] = useMutation(REMOVE_SKIN, {
-    variables: {id: skin.id}
-  })
+  const {id, price, image_url, market_hash_name} = skin
 
   return <div className={styles.skin}>
-    <Button onClick={removeSkin}>remove</Button>
-    <img className={styles.image} src={image_url} alt={market_hash_name}/>
+    <img className={styles.image} src={image_url}
+         alt={market_hash_name}/>
+
+    <span>{toMoney(price)}</span>
+    <span> {market_hash_name} </span>
   </div>
 }
 

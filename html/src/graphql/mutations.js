@@ -9,13 +9,6 @@ export const MAKE_BET = gql`
   }
 `
 
-export const REMOVE_SKIN = gql`
-  mutation REMOVE_SKIN ($id: bigint!) {
-    delete_game_skin_by_pk(id: $id) {
-      id
-    }
-  }
-`
 
 export const UPDATE_SKINS = gql`
   mutation UPDATE_SKINS {
@@ -25,3 +18,29 @@ export const UPDATE_SKINS = gql`
   }
 `
 
+
+export const MONEY_PLUS = gql`
+  mutation MONEY_PLUS {
+    money_plus {
+      money
+    }
+  }
+`
+
+
+export const MONEY_MINUS = gql`
+  mutation MONEY_MINUS {
+    money_minus {
+      money
+    }
+  }
+`
+
+
+export const BUY_SKIN = gql`
+  mutation BUY_SKIN ($skin_id: bigint!) {
+    buy_skin(skin_id: $skin_id) {
+      id
+    }
+  }
+`

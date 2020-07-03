@@ -1,4 +1,5 @@
-import {useQuery, useSubscription} from "@apollo/react-hooks";
+import {useSubscription} from "@apollo/react-hooks";
+import useQuery from "./useQuery";
 
 
 export default function useLiveQuery(query, options = {}) {
@@ -11,7 +12,7 @@ export default function useLiveQuery(query, options = {}) {
     }
   })
 
-  return getQueryResultData(queryResult)
+  return queryResult
 }
 
 
@@ -26,20 +27,5 @@ function toSubscription(query) {
   subscription.definitions[0].operation = 'subscription'
   subscriptionsCache.set(query, subscription)
   return subscription
-}
-
-
-function getQueryResultData({data}) {
-  if (!data) {
-    return []
-  }
-
-  const keys = Object.keys(data)
-
-  if (keys.length > 1) {
-    return data
-  }
-
-  return data[keys[0]]
 }
 

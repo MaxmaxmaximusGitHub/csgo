@@ -5,6 +5,7 @@ export const GET_CURRENT_USER = gql`
   query GET_CURRENT_USER {
     user_current_view {
       id
+      money
       steam_id
       nickname
       avatar
@@ -65,21 +66,24 @@ export const GET_GAME_SETTINGS = gql`
   }
 `
 
+
 export const GET_SKINS = gql`
-  query GET_SKINS {
-    game_skin (order_by: {market_hash_name: asc}) {
+  query GET_SKINS (
+    $cursor: Int
+    $search: String,
+  ) {
+    game_skin (
+      where: {
+        price: {_lt: $cursor}
+        market_hash_name: {_ilike: $search}
+      },
+      order_by: {price: desc, id: asc}
+    ) {
       id
-      avg_price
-      bg_color
-      buy_order
       image_url
       market_hash_name
-      popularity_7d
+      volume
       price
-      ru_name
-      ru_quality
-      ru_rarity
-      text_color
     }
   }
 `
@@ -87,9 +91,40 @@ export const GET_SKINS = gql`
 export const GET_SKINS_LOADER_STATE = gql`
   query GET_SKINS_LOADING_STATE {
     game_skin_loader {
-      completed
       loading
       total
+      completed
+      total_images
+      completed_images
+      try_images_loading
+    }
+  }
+`
+
+
+export const GET_MY_SKINS = gql`
+  query GET_MY_SKINS (
+    $cursor: timestamptz
+    $search: String,
+  ) {
+    game_skin_inventar_my_view (
+      where: {
+        created_at: {_gt: $cursor}
+        
+        skin: {
+          market_hash_name: {_ilike: $search}
+        }
+      },
+      order_by: {created_at: desc}
+    ) {
+      id
+      created_at
+      skin {
+        image_url
+        market_hash_name
+        volume
+        price
+      }
     }
   }
 `

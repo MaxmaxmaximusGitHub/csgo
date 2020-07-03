@@ -1,4 +1,5 @@
 import app from "./expressApp";
+import {getUserById} from "./helpers";
 
 
 class ActionsController {
@@ -16,7 +17,8 @@ class ActionsController {
 
   async onRequest(req, res) {
     const {action, input: data, session_variables} = req.body
-    const user = JSON.parse(session_variables['x-hasura-user'])
+    const userId = session_variables['x-hasura-user-id']
+    const user = await getUserById(userId)
 
     try {
       var result = await this.callAction(action.name, user, data)

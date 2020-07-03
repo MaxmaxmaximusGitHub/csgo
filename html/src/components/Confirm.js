@@ -38,12 +38,14 @@ export default function Confirm() {
     setOpened(false)
   }
 
-  return <Popup className={styles.popup} opened={opened} onClose={reject}>
-    <div className={styles.message}>{message || 'Вы уверены?'}</div>
+  return <Popup opened={opened} onClose={reject}>
+    <div className={styles.confirm}>
+      <div className={styles.message}>{message || 'Вы уверены?'}</div>
 
-    <div className={styles.variants}>
-      <Button onClick={confirm}>Да</Button>
-      <Button onClick={reject}>Нет</Button>
+      <div className={styles.variants}>
+        <Button onClick={confirm}>Да</Button>
+        <Button onClick={reject}>Нет</Button>
+      </div>
     </div>
   </Popup>
 }

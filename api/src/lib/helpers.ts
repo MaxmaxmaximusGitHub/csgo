@@ -4,37 +4,29 @@ import {UserInput} from "./types";
 
 
 export async function getUserBySteamId(steam_id) {
-  const {rows} = await db.query(sql`
+  const {rows: [user = null]} = await db.query(sql`
     SELECT * FROM "user"
     WHERE steam_id = ${steam_id}
   `)
 
-  if (!rows.length) {
-    return null
-  }
-
-  return rows[0]
+  return user
 }
 
 
 export async function getUserById(id) {
-  const {rows} = await db.query(sql`
+  const {rows: [user = null]} = await db.query(sql`
     SELECT * FROM "user"
     WHERE id = ${id}
   `)
 
-  if (!rows.length) {
-    return null
-  }
-
-  return rows[0]
+  return user
 }
 
 
 export async function createUser(data: UserInput) {
   const {steam_id, steam_profile, nickname, avatar, lang, role} = data
 
-  const {rows} = await db.query(sql`
+  const {rows: [user]} = await db.query(sql`
     INSERT INTO "user"
       (steam_id, steam_profile, nickname, avatar, lang, role)
     VALUES 
@@ -42,7 +34,7 @@ export async function createUser(data: UserInput) {
     RETURNING *
   `)
 
-  return rows[0]
+  return user
 }
 
 
