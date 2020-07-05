@@ -9,7 +9,7 @@ services:
       - ${PG_PORT}:${PG_PORT}
     command: -p ${PG_PORT}
     environment:
-      PG_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
 
