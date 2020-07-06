@@ -1,7 +1,7 @@
 import styles from './HomePage.styl'
 import Game from "../../../components/Game/Game";
 import Skins from "../../../components/Skins/Skins";
-import SkinsInventar from "../../../components/SkinsInventar/SkinsInventar";
+import Inventar from "../../../components/Inventar/Inventar";
 
 
 export default function HomePage() {
@@ -9,7 +9,7 @@ export default function HomePage() {
   return <div className={styles.homePage}>
     <div className={styles.leftColumn}>
       <Game/>
-      <SkinsInventar/>
+      <Inventar/>
     </div>
 
     <Skins/>

@@ -6,8 +6,8 @@ import sql from 'sql-tag'
 import ActionsController from "../lib/ActionsController"
 
 
-ActionsController.add('update_skins', async () => {
-  await SkinsLoader.load()
+ActionsController.add('update_skins', () => {
+  SkinsLoader.load()
   return {id: 1}
 })
 
@@ -19,7 +19,7 @@ class SkinsLoader {
   static haveNotLoadedImages = false
   static tryLoadNotLoadedImagesTimeoutId = null
   static loadingImages = false
-  static TRY_LOAD_NOT_LOADED_IMAGES_INTERVAL = 10000
+  static TRY_LOAD_NOT_LOADED_IMAGES_INTERVAL = 5000
 
 
   static async init() {
@@ -61,7 +61,34 @@ class SkinsLoader {
       }
     }
 
+    try {
+      await this.markNotActiveSkins(skins)
+    } catch (error) {
+      console.error(error)
+    }
+
     await this.setLoading(false)
+  }
+
+
+  static async markNotActiveSkins(skinsInMarket) {
+    const {rows: skins} = await db.query(sql`
+      SELECT id
+      FROM game.skin
+    `)
+
+    for (let skin of skins) {
+      const hasInMarket = skinsInMarket.some(skinInMarket => {
+        return skin.id === skinInMarket.id
+      })
+
+      if (!hasInMarket) {
+        await db.query(sql`
+          UPDATE game.skin
+          SET active = false
+        `)
+      }
+    }
   }
 
 
@@ -70,13 +97,13 @@ class SkinsLoader {
 
     await db.query(sql`
       INSERT INTO game.skin
-      (market_hash_name, max_ask, min_bid, price, volume)
+      (market_hash_name, max_ask, min_bid, price, volume, active)
       VALUES 
-       (${market_hash_name}, ${max_ask}, ${min_bid}, ${price}, ${volume})
+       (${market_hash_name}, ${max_ask}, ${min_bid}, ${price}, ${volume}, true)
+       
       ON CONFLICT (market_hash_name)
-        
-      DO UPDATE set  (market_hash_name, max_ask, min_bid, price, volume) =
-      (${market_hash_name}, ${max_ask}, ${min_bid}, ${price}, ${volume})
+      DO UPDATE set  (market_hash_name, max_ask, min_bid, price, volume, active) =
+      (${market_hash_name}, ${max_ask}, ${min_bid}, ${price}, ${volume}, true)
     `)
   }
 
@@ -132,9 +159,9 @@ class SkinsLoader {
 
 
   static async tryLoadNotLoadedImages() {
-    if (this.loadingImages) return
-
-    console.log('tryLoadNotLoadedImages')
+    if (this.loadingImages) {
+      return
+    }
 
     this.loadingImages = true
     this.haveNotLoadedImages = false
@@ -153,8 +180,12 @@ class SkinsLoader {
     for (let i = 0; i < skinsWithoutImages.length; i++) {
 
       try {
-        const res = await this.loadImageForSkin(skinsWithoutImages[i])
-        // if (res === false) return
+        const success = await this.loadImageForSkin(skinsWithoutImages[i])
+        if (!success) {
+          this.setNotAllImageLoaded()
+          this.loadingImages = false
+          return
+        }
         await this.updateLoadedImagesCount()
       } catch (error) {
         console.error(error)
@@ -170,13 +201,12 @@ class SkinsLoader {
   static async loadImageForSkin({id, market_hash_name}) {
     await this.time(5000)
     const image_url = await this.getImageUrl(market_hash_name)
-    console.log('load image', image_url)
 
     if (!image_url) {
-      this.setNotAllImageLoaded()
-      this.loadingImages = false
       return false
     }
+
+    console.log('load image', image_url)
 
     await db.query(sql`
       UPDATE game.skin
@@ -217,7 +247,7 @@ class SkinsLoader {
     this.haveNotLoadedImages = true
 
     this.tryLoadNotLoadedImagesTimeoutId = setTimeout(() => {
-      // this.tryLoadNotLoadedImages()
+      this.tryLoadNotLoadedImages()
     }, this.TRY_LOAD_NOT_LOADED_IMAGES_INTERVAL)
   }
 

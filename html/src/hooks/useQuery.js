@@ -26,8 +26,7 @@ function wrapQueryResult({data, fetchMore}, {cursor = {}}) {
         cursor: lastItem[prop],
       },
       updateQuery(prev, {fetchMoreResult}) {
-        console.log('load more', fetchMoreResult)
-
+        // console.log('load more', fetchMoreResult)
         return mergeFetchMoreResult(prev, fetchMoreResult)
       }
     })
@@ -42,7 +41,6 @@ function mergeFetchMoreResult(prev, fetchMoreResult) {
   const key = keys[0]
   const prevArr = prev[key]
   const newArr = fetchMoreResult[key]
-
   const mergedArr = [...prevArr]
 
   newArr.forEach(item => {

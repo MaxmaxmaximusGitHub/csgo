@@ -67,27 +67,6 @@ export const GET_GAME_SETTINGS = gql`
 `
 
 
-export const GET_SKINS = gql`
-  query GET_SKINS (
-    $cursor: Int
-    $search: String,
-  ) {
-    game_skin (
-      where: {
-        price: {_lt: $cursor}
-        market_hash_name: {_ilike: $search}
-      },
-      order_by: {price: desc, id: asc}
-    ) {
-      id
-      image_url
-      market_hash_name
-      volume
-      price
-    }
-  }
-`
-
 export const GET_SKINS_LOADER_STATE = gql`
   query GET_SKINS_LOADING_STATE {
     game_skin_loader {
@@ -102,19 +81,36 @@ export const GET_SKINS_LOADER_STATE = gql`
 `
 
 
+export const GET_SKINS = gql`
+  query GET_SKINS (
+    $cursor: Int
+    $search: String
+  ) {
+    game_skin (
+      where: {
+        price: {_lt: $cursor}
+        market_hash_name: {_ilike: $search}
+      }
+      order_by: {price: desc, id: asc}
+    ) {
+      id
+      image_url
+      market_hash_name
+      volume
+      price
+    }
+  }
+`
+
 export const GET_MY_SKINS = gql`
   query GET_MY_SKINS (
     $cursor: timestamptz
-    $search: String,
+    $search: String
   ) {
-    game_skin_inventar_my_view (
+    game_skin_in_my_inventar_view (
       where: {
-        created_at: {_gt: $cursor}
-        
-        skin: {
-          market_hash_name: {_ilike: $search}
-        }
-      },
+        created_at: {_lt: $cursor}
+      }
       order_by: {created_at: desc}
     ) {
       id

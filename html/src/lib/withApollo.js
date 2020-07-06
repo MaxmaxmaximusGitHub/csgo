@@ -22,7 +22,6 @@ export default function withApollo(Component) {
   })`
 
   return WithApollo
-
 }
 
 

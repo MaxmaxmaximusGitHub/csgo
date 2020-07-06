@@ -5,14 +5,15 @@ import ReactDOM from 'react-dom'
 import withApollo from "../../lib/withApollo"
 import Pages from "../../components/Pages"
 import withCurrentUser from "../../lib/withCurrentUser"
-import {BrowserRouter} from "react-router-dom"
 import Confirm from "../../components/Confirm"
 import HomePage from "./HomePage/HomePage"
 import AboutPage from "./AboutPage/AboutPage"
 import Notificator from "../../components/Notificator/Notificator"
 import DesktopHeader from "../../components/DesktopHeader/DesktopHeader";
 import Chat from "../../components/Chat/Chat";
-import MarketSkins from "../../components/MarketSkins/MarketSkins";
+import Market from "../../components/Market/Market";
+import withRouter from "../../lib/withRouter";
+import MarketProvider from "../../components/Market/MarketProvider";
 
 
 export const pages = [
@@ -23,21 +24,25 @@ export const pages = [
 
 function Desktop() {
 
-  return <BrowserRouter>
-    <DesktopHeader pages={pages}/>
+  return <>
+    <MarketProvider>
+      <DesktopHeader pages={pages}/>
 
-    <div className={styles.content}>
-      <Pages pages={pages}/>
-      <Chat/>
-    </div>
+      <div className={styles.content}>
+        <Pages pages={pages}/>
+        <Chat/>
+      </div>
 
-    <Notificator/>
-    <Confirm/>
-  </BrowserRouter>
+      <Market/>
+      <Confirm/>
+      <Notificator/>
+    </MarketProvider>
+  </>
 }
 
 
 Desktop = withCurrentUser(Desktop)
+Desktop = withRouter(Desktop)
 Desktop = withApollo(Desktop)
 
 

@@ -32,7 +32,7 @@ ActionsController.add('buy_skin', async (user, {skin_id}) => {
       WHERE id = ${user.id} 
     )
     
-    INSERT INTO game.skin_inventar
+    INSERT INTO game.skin_in_inventar
       (user_id, skin_id)
     VALUES
        (${user.id}, ${skin_id})
