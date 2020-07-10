@@ -10,9 +10,9 @@ export const MAKE_BET = gql`
 `
 
 
-export const UPDATE_SKINS = gql`
+export const UPDATE_ITEMS_DATA = gql`
   mutation UPDATE_SKINS {
-    update_skins {
+    update_items_data {
       id
     }
   }
@@ -37,10 +37,20 @@ export const MONEY_MINUS = gql`
 `
 
 
-export const BUY_SKIN = gql`
-  mutation BUY_SKIN ($skin_id: bigint!) {
-    buy_skin(skin_id: $skin_id) {
+export const BUY_ITEM = gql`
+  mutation BUY_ITEM ($skin_id: bigint!) {
+    buy_item(item_data_id: $skin_id) {
       id
     }
   }
 `
+
+
+export const SELL_ITEM = gql`
+  mutation SELL_ITEM ($id: bigint!) {
+    sell_item(item_id: $id) {
+      id
+    }
+  }
+`
+

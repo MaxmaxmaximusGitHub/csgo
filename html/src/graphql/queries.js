@@ -3,7 +3,7 @@ import gql from "graphql-tag"
 
 export const GET_CURRENT_USER = gql`
   query GET_CURRENT_USER {
-    user_current_view {
+    view_current_user {
       id
       money
       steam_id
@@ -15,37 +15,10 @@ export const GET_CURRENT_USER = gql`
   }
 `
 
-export const GET_ROUNDS_HISTORY = gql`
-  query GET_ROUNDS_HISTORY {
-    game_round (
-      order_by: [{id: desc}],
-      limit: 5
-    ) {
-      id
-      status
-      created_at
-      x
-    }
-  }
-`
 
-export const GET_ACTIVE_BETS = gql`
-  query GET_ACTIVE_BETS {
-    game_bet_active_view {
-      id
-      money
-      user {
-        id
-        avatar
-        nickname
-      }
-    }
-  }
-`
-
-export const GET_ACTIVE_ROUNDS = gql`
+export const GET_ACTIVE_ROUND = gql`
   query GET_ACTIVE_ROUNDS {
-    game_round_active_view {
+    game_view_active_round {
       id
       x
       status
@@ -67,9 +40,9 @@ export const GET_GAME_SETTINGS = gql`
 `
 
 
-export const GET_SKINS_LOADER_STATE = gql`
-  query GET_SKINS_LOADING_STATE {
-    game_skin_loader {
+export const GET_ITEMS_DATA_LOADER = gql`
+  query GET_ITEMS_LOADER {
+    game_items_data_loader {
       loading
       total
       completed
@@ -81,46 +54,48 @@ export const GET_SKINS_LOADER_STATE = gql`
 `
 
 
-export const GET_SKINS = gql`
-  query GET_SKINS (
+export const GET_ITEMS_DATA = gql`
+  query GET_ITEMS_DATA (
     $cursor: Int
     $search: String
   ) {
-    game_skin (
+    game_item_data (
       where: {
         price: {_lt: $cursor}
         market_hash_name: {_ilike: $search}
+        active: {_eq: true}
       }
       order_by: {price: desc, id: asc}
     ) {
       id
       image_url
       market_hash_name
-      volume
       price
     }
   }
 `
 
-export const GET_MY_SKINS = gql`
-  query GET_MY_SKINS (
+export const GET_MY_ITEMS = gql`
+  query GET_MY_ITEMS (
     $cursor: timestamptz
     $search: String
   ) {
-    game_skin_in_my_inventar_view (
+    game_view_my_item (
       where: {
+        item_data: {market_hash_name: {_ilike: $search}}
         created_at: {_lt: $cursor}
       }
       order_by: {created_at: desc}
     ) {
       id
       created_at
-      skin {
+      item_data {
         image_url
         market_hash_name
-        volume
         price
       }
     }
   }
 `
+
+

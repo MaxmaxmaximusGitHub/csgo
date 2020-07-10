@@ -1,34 +1,24 @@
 import styles from './Inventar.styl'
-import useQuery from "../../hooks/useQuery";
-import {GET_MY_SKINS} from "../../graphql/queries";
-import InventarSkin from "./InventarSkin";
-import List from "../List";
 import useInput from "../../hooks/useInput";
 import InventarPanel from "./InventarPanel";
-import Button from "../Button";
+import {observer} from "mobx-react-lite"
+import MarketModel from '../../models/MarketModel'
+import MyItems from "./MyItems";
+import classNames from 'classnames'
 
 
-export default function Inventar() {
+export default observer(function Inventar() {
 
-  const [search, setSearch] = useInput('')
+  const className = classNames(
+    styles.Inventar, {
+      [styles.__hide]: MarketModel.opened
+    }
+  )
 
-  const skinsInInventar = useQuery(GET_MY_SKINS, {
-    cursor: {prop: 'created_at'},
-    variables: {search}
-  })
-
-  return <div className={styles.inventar}>
-    <InventarPanel search={search} setSearch={setSearch}/>
-
-    <List next={skinsInInventar.next}>
-      <ul className={styles.skins}>
-        {skinsInInventar.map(skinsInventar => (
-          <InventarSkin key={skinsInventar.id} skin={skinsInventar.skin}/>
-        ))}
-      </ul>
-    </List>
-
+  return <div className={className}>
+    <InventarPanel/>
+    <MyItems/>
   </div>
-}
+})
 
 

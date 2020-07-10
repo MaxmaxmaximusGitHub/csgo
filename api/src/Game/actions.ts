@@ -2,6 +2,7 @@ import ActionsController from "../lib/ActionsController";
 import db from "../lib/db"
 import Game from "./Game"
 import sql from "sql-tag"
+import ItemsDataLoader from "./ItemsDataLoader";
 
 
 ActionsController.add('game_make_bet', async (user, data) => {
@@ -9,39 +10,86 @@ ActionsController.add('game_make_bet', async (user, data) => {
 })
 
 
-ActionsController.add('buy_skin', async (user, {skin_id}) => {
+ActionsController.add('update_items_data', async () => {
+  await ItemsDataLoader.update()
+  return {id: 1}
+})
 
-  const {rows: [skin]} = await db.query(sql`
-    SELECT price from game.skin
-    WHERE id = ${skin_id}
+
+ActionsController.add('buy_item', async (user, {item_data_id}) => {
+
+  const {rows: [item_data]} = await db.query(sql`
+    SELECT price, active from game.item_data
+    WHERE id = ${item_data_id}
   `)
 
-  if (skin.price > Number(user.money)) {
+  if (!item_data.active) {
+    throw new Error('Этот айтем не активен')
+  }
+
+  if (item_data.price > Number(user.money)) {
     throw new Error('Недостатаочно денег')
   }
 
-  const {rows: [skinInventar]} = await db.query(sql`
-    WITH skin AS (
-      SELECT price from game.skin
-      WHERE id = ${skin_id}
+  const {rows: [item]} = await db.query(sql`
+    WITH 
+         
+    item_data AS (
+      SELECT price from game.item_data
+      WHERE id = ${item_data_id}
+      AND active = true
     ),
          
     minus_money_from_user AS (
       UPDATE public."user"
-      SET money = money - (SELECT price FROM skin)
+      SET money = money - (SELECT price FROM item_data)
       WHERE id = ${user.id} 
     )
     
-    INSERT INTO game.skin_in_inventar
-      (user_id, skin_id)
+    INSERT INTO game.item
+      (user_id, item_data_id)
     VALUES
-       (${user.id}, ${skin_id})
+       (${user.id}, ${item_data_id})
     RETURNING 
       id
   `)
 
-  return {
-    id: skinInventar.id
-  }
+  return {id: item.id}
 })
+
+
+ActionsController.add('sell_item', async (user, {id}) => {
+
+  const {rows: [{count}]} = await db.query(sql`
+    SELECT count(*) FROM game.item
+    WHERE user_id = ${user.id}
+    AND id = ${id}
+  `)
+
+  if (!Number(count)) {
+    throw new Error("Данный предмет отосутствует у вас в инвентаре")
+  }
+
+  await db.query(sql`
+    WITH 
+       
+    saled_item AS (
+      DELETE FROM game.item
+      WHERE user_id = ${user.id}
+      AND id = ${id}
+      RETURNING item_data_id
+    ),
+     
+   saled_item_data AS (
+     SELECT price FROM game.item_data
+     WHERE id = (SELECT item_data_id FROM saled_item)
+   )
+
+    UPDATE public."user"
+    SET money = money + (SELECT price FROM saled_item_data)
+  `)
+
+  return {id}
+})
+
 

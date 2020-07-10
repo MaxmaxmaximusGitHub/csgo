@@ -1,15 +1,19 @@
 import useInterval from "../hooks/useInterval";
+import Button from "./Button";
 
 
-const PADDING = 1000
+export default function List(
+  {emptyMessage, children, list, className, ...props}
+) {
 
-export default function List({children, next}) {
-  const ref = useRef(null);
+  const ref = useRef(null)
+  const padding = 1000
 
-  function checkNeedMore() {
+  function checkMore() {
     const element = ref.current
     const scrollTop = element.scrollTop
-    const maxScroll = element.scrollHeight - element.offsetHeight - PADDING
+    const maxScroll = element.scrollHeight - element.offsetHeight - padding
+    const {next} = list
 
     if (scrollTop >= maxScroll) {
       if (typeof next === 'function') {
@@ -18,11 +22,17 @@ export default function List({children, next}) {
     }
   }
 
-  // useInterval(checkNeedMore, 1000)
-  // useEffect(checkNeedMore)
+  // useInterval(checkMore, 1000)
+  // useEffect(checkMore)
 
-  return React.cloneElement(React.Children.only(children), {
-    ref, onScroll: checkNeedMore
-  })
+  if (!list.length && emptyMessage) {
+    return emptyMessage
+  }
+
+  return <ul ref={ref} onScroll={checkMore} className={className} {...props}>
+    {list.map(item => (
+      React.cloneElement(children(item), {key: item.id})
+    ))}
+  </ul>
 }
 

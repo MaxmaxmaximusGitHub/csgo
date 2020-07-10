@@ -10,6 +10,12 @@ module.exports = (api) => {
     ],
 
     plugins: [
+      ["@babel/plugin-proposal-decorators", {
+        "legacy": true
+      }],
+
+      ["@babel/plugin-proposal-class-properties"],
+
       isDev && 'react-refresh/babel',
 
       ['babel-plugin-graphql-tag'],

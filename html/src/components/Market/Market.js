@@ -1,48 +1,21 @@
 import styles from './Market.styl'
-import useQuery from "../../hooks/useQuery";
-import {GET_SKINS} from "../../graphql/queries";
-import List from "../List";
-import MarketSkin from "./MarketSkin";
-import Popup from "../Popup";
-import MarketPanel from "./MarketPanel";
-import useInput from "../../hooks/useInput";
-import {MarketContext} from "./MarketProvider";
+import Popup from "../Popup"
+import {observer} from "mobx-react-lite"
+import MarketModel from "../../models/MarketModel";
+import MarketInventar from "./MarketInventar";
+import MarketShop from "./MarketShop";
 
 
-export default function Market() {
+export default observer(function Market() {
 
-  const {opened, close} = useContext(MarketContext)
+  const {opened, close} = MarketModel
 
-  const [search, setSearch] = useInput('')
-
-  const skins = useQuery(GET_SKINS, {
-    variables: {search: `%${search}%`},
-    cursor: {prop: 'price'}
-  })
-
-
-  return <Popup opened={opened} onClose={close} fullSize={true}>
-
+  return <Popup opened={opened} onClose={close}>
     <div className={styles.Market}>
-
-      <div className={styles.skins}>
-
-        <MarketPanel
-          search={search}
-          setSearch={setSearch}
-          closeMarket={close}
-        />
-
-        <List next={skins.next}>
-          <ul className={styles.skinsList}>
-            {skins.map(skin => (
-              <MarketSkin key={skin.id} skin={skin}/>
-            ))}
-          </ul>
-        </List>
-      </div>
-
+      <MarketInventar/>
+      <MarketShop/>
     </div>
-
   </Popup>
-}
+})
+
+

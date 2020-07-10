@@ -1,21 +1,15 @@
 import styles from './InventarPanel.styl'
-import Button from "../Button";
-import {MarketContext} from "../Market/MarketProvider";
+import MarketModel from '../../models/MarketModel'
+import Button from "../Button"
+import {observer} from "mobx-react-lite";
 
 
+export default observer(function InventarPanel() {
 
-export default function InventarPanel({search, setSearch}) {
-
-  const marketContext = useContext(MarketContext)
 
   return <div className={styles.InventarPanel}>
-    <Button onClick={marketContext.open}>Купить скины</Button>
-
-    <input
-      value={search} onChange={setSearch}
-      placeholder='Поиск...'
-    />
+    <Button onClick={MarketModel.open}>Купить скины</Button>
   </div>
-}
+})
 
 

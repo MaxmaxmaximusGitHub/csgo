@@ -1,7 +1,7 @@
 import styles from './HomePage.styl'
 import Game from "../../../components/Game/Game";
-import Skins from "../../../components/Skins/Skins";
 import Inventar from "../../../components/Inventar/Inventar";
+import BetsPanel from "../../../components/BetsPanel/BetsPanel";
 
 
 export default function HomePage() {
@@ -12,7 +12,10 @@ export default function HomePage() {
       <Inventar/>
     </div>
 
-    <Skins/>
+    <div className={styles.middleColumn}>
+      <BetsPanel/>
+    </div>
+
   </div>
 }
 

@@ -1,5 +1,5 @@
 import styles from './Notify.styl'
-import classes from "../../lib/classes";
+import classNames from 'classnames'
 import useTimeout from "../../hooks/useTimeout"
 
 
@@ -15,10 +15,12 @@ export default function Notify({notification, onClose}) {
     closeNotification, time
   )
 
-  const notificationClassNames = classes(styles.notification, [
-    styles.__error, type === 'error',
-    styles.__alert, type === 'alert',
-  ])
+  const notificationClassNames = classNames(
+    styles.notification, {
+      [styles.__error]: type === 'error',
+      [styles.__alert]: type === 'alert',
+    }
+  )
 
 
   return <li

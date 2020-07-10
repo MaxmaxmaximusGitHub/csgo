@@ -1,19 +1,22 @@
-.inventar
-  background-color blue
+.Inventar
+  $time = 0.3s
   flex-grow 1
   display flex
   flex-direction column
+  transition opacity $time
+  background-color #222
 
-  .panel
-    background-color red
-    //display flex
-    //flex-direction column
+  &.__hide
+    opacity 0
 
-  .skins
-    background-color blueviolet
-    overflow auto
+  .emptyMessage
     flex-grow 1
-    height 0
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    color white
+
 
 
 

@@ -32,12 +32,8 @@ input Boolean_comparison_exp {
   _nin: [Boolean!]
 }
 
-type BuySkinOutput {
+type BuyItemOutput {
   id: bigint!
-}
-
-type BySkinsOutput {
-  done: Boolean!
 }
 
 # columns and relationships of "chat.message"
@@ -329,299 +325,6 @@ type game_bet {
   # An object relationship
   user: user!
   user_id: bigint!
-}
-
-# columns and relationships of "game.bet_active_view"
-type game_bet_active_view {
-  id: bigint
-  money: Int
-
-  # An object relationship
-  round: game_round
-  round_id: bigint
-
-  # An object relationship
-  user: user
-  user_id: bigint
-}
-
-# aggregated selection of "game.bet_active_view"
-type game_bet_active_view_aggregate {
-  aggregate: game_bet_active_view_aggregate_fields
-  nodes: [game_bet_active_view!]!
-}
-
-# aggregate fields of "game.bet_active_view"
-type game_bet_active_view_aggregate_fields {
-  avg: game_bet_active_view_avg_fields
-  count(columns: [game_bet_active_view_select_column!], distinct: Boolean): Int
-  max: game_bet_active_view_max_fields
-  min: game_bet_active_view_min_fields
-  stddev: game_bet_active_view_stddev_fields
-  stddev_pop: game_bet_active_view_stddev_pop_fields
-  stddev_samp: game_bet_active_view_stddev_samp_fields
-  sum: game_bet_active_view_sum_fields
-  var_pop: game_bet_active_view_var_pop_fields
-  var_samp: game_bet_active_view_var_samp_fields
-  variance: game_bet_active_view_variance_fields
-}
-
-# order by aggregate values of table "game.bet_active_view"
-input game_bet_active_view_aggregate_order_by {
-  avg: game_bet_active_view_avg_order_by
-  count: order_by
-  max: game_bet_active_view_max_order_by
-  min: game_bet_active_view_min_order_by
-  stddev: game_bet_active_view_stddev_order_by
-  stddev_pop: game_bet_active_view_stddev_pop_order_by
-  stddev_samp: game_bet_active_view_stddev_samp_order_by
-  sum: game_bet_active_view_sum_order_by
-  var_pop: game_bet_active_view_var_pop_order_by
-  var_samp: game_bet_active_view_var_samp_order_by
-  variance: game_bet_active_view_variance_order_by
-}
-
-# input type for inserting array relation for remote table "game.bet_active_view"
-input game_bet_active_view_arr_rel_insert_input {
-  data: [game_bet_active_view_insert_input!]!
-}
-
-# aggregate avg on columns
-type game_bet_active_view_avg_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by avg() on columns of table "game.bet_active_view"
-input game_bet_active_view_avg_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# Boolean expression to filter rows from the table "game.bet_active_view". All fields are combined with a logical 'AND'.
-input game_bet_active_view_bool_exp {
-  _and: [game_bet_active_view_bool_exp]
-  _not: game_bet_active_view_bool_exp
-  _or: [game_bet_active_view_bool_exp]
-  id: bigint_comparison_exp
-  money: Int_comparison_exp
-  round: game_round_bool_exp
-  round_id: bigint_comparison_exp
-  user: user_bool_exp
-  user_id: bigint_comparison_exp
-}
-
-# input type for incrementing integer column in table "game.bet_active_view"
-input game_bet_active_view_inc_input {
-  id: bigint
-  money: Int
-  round_id: bigint
-  user_id: bigint
-}
-
-# input type for inserting data into table "game.bet_active_view"
-input game_bet_active_view_insert_input {
-  id: bigint
-  money: Int
-  round: game_round_obj_rel_insert_input
-  round_id: bigint
-  user: user_obj_rel_insert_input
-  user_id: bigint
-}
-
-# aggregate max on columns
-type game_bet_active_view_max_fields {
-  id: bigint
-  money: Int
-  round_id: bigint
-  user_id: bigint
-}
-
-# order by max() on columns of table "game.bet_active_view"
-input game_bet_active_view_max_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate min on columns
-type game_bet_active_view_min_fields {
-  id: bigint
-  money: Int
-  round_id: bigint
-  user_id: bigint
-}
-
-# order by min() on columns of table "game.bet_active_view"
-input game_bet_active_view_min_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# response of any mutation on the table "game.bet_active_view"
-type game_bet_active_view_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [game_bet_active_view!]!
-}
-
-# input type for inserting object relation for remote table "game.bet_active_view"
-input game_bet_active_view_obj_rel_insert_input {
-  data: game_bet_active_view_insert_input!
-}
-
-# ordering options when selecting data from "game.bet_active_view"
-input game_bet_active_view_order_by {
-  id: order_by
-  money: order_by
-  round: game_round_order_by
-  round_id: order_by
-  user: user_order_by
-  user_id: order_by
-}
-
-# select columns of table "game.bet_active_view"
-enum game_bet_active_view_select_column {
-  # column name
-  id
-
-  # column name
-  money
-
-  # column name
-  round_id
-
-  # column name
-  user_id
-}
-
-# input type for updating data in table "game.bet_active_view"
-input game_bet_active_view_set_input {
-  id: bigint
-  money: Int
-  round_id: bigint
-  user_id: bigint
-}
-
-# aggregate stddev on columns
-type game_bet_active_view_stddev_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by stddev() on columns of table "game.bet_active_view"
-input game_bet_active_view_stddev_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate stddev_pop on columns
-type game_bet_active_view_stddev_pop_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by stddev_pop() on columns of table "game.bet_active_view"
-input game_bet_active_view_stddev_pop_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate stddev_samp on columns
-type game_bet_active_view_stddev_samp_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by stddev_samp() on columns of table "game.bet_active_view"
-input game_bet_active_view_stddev_samp_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate sum on columns
-type game_bet_active_view_sum_fields {
-  id: bigint
-  money: Int
-  round_id: bigint
-  user_id: bigint
-}
-
-# order by sum() on columns of table "game.bet_active_view"
-input game_bet_active_view_sum_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate var_pop on columns
-type game_bet_active_view_var_pop_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by var_pop() on columns of table "game.bet_active_view"
-input game_bet_active_view_var_pop_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate var_samp on columns
-type game_bet_active_view_var_samp_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by var_samp() on columns of table "game.bet_active_view"
-input game_bet_active_view_var_samp_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
-}
-
-# aggregate variance on columns
-type game_bet_active_view_variance_fields {
-  id: Float
-  money: Float
-  round_id: Float
-  user_id: Float
-}
-
-# order by variance() on columns of table "game.bet_active_view"
-input game_bet_active_view_variance_order_by {
-  id: order_by
-  money: order_by
-  round_id: order_by
-  user_id: order_by
 }
 
 # aggregated selection of "game.bet"
@@ -938,8 +641,897 @@ input game_bet_variance_order_by {
   user_id: order_by
 }
 
+# columns and relationships of "game.item"
+type game_item {
+  id: bigint!
+
+  # An object relationship
+  item_data: game_item_data
+  item_data_id: bigint!
+
+  # An object relationship
+  user: user
+  user_id: bigint!
+}
+
+# aggregated selection of "game.item"
+type game_item_aggregate {
+  aggregate: game_item_aggregate_fields
+  nodes: [game_item!]!
+}
+
+# aggregate fields of "game.item"
+type game_item_aggregate_fields {
+  avg: game_item_avg_fields
+  count(columns: [game_item_select_column!], distinct: Boolean): Int
+  max: game_item_max_fields
+  min: game_item_min_fields
+  stddev: game_item_stddev_fields
+  stddev_pop: game_item_stddev_pop_fields
+  stddev_samp: game_item_stddev_samp_fields
+  sum: game_item_sum_fields
+  var_pop: game_item_var_pop_fields
+  var_samp: game_item_var_samp_fields
+  variance: game_item_variance_fields
+}
+
+# order by aggregate values of table "game.item"
+input game_item_aggregate_order_by {
+  avg: game_item_avg_order_by
+  count: order_by
+  max: game_item_max_order_by
+  min: game_item_min_order_by
+  stddev: game_item_stddev_order_by
+  stddev_pop: game_item_stddev_pop_order_by
+  stddev_samp: game_item_stddev_samp_order_by
+  sum: game_item_sum_order_by
+  var_pop: game_item_var_pop_order_by
+  var_samp: game_item_var_samp_order_by
+  variance: game_item_variance_order_by
+}
+
+# input type for inserting array relation for remote table "game.item"
+input game_item_arr_rel_insert_input {
+  data: [game_item_insert_input!]!
+  on_conflict: game_item_on_conflict
+}
+
+# aggregate avg on columns
+type game_item_avg_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by avg() on columns of table "game.item"
+input game_item_avg_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# Boolean expression to filter rows from the table "game.item". All fields are combined with a logical 'AND'.
+input game_item_bool_exp {
+  _and: [game_item_bool_exp]
+  _not: game_item_bool_exp
+  _or: [game_item_bool_exp]
+  id: bigint_comparison_exp
+  item_data: game_item_data_bool_exp
+  item_data_id: bigint_comparison_exp
+  user: user_bool_exp
+  user_id: bigint_comparison_exp
+}
+
+# unique or primary key constraints on table "game.item"
+enum game_item_constraint {
+  # unique or primary key constraint
+  item_pkey
+}
+
+# columns and relationships of "game.item_data"
+type game_item_data {
+  active: Boolean!
+  id: bigint!
+  price: Int!
+}
+
+# aggregated selection of "game.item_data"
+type game_item_data_aggregate {
+  aggregate: game_item_data_aggregate_fields
+  nodes: [game_item_data!]!
+}
+
+# aggregate fields of "game.item_data"
+type game_item_data_aggregate_fields {
+  avg: game_item_data_avg_fields
+  count(columns: [game_item_data_select_column!], distinct: Boolean): Int
+  max: game_item_data_max_fields
+  min: game_item_data_min_fields
+  stddev: game_item_data_stddev_fields
+  stddev_pop: game_item_data_stddev_pop_fields
+  stddev_samp: game_item_data_stddev_samp_fields
+  sum: game_item_data_sum_fields
+  var_pop: game_item_data_var_pop_fields
+  var_samp: game_item_data_var_samp_fields
+  variance: game_item_data_variance_fields
+}
+
+# order by aggregate values of table "game.item_data"
+input game_item_data_aggregate_order_by {
+  avg: game_item_data_avg_order_by
+  count: order_by
+  max: game_item_data_max_order_by
+  min: game_item_data_min_order_by
+  stddev: game_item_data_stddev_order_by
+  stddev_pop: game_item_data_stddev_pop_order_by
+  stddev_samp: game_item_data_stddev_samp_order_by
+  sum: game_item_data_sum_order_by
+  var_pop: game_item_data_var_pop_order_by
+  var_samp: game_item_data_var_samp_order_by
+  variance: game_item_data_variance_order_by
+}
+
+# input type for inserting array relation for remote table "game.item_data"
+input game_item_data_arr_rel_insert_input {
+  data: [game_item_data_insert_input!]!
+  on_conflict: game_item_data_on_conflict
+}
+
+# aggregate avg on columns
+type game_item_data_avg_fields {
+  id: Float
+  price: Float
+}
+
+# order by avg() on columns of table "game.item_data"
+input game_item_data_avg_order_by {
+  id: order_by
+  price: order_by
+}
+
+# Boolean expression to filter rows from the table "game.item_data". All fields are combined with a logical 'AND'.
+input game_item_data_bool_exp {
+  _and: [game_item_data_bool_exp]
+  _not: game_item_data_bool_exp
+  _or: [game_item_data_bool_exp]
+  active: Boolean_comparison_exp
+  id: bigint_comparison_exp
+  price: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "game.item_data"
+enum game_item_data_constraint {
+  # unique or primary key constraint
+  item_data_pkey
+}
+
+# input type for incrementing integer column in table "game.item_data"
+input game_item_data_inc_input {
+  id: bigint
+  price: Int
+}
+
+# input type for inserting data into table "game.item_data"
+input game_item_data_insert_input {
+  active: Boolean
+  id: bigint
+  price: Int
+}
+
+# aggregate max on columns
+type game_item_data_max_fields {
+  id: bigint
+  price: Int
+}
+
+# order by max() on columns of table "game.item_data"
+input game_item_data_max_order_by {
+  id: order_by
+  price: order_by
+}
+
+# aggregate min on columns
+type game_item_data_min_fields {
+  id: bigint
+  price: Int
+}
+
+# order by min() on columns of table "game.item_data"
+input game_item_data_min_order_by {
+  id: order_by
+  price: order_by
+}
+
+# response of any mutation on the table "game.item_data"
+type game_item_data_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [game_item_data!]!
+}
+
+# input type for inserting object relation for remote table "game.item_data"
+input game_item_data_obj_rel_insert_input {
+  data: game_item_data_insert_input!
+  on_conflict: game_item_data_on_conflict
+}
+
+# on conflict condition type for table "game.item_data"
+input game_item_data_on_conflict {
+  constraint: game_item_data_constraint!
+  update_columns: [game_item_data_update_column!]!
+  where: game_item_data_bool_exp
+}
+
+# ordering options when selecting data from "game.item_data"
+input game_item_data_order_by {
+  active: order_by
+  id: order_by
+  price: order_by
+}
+
+# primary key columns input for table: "game.item_data"
+input game_item_data_pk_columns_input {
+  id: bigint!
+}
+
+# select columns of table "game.item_data"
+enum game_item_data_select_column {
+  # column name
+  active
+
+  # column name
+  id
+
+  # column name
+  price
+}
+
+# input type for updating data in table "game.item_data"
+input game_item_data_set_input {
+  active: Boolean
+  id: bigint
+  price: Int
+}
+
+# aggregate stddev on columns
+type game_item_data_stddev_fields {
+  id: Float
+  price: Float
+}
+
+# order by stddev() on columns of table "game.item_data"
+input game_item_data_stddev_order_by {
+  id: order_by
+  price: order_by
+}
+
+# aggregate stddev_pop on columns
+type game_item_data_stddev_pop_fields {
+  id: Float
+  price: Float
+}
+
+# order by stddev_pop() on columns of table "game.item_data"
+input game_item_data_stddev_pop_order_by {
+  id: order_by
+  price: order_by
+}
+
+# aggregate stddev_samp on columns
+type game_item_data_stddev_samp_fields {
+  id: Float
+  price: Float
+}
+
+# order by stddev_samp() on columns of table "game.item_data"
+input game_item_data_stddev_samp_order_by {
+  id: order_by
+  price: order_by
+}
+
+# aggregate sum on columns
+type game_item_data_sum_fields {
+  id: bigint
+  price: Int
+}
+
+# order by sum() on columns of table "game.item_data"
+input game_item_data_sum_order_by {
+  id: order_by
+  price: order_by
+}
+
+# update columns of table "game.item_data"
+enum game_item_data_update_column {
+  # column name
+  active
+
+  # column name
+  id
+
+  # column name
+  price
+}
+
+# aggregate var_pop on columns
+type game_item_data_var_pop_fields {
+  id: Float
+  price: Float
+}
+
+# order by var_pop() on columns of table "game.item_data"
+input game_item_data_var_pop_order_by {
+  id: order_by
+  price: order_by
+}
+
+# aggregate var_samp on columns
+type game_item_data_var_samp_fields {
+  id: Float
+  price: Float
+}
+
+# order by var_samp() on columns of table "game.item_data"
+input game_item_data_var_samp_order_by {
+  id: order_by
+  price: order_by
+}
+
+# aggregate variance on columns
+type game_item_data_variance_fields {
+  id: Float
+  price: Float
+}
+
+# order by variance() on columns of table "game.item_data"
+input game_item_data_variance_order_by {
+  id: order_by
+  price: order_by
+}
+
+# input type for incrementing integer column in table "game.item"
+input game_item_inc_input {
+  id: bigint
+  item_data_id: bigint
+  user_id: bigint
+}
+
+# input type for inserting data into table "game.item"
+input game_item_insert_input {
+  id: bigint
+  item_data: game_item_data_obj_rel_insert_input
+  item_data_id: bigint
+  user: user_obj_rel_insert_input
+  user_id: bigint
+}
+
+# aggregate max on columns
+type game_item_max_fields {
+  id: bigint
+  item_data_id: bigint
+  user_id: bigint
+}
+
+# order by max() on columns of table "game.item"
+input game_item_max_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type game_item_min_fields {
+  id: bigint
+  item_data_id: bigint
+  user_id: bigint
+}
+
+# order by min() on columns of table "game.item"
+input game_item_min_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "game.item"
+type game_item_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [game_item!]!
+}
+
+# input type for inserting object relation for remote table "game.item"
+input game_item_obj_rel_insert_input {
+  data: game_item_insert_input!
+  on_conflict: game_item_on_conflict
+}
+
+# on conflict condition type for table "game.item"
+input game_item_on_conflict {
+  constraint: game_item_constraint!
+  update_columns: [game_item_update_column!]!
+  where: game_item_bool_exp
+}
+
+# ordering options when selecting data from "game.item"
+input game_item_order_by {
+  id: order_by
+  item_data: game_item_data_order_by
+  item_data_id: order_by
+  user: user_order_by
+  user_id: order_by
+}
+
+# primary key columns input for table: "game.item"
+input game_item_pk_columns_input {
+  id: bigint!
+}
+
+# select columns of table "game.item"
+enum game_item_select_column {
+  # column name
+  id
+
+  # column name
+  item_data_id
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "game.item"
+input game_item_set_input {
+  id: bigint
+  item_data_id: bigint
+  user_id: bigint
+}
+
+# aggregate stddev on columns
+type game_item_stddev_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by stddev() on columns of table "game.item"
+input game_item_stddev_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# aggregate stddev_pop on columns
+type game_item_stddev_pop_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by stddev_pop() on columns of table "game.item"
+input game_item_stddev_pop_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# aggregate stddev_samp on columns
+type game_item_stddev_samp_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by stddev_samp() on columns of table "game.item"
+input game_item_stddev_samp_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# aggregate sum on columns
+type game_item_sum_fields {
+  id: bigint
+  item_data_id: bigint
+  user_id: bigint
+}
+
+# order by sum() on columns of table "game.item"
+input game_item_sum_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# update columns of table "game.item"
+enum game_item_update_column {
+  # column name
+  id
+
+  # column name
+  item_data_id
+
+  # column name
+  user_id
+}
+
+# aggregate var_pop on columns
+type game_item_var_pop_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by var_pop() on columns of table "game.item"
+input game_item_var_pop_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# aggregate var_samp on columns
+type game_item_var_samp_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by var_samp() on columns of table "game.item"
+input game_item_var_samp_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# aggregate variance on columns
+type game_item_variance_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by variance() on columns of table "game.item"
+input game_item_variance_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# columns and relationships of "game.items_data_loader"
+type game_items_data_loader {
+  completed: Int!
+  id: bigint!
+  loading: Boolean!
+  total: Int!
+}
+
+# aggregated selection of "game.items_data_loader"
+type game_items_data_loader_aggregate {
+  aggregate: game_items_data_loader_aggregate_fields
+  nodes: [game_items_data_loader!]!
+}
+
+# aggregate fields of "game.items_data_loader"
+type game_items_data_loader_aggregate_fields {
+  avg: game_items_data_loader_avg_fields
+  count(columns: [game_items_data_loader_select_column!], distinct: Boolean): Int
+  max: game_items_data_loader_max_fields
+  min: game_items_data_loader_min_fields
+  stddev: game_items_data_loader_stddev_fields
+  stddev_pop: game_items_data_loader_stddev_pop_fields
+  stddev_samp: game_items_data_loader_stddev_samp_fields
+  sum: game_items_data_loader_sum_fields
+  var_pop: game_items_data_loader_var_pop_fields
+  var_samp: game_items_data_loader_var_samp_fields
+  variance: game_items_data_loader_variance_fields
+}
+
+# order by aggregate values of table "game.items_data_loader"
+input game_items_data_loader_aggregate_order_by {
+  avg: game_items_data_loader_avg_order_by
+  count: order_by
+  max: game_items_data_loader_max_order_by
+  min: game_items_data_loader_min_order_by
+  stddev: game_items_data_loader_stddev_order_by
+  stddev_pop: game_items_data_loader_stddev_pop_order_by
+  stddev_samp: game_items_data_loader_stddev_samp_order_by
+  sum: game_items_data_loader_sum_order_by
+  var_pop: game_items_data_loader_var_pop_order_by
+  var_samp: game_items_data_loader_var_samp_order_by
+  variance: game_items_data_loader_variance_order_by
+}
+
+# input type for inserting array relation for remote table "game.items_data_loader"
+input game_items_data_loader_arr_rel_insert_input {
+  data: [game_items_data_loader_insert_input!]!
+  on_conflict: game_items_data_loader_on_conflict
+}
+
+# aggregate avg on columns
+type game_items_data_loader_avg_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by avg() on columns of table "game.items_data_loader"
+input game_items_data_loader_avg_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# Boolean expression to filter rows from the table "game.items_data_loader". All fields are combined with a logical 'AND'.
+input game_items_data_loader_bool_exp {
+  _and: [game_items_data_loader_bool_exp]
+  _not: game_items_data_loader_bool_exp
+  _or: [game_items_data_loader_bool_exp]
+  completed: Int_comparison_exp
+  id: bigint_comparison_exp
+  loading: Boolean_comparison_exp
+  total: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "game.items_data_loader"
+enum game_items_data_loader_constraint {
+  # unique or primary key constraint
+  items_data_loader_pkey
+}
+
+# input type for incrementing integer column in table "game.items_data_loader"
+input game_items_data_loader_inc_input {
+  completed: Int
+  id: bigint
+  total: Int
+}
+
+# input type for inserting data into table "game.items_data_loader"
+input game_items_data_loader_insert_input {
+  completed: Int
+  id: bigint
+  loading: Boolean
+  total: Int
+}
+
+# aggregate max on columns
+type game_items_data_loader_max_fields {
+  completed: Int
+  id: bigint
+  total: Int
+}
+
+# order by max() on columns of table "game.items_data_loader"
+input game_items_data_loader_max_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# aggregate min on columns
+type game_items_data_loader_min_fields {
+  completed: Int
+  id: bigint
+  total: Int
+}
+
+# order by min() on columns of table "game.items_data_loader"
+input game_items_data_loader_min_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# response of any mutation on the table "game.items_data_loader"
+type game_items_data_loader_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [game_items_data_loader!]!
+}
+
+# input type for inserting object relation for remote table "game.items_data_loader"
+input game_items_data_loader_obj_rel_insert_input {
+  data: game_items_data_loader_insert_input!
+  on_conflict: game_items_data_loader_on_conflict
+}
+
+# on conflict condition type for table "game.items_data_loader"
+input game_items_data_loader_on_conflict {
+  constraint: game_items_data_loader_constraint!
+  update_columns: [game_items_data_loader_update_column!]!
+  where: game_items_data_loader_bool_exp
+}
+
+# ordering options when selecting data from "game.items_data_loader"
+input game_items_data_loader_order_by {
+  completed: order_by
+  id: order_by
+  loading: order_by
+  total: order_by
+}
+
+# primary key columns input for table: "game.items_data_loader"
+input game_items_data_loader_pk_columns_input {
+  id: bigint!
+}
+
+# select columns of table "game.items_data_loader"
+enum game_items_data_loader_select_column {
+  # column name
+  completed
+
+  # column name
+  id
+
+  # column name
+  loading
+
+  # column name
+  total
+}
+
+# input type for updating data in table "game.items_data_loader"
+input game_items_data_loader_set_input {
+  completed: Int
+  id: bigint
+  loading: Boolean
+  total: Int
+}
+
+# aggregate stddev on columns
+type game_items_data_loader_stddev_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by stddev() on columns of table "game.items_data_loader"
+input game_items_data_loader_stddev_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# aggregate stddev_pop on columns
+type game_items_data_loader_stddev_pop_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by stddev_pop() on columns of table "game.items_data_loader"
+input game_items_data_loader_stddev_pop_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# aggregate stddev_samp on columns
+type game_items_data_loader_stddev_samp_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by stddev_samp() on columns of table "game.items_data_loader"
+input game_items_data_loader_stddev_samp_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# aggregate sum on columns
+type game_items_data_loader_sum_fields {
+  completed: Int
+  id: bigint
+  total: Int
+}
+
+# order by sum() on columns of table "game.items_data_loader"
+input game_items_data_loader_sum_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# update columns of table "game.items_data_loader"
+enum game_items_data_loader_update_column {
+  # column name
+  completed
+
+  # column name
+  id
+
+  # column name
+  loading
+
+  # column name
+  total
+}
+
+# aggregate var_pop on columns
+type game_items_data_loader_var_pop_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by var_pop() on columns of table "game.items_data_loader"
+input game_items_data_loader_var_pop_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# aggregate var_samp on columns
+type game_items_data_loader_var_samp_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by var_samp() on columns of table "game.items_data_loader"
+input game_items_data_loader_var_samp_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
+# aggregate variance on columns
+type game_items_data_loader_variance_fields {
+  completed: Float
+  id: Float
+  total: Float
+}
+
+# order by variance() on columns of table "game.items_data_loader"
+input game_items_data_loader_variance_order_by {
+  completed: order_by
+  id: order_by
+  total: order_by
+}
+
 # columns and relationships of "game.round"
 type game_round {
+  # An array relationship
+  bets(
+    # distinct select on columns
+    distinct_on: [game_bet_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_bet_order_by!]
+
+    # filter the rows returned
+    where: game_bet_bool_exp
+  ): [game_bet!]!
+
+  # An aggregated array relationship
+  bets_aggregate(
+    # distinct select on columns
+    distinct_on: [game_bet_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_bet_order_by!]
+
+    # filter the rows returned
+    where: game_bet_bool_exp
+  ): game_bet_aggregate!
   created_at: timestamptz!
   id: bigint!
   start_pending_at: timestamptz
@@ -947,289 +1539,6 @@ type game_round {
   start_show_at: timestamptz
   status: game_round_status_enum!
   x: Int
-}
-
-# columns and relationships of "game.round_active_view"
-type game_round_active_view {
-  created_at: timestamptz
-  id: bigint
-  start_pending_at: timestamptz
-  start_playing_at: timestamptz
-  start_show_at: timestamptz
-  status: String
-  x: Int
-}
-
-# aggregated selection of "game.round_active_view"
-type game_round_active_view_aggregate {
-  aggregate: game_round_active_view_aggregate_fields
-  nodes: [game_round_active_view!]!
-}
-
-# aggregate fields of "game.round_active_view"
-type game_round_active_view_aggregate_fields {
-  avg: game_round_active_view_avg_fields
-  count(columns: [game_round_active_view_select_column!], distinct: Boolean): Int
-  max: game_round_active_view_max_fields
-  min: game_round_active_view_min_fields
-  stddev: game_round_active_view_stddev_fields
-  stddev_pop: game_round_active_view_stddev_pop_fields
-  stddev_samp: game_round_active_view_stddev_samp_fields
-  sum: game_round_active_view_sum_fields
-  var_pop: game_round_active_view_var_pop_fields
-  var_samp: game_round_active_view_var_samp_fields
-  variance: game_round_active_view_variance_fields
-}
-
-# order by aggregate values of table "game.round_active_view"
-input game_round_active_view_aggregate_order_by {
-  avg: game_round_active_view_avg_order_by
-  count: order_by
-  max: game_round_active_view_max_order_by
-  min: game_round_active_view_min_order_by
-  stddev: game_round_active_view_stddev_order_by
-  stddev_pop: game_round_active_view_stddev_pop_order_by
-  stddev_samp: game_round_active_view_stddev_samp_order_by
-  sum: game_round_active_view_sum_order_by
-  var_pop: game_round_active_view_var_pop_order_by
-  var_samp: game_round_active_view_var_samp_order_by
-  variance: game_round_active_view_variance_order_by
-}
-
-# input type for inserting array relation for remote table "game.round_active_view"
-input game_round_active_view_arr_rel_insert_input {
-  data: [game_round_active_view_insert_input!]!
-}
-
-# aggregate avg on columns
-type game_round_active_view_avg_fields {
-  id: Float
-  x: Float
-}
-
-# order by avg() on columns of table "game.round_active_view"
-input game_round_active_view_avg_order_by {
-  id: order_by
-  x: order_by
-}
-
-# Boolean expression to filter rows from the table "game.round_active_view". All fields are combined with a logical 'AND'.
-input game_round_active_view_bool_exp {
-  _and: [game_round_active_view_bool_exp]
-  _not: game_round_active_view_bool_exp
-  _or: [game_round_active_view_bool_exp]
-  created_at: timestamptz_comparison_exp
-  id: bigint_comparison_exp
-  start_pending_at: timestamptz_comparison_exp
-  start_playing_at: timestamptz_comparison_exp
-  start_show_at: timestamptz_comparison_exp
-  status: String_comparison_exp
-  x: Int_comparison_exp
-}
-
-# input type for incrementing integer column in table "game.round_active_view"
-input game_round_active_view_inc_input {
-  id: bigint
-  x: Int
-}
-
-# input type for inserting data into table "game.round_active_view"
-input game_round_active_view_insert_input {
-  created_at: timestamptz
-  id: bigint
-  start_pending_at: timestamptz
-  start_playing_at: timestamptz
-  start_show_at: timestamptz
-  status: String
-  x: Int
-}
-
-# aggregate max on columns
-type game_round_active_view_max_fields {
-  created_at: timestamptz
-  id: bigint
-  start_pending_at: timestamptz
-  start_playing_at: timestamptz
-  start_show_at: timestamptz
-  status: String
-  x: Int
-}
-
-# order by max() on columns of table "game.round_active_view"
-input game_round_active_view_max_order_by {
-  created_at: order_by
-  id: order_by
-  start_pending_at: order_by
-  start_playing_at: order_by
-  start_show_at: order_by
-  status: order_by
-  x: order_by
-}
-
-# aggregate min on columns
-type game_round_active_view_min_fields {
-  created_at: timestamptz
-  id: bigint
-  start_pending_at: timestamptz
-  start_playing_at: timestamptz
-  start_show_at: timestamptz
-  status: String
-  x: Int
-}
-
-# order by min() on columns of table "game.round_active_view"
-input game_round_active_view_min_order_by {
-  created_at: order_by
-  id: order_by
-  start_pending_at: order_by
-  start_playing_at: order_by
-  start_show_at: order_by
-  status: order_by
-  x: order_by
-}
-
-# response of any mutation on the table "game.round_active_view"
-type game_round_active_view_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [game_round_active_view!]!
-}
-
-# input type for inserting object relation for remote table "game.round_active_view"
-input game_round_active_view_obj_rel_insert_input {
-  data: game_round_active_view_insert_input!
-}
-
-# ordering options when selecting data from "game.round_active_view"
-input game_round_active_view_order_by {
-  created_at: order_by
-  id: order_by
-  start_pending_at: order_by
-  start_playing_at: order_by
-  start_show_at: order_by
-  status: order_by
-  x: order_by
-}
-
-# select columns of table "game.round_active_view"
-enum game_round_active_view_select_column {
-  # column name
-  created_at
-
-  # column name
-  id
-
-  # column name
-  start_pending_at
-
-  # column name
-  start_playing_at
-
-  # column name
-  start_show_at
-
-  # column name
-  status
-
-  # column name
-  x
-}
-
-# input type for updating data in table "game.round_active_view"
-input game_round_active_view_set_input {
-  created_at: timestamptz
-  id: bigint
-  start_pending_at: timestamptz
-  start_playing_at: timestamptz
-  start_show_at: timestamptz
-  status: String
-  x: Int
-}
-
-# aggregate stddev on columns
-type game_round_active_view_stddev_fields {
-  id: Float
-  x: Float
-}
-
-# order by stddev() on columns of table "game.round_active_view"
-input game_round_active_view_stddev_order_by {
-  id: order_by
-  x: order_by
-}
-
-# aggregate stddev_pop on columns
-type game_round_active_view_stddev_pop_fields {
-  id: Float
-  x: Float
-}
-
-# order by stddev_pop() on columns of table "game.round_active_view"
-input game_round_active_view_stddev_pop_order_by {
-  id: order_by
-  x: order_by
-}
-
-# aggregate stddev_samp on columns
-type game_round_active_view_stddev_samp_fields {
-  id: Float
-  x: Float
-}
-
-# order by stddev_samp() on columns of table "game.round_active_view"
-input game_round_active_view_stddev_samp_order_by {
-  id: order_by
-  x: order_by
-}
-
-# aggregate sum on columns
-type game_round_active_view_sum_fields {
-  id: bigint
-  x: Int
-}
-
-# order by sum() on columns of table "game.round_active_view"
-input game_round_active_view_sum_order_by {
-  id: order_by
-  x: order_by
-}
-
-# aggregate var_pop on columns
-type game_round_active_view_var_pop_fields {
-  id: Float
-  x: Float
-}
-
-# order by var_pop() on columns of table "game.round_active_view"
-input game_round_active_view_var_pop_order_by {
-  id: order_by
-  x: order_by
-}
-
-# aggregate var_samp on columns
-type game_round_active_view_var_samp_fields {
-  id: Float
-  x: Float
-}
-
-# order by var_samp() on columns of table "game.round_active_view"
-input game_round_active_view_var_samp_order_by {
-  id: order_by
-  x: order_by
-}
-
-# aggregate variance on columns
-type game_round_active_view_variance_fields {
-  id: Float
-  x: Float
-}
-
-# order by variance() on columns of table "game.round_active_view"
-input game_round_active_view_variance_order_by {
-  id: order_by
-  x: order_by
 }
 
 # aggregated selection of "game.round"
@@ -1291,6 +1600,7 @@ input game_round_bool_exp {
   _and: [game_round_bool_exp]
   _not: game_round_bool_exp
   _or: [game_round_bool_exp]
+  bets: game_bet_bool_exp
   created_at: timestamptz_comparison_exp
   id: bigint_comparison_exp
   start_pending_at: timestamptz_comparison_exp
@@ -1314,6 +1624,7 @@ input game_round_inc_input {
 
 # input type for inserting data into table "game.round"
 input game_round_insert_input {
+  bets: game_bet_arr_rel_insert_input
   created_at: timestamptz
   id: bigint
   start_pending_at: timestamptz
@@ -1387,6 +1698,7 @@ input game_round_on_conflict {
 
 # ordering options when selecting data from "game.round"
 input game_round_order_by {
+  bets_aggregate: game_bet_aggregate_order_by
   created_at: order_by
   id: order_by
   start_pending_at: order_by
@@ -1996,1354 +2308,832 @@ input game_settings_variance_order_by {
   speed_x: order_by
 }
 
-# columns and relationships of "game.skin"
-type game_skin {
-  active: Boolean!
-  id: bigint!
-  image_url: String
-  market_hash_name: String!
-  max_ask: Int!
-  min_bid: Int!
-  price: Int!
-  volume: Int!
+# columns and relationships of "game.view_active_bet"
+type game_view_active_bet {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
 }
 
-# aggregated selection of "game.skin"
-type game_skin_aggregate {
-  aggregate: game_skin_aggregate_fields
-  nodes: [game_skin!]!
+# aggregated selection of "game.view_active_bet"
+type game_view_active_bet_aggregate {
+  aggregate: game_view_active_bet_aggregate_fields
+  nodes: [game_view_active_bet!]!
 }
 
-# aggregate fields of "game.skin"
-type game_skin_aggregate_fields {
-  avg: game_skin_avg_fields
-  count(columns: [game_skin_select_column!], distinct: Boolean): Int
-  max: game_skin_max_fields
-  min: game_skin_min_fields
-  stddev: game_skin_stddev_fields
-  stddev_pop: game_skin_stddev_pop_fields
-  stddev_samp: game_skin_stddev_samp_fields
-  sum: game_skin_sum_fields
-  var_pop: game_skin_var_pop_fields
-  var_samp: game_skin_var_samp_fields
-  variance: game_skin_variance_fields
+# aggregate fields of "game.view_active_bet"
+type game_view_active_bet_aggregate_fields {
+  avg: game_view_active_bet_avg_fields
+  count(columns: [game_view_active_bet_select_column!], distinct: Boolean): Int
+  max: game_view_active_bet_max_fields
+  min: game_view_active_bet_min_fields
+  stddev: game_view_active_bet_stddev_fields
+  stddev_pop: game_view_active_bet_stddev_pop_fields
+  stddev_samp: game_view_active_bet_stddev_samp_fields
+  sum: game_view_active_bet_sum_fields
+  var_pop: game_view_active_bet_var_pop_fields
+  var_samp: game_view_active_bet_var_samp_fields
+  variance: game_view_active_bet_variance_fields
 }
 
-# order by aggregate values of table "game.skin"
-input game_skin_aggregate_order_by {
-  avg: game_skin_avg_order_by
+# order by aggregate values of table "game.view_active_bet"
+input game_view_active_bet_aggregate_order_by {
+  avg: game_view_active_bet_avg_order_by
   count: order_by
-  max: game_skin_max_order_by
-  min: game_skin_min_order_by
-  stddev: game_skin_stddev_order_by
-  stddev_pop: game_skin_stddev_pop_order_by
-  stddev_samp: game_skin_stddev_samp_order_by
-  sum: game_skin_sum_order_by
-  var_pop: game_skin_var_pop_order_by
-  var_samp: game_skin_var_samp_order_by
-  variance: game_skin_variance_order_by
+  max: game_view_active_bet_max_order_by
+  min: game_view_active_bet_min_order_by
+  stddev: game_view_active_bet_stddev_order_by
+  stddev_pop: game_view_active_bet_stddev_pop_order_by
+  stddev_samp: game_view_active_bet_stddev_samp_order_by
+  sum: game_view_active_bet_sum_order_by
+  var_pop: game_view_active_bet_var_pop_order_by
+  var_samp: game_view_active_bet_var_samp_order_by
+  variance: game_view_active_bet_variance_order_by
 }
 
-# input type for inserting array relation for remote table "game.skin"
-input game_skin_arr_rel_insert_input {
-  data: [game_skin_insert_input!]!
-  on_conflict: game_skin_on_conflict
+# input type for inserting array relation for remote table "game.view_active_bet"
+input game_view_active_bet_arr_rel_insert_input {
+  data: [game_view_active_bet_insert_input!]!
 }
 
 # aggregate avg on columns
-type game_skin_avg_fields {
+type game_view_active_bet_avg_fields {
   id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by avg() on columns of table "game.skin"
-input game_skin_avg_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# Boolean expression to filter rows from the table "game.skin". All fields are combined with a logical 'AND'.
-input game_skin_bool_exp {
-  _and: [game_skin_bool_exp]
-  _not: game_skin_bool_exp
-  _or: [game_skin_bool_exp]
-  active: Boolean_comparison_exp
-  id: bigint_comparison_exp
-  image_url: String_comparison_exp
-  market_hash_name: String_comparison_exp
-  max_ask: Int_comparison_exp
-  min_bid: Int_comparison_exp
-  price: Int_comparison_exp
-  volume: Int_comparison_exp
-}
-
-# unique or primary key constraints on table "game.skin"
-enum game_skin_constraint {
-  # unique or primary key constraint
-  skin_market_hash_name_key
-
-  # unique or primary key constraint
-  skin_pkey
-}
-
-# columns and relationships of "game.skin_in_inventar"
-type game_skin_in_inventar {
-  created_at: timestamptz!
-  id: bigint!
-
-  # An object relationship
-  skin: game_skin
-  skin_id: bigint!
-
-  # An object relationship
-  user: user
-  user_id: bigint!
-}
-
-# aggregated selection of "game.skin_in_inventar"
-type game_skin_in_inventar_aggregate {
-  aggregate: game_skin_in_inventar_aggregate_fields
-  nodes: [game_skin_in_inventar!]!
-}
-
-# aggregate fields of "game.skin_in_inventar"
-type game_skin_in_inventar_aggregate_fields {
-  avg: game_skin_in_inventar_avg_fields
-  count(columns: [game_skin_in_inventar_select_column!], distinct: Boolean): Int
-  max: game_skin_in_inventar_max_fields
-  min: game_skin_in_inventar_min_fields
-  stddev: game_skin_in_inventar_stddev_fields
-  stddev_pop: game_skin_in_inventar_stddev_pop_fields
-  stddev_samp: game_skin_in_inventar_stddev_samp_fields
-  sum: game_skin_in_inventar_sum_fields
-  var_pop: game_skin_in_inventar_var_pop_fields
-  var_samp: game_skin_in_inventar_var_samp_fields
-  variance: game_skin_in_inventar_variance_fields
-}
-
-# order by aggregate values of table "game.skin_in_inventar"
-input game_skin_in_inventar_aggregate_order_by {
-  avg: game_skin_in_inventar_avg_order_by
-  count: order_by
-  max: game_skin_in_inventar_max_order_by
-  min: game_skin_in_inventar_min_order_by
-  stddev: game_skin_in_inventar_stddev_order_by
-  stddev_pop: game_skin_in_inventar_stddev_pop_order_by
-  stddev_samp: game_skin_in_inventar_stddev_samp_order_by
-  sum: game_skin_in_inventar_sum_order_by
-  var_pop: game_skin_in_inventar_var_pop_order_by
-  var_samp: game_skin_in_inventar_var_samp_order_by
-  variance: game_skin_in_inventar_variance_order_by
-}
-
-# input type for inserting array relation for remote table "game.skin_in_inventar"
-input game_skin_in_inventar_arr_rel_insert_input {
-  data: [game_skin_in_inventar_insert_input!]!
-  on_conflict: game_skin_in_inventar_on_conflict
-}
-
-# aggregate avg on columns
-type game_skin_in_inventar_avg_fields {
-  id: Float
-  skin_id: Float
+  money: Float
+  round_id: Float
   user_id: Float
 }
 
-# order by avg() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_avg_order_by {
+# order by avg() on columns of table "game.view_active_bet"
+input game_view_active_bet_avg_order_by {
   id: order_by
-  skin_id: order_by
+  money: order_by
+  round_id: order_by
   user_id: order_by
 }
 
-# Boolean expression to filter rows from the table "game.skin_in_inventar". All fields are combined with a logical 'AND'.
-input game_skin_in_inventar_bool_exp {
-  _and: [game_skin_in_inventar_bool_exp]
-  _not: game_skin_in_inventar_bool_exp
-  _or: [game_skin_in_inventar_bool_exp]
+# Boolean expression to filter rows from the table "game.view_active_bet". All fields are combined with a logical 'AND'.
+input game_view_active_bet_bool_exp {
+  _and: [game_view_active_bet_bool_exp]
+  _not: game_view_active_bet_bool_exp
+  _or: [game_view_active_bet_bool_exp]
+  id: bigint_comparison_exp
+  money: Int_comparison_exp
+  round_id: bigint_comparison_exp
+  user_id: bigint_comparison_exp
+}
+
+# input type for incrementing integer column in table "game.view_active_bet"
+input game_view_active_bet_inc_input {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
+}
+
+# input type for inserting data into table "game.view_active_bet"
+input game_view_active_bet_insert_input {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
+}
+
+# aggregate max on columns
+type game_view_active_bet_max_fields {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
+}
+
+# order by max() on columns of table "game.view_active_bet"
+input game_view_active_bet_max_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type game_view_active_bet_min_fields {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
+}
+
+# order by min() on columns of table "game.view_active_bet"
+input game_view_active_bet_min_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "game.view_active_bet"
+type game_view_active_bet_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [game_view_active_bet!]!
+}
+
+# input type for inserting object relation for remote table "game.view_active_bet"
+input game_view_active_bet_obj_rel_insert_input {
+  data: game_view_active_bet_insert_input!
+}
+
+# ordering options when selecting data from "game.view_active_bet"
+input game_view_active_bet_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# select columns of table "game.view_active_bet"
+enum game_view_active_bet_select_column {
+  # column name
+  id
+
+  # column name
+  money
+
+  # column name
+  round_id
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "game.view_active_bet"
+input game_view_active_bet_set_input {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
+}
+
+# aggregate stddev on columns
+type game_view_active_bet_stddev_fields {
+  id: Float
+  money: Float
+  round_id: Float
+  user_id: Float
+}
+
+# order by stddev() on columns of table "game.view_active_bet"
+input game_view_active_bet_stddev_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate stddev_pop on columns
+type game_view_active_bet_stddev_pop_fields {
+  id: Float
+  money: Float
+  round_id: Float
+  user_id: Float
+}
+
+# order by stddev_pop() on columns of table "game.view_active_bet"
+input game_view_active_bet_stddev_pop_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate stddev_samp on columns
+type game_view_active_bet_stddev_samp_fields {
+  id: Float
+  money: Float
+  round_id: Float
+  user_id: Float
+}
+
+# order by stddev_samp() on columns of table "game.view_active_bet"
+input game_view_active_bet_stddev_samp_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate sum on columns
+type game_view_active_bet_sum_fields {
+  id: bigint
+  money: Int
+  round_id: bigint
+  user_id: bigint
+}
+
+# order by sum() on columns of table "game.view_active_bet"
+input game_view_active_bet_sum_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate var_pop on columns
+type game_view_active_bet_var_pop_fields {
+  id: Float
+  money: Float
+  round_id: Float
+  user_id: Float
+}
+
+# order by var_pop() on columns of table "game.view_active_bet"
+input game_view_active_bet_var_pop_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate var_samp on columns
+type game_view_active_bet_var_samp_fields {
+  id: Float
+  money: Float
+  round_id: Float
+  user_id: Float
+}
+
+# order by var_samp() on columns of table "game.view_active_bet"
+input game_view_active_bet_var_samp_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# aggregate variance on columns
+type game_view_active_bet_variance_fields {
+  id: Float
+  money: Float
+  round_id: Float
+  user_id: Float
+}
+
+# order by variance() on columns of table "game.view_active_bet"
+input game_view_active_bet_variance_order_by {
+  id: order_by
+  money: order_by
+  round_id: order_by
+  user_id: order_by
+}
+
+# columns and relationships of "game.view_active_round"
+type game_view_active_round {
+  created_at: timestamptz
+  id: bigint
+  start_pending_at: timestamptz
+  start_playing_at: timestamptz
+  start_show_at: timestamptz
+  status: String
+  x: Int
+}
+
+# aggregated selection of "game.view_active_round"
+type game_view_active_round_aggregate {
+  aggregate: game_view_active_round_aggregate_fields
+  nodes: [game_view_active_round!]!
+}
+
+# aggregate fields of "game.view_active_round"
+type game_view_active_round_aggregate_fields {
+  avg: game_view_active_round_avg_fields
+  count(columns: [game_view_active_round_select_column!], distinct: Boolean): Int
+  max: game_view_active_round_max_fields
+  min: game_view_active_round_min_fields
+  stddev: game_view_active_round_stddev_fields
+  stddev_pop: game_view_active_round_stddev_pop_fields
+  stddev_samp: game_view_active_round_stddev_samp_fields
+  sum: game_view_active_round_sum_fields
+  var_pop: game_view_active_round_var_pop_fields
+  var_samp: game_view_active_round_var_samp_fields
+  variance: game_view_active_round_variance_fields
+}
+
+# order by aggregate values of table "game.view_active_round"
+input game_view_active_round_aggregate_order_by {
+  avg: game_view_active_round_avg_order_by
+  count: order_by
+  max: game_view_active_round_max_order_by
+  min: game_view_active_round_min_order_by
+  stddev: game_view_active_round_stddev_order_by
+  stddev_pop: game_view_active_round_stddev_pop_order_by
+  stddev_samp: game_view_active_round_stddev_samp_order_by
+  sum: game_view_active_round_sum_order_by
+  var_pop: game_view_active_round_var_pop_order_by
+  var_samp: game_view_active_round_var_samp_order_by
+  variance: game_view_active_round_variance_order_by
+}
+
+# input type for inserting array relation for remote table "game.view_active_round"
+input game_view_active_round_arr_rel_insert_input {
+  data: [game_view_active_round_insert_input!]!
+}
+
+# aggregate avg on columns
+type game_view_active_round_avg_fields {
+  id: Float
+  x: Float
+}
+
+# order by avg() on columns of table "game.view_active_round"
+input game_view_active_round_avg_order_by {
+  id: order_by
+  x: order_by
+}
+
+# Boolean expression to filter rows from the table "game.view_active_round". All fields are combined with a logical 'AND'.
+input game_view_active_round_bool_exp {
+  _and: [game_view_active_round_bool_exp]
+  _not: game_view_active_round_bool_exp
+  _or: [game_view_active_round_bool_exp]
   created_at: timestamptz_comparison_exp
   id: bigint_comparison_exp
-  skin: game_skin_bool_exp
-  skin_id: bigint_comparison_exp
+  start_pending_at: timestamptz_comparison_exp
+  start_playing_at: timestamptz_comparison_exp
+  start_show_at: timestamptz_comparison_exp
+  status: String_comparison_exp
+  x: Int_comparison_exp
+}
+
+# input type for incrementing integer column in table "game.view_active_round"
+input game_view_active_round_inc_input {
+  id: bigint
+  x: Int
+}
+
+# input type for inserting data into table "game.view_active_round"
+input game_view_active_round_insert_input {
+  created_at: timestamptz
+  id: bigint
+  start_pending_at: timestamptz
+  start_playing_at: timestamptz
+  start_show_at: timestamptz
+  status: String
+  x: Int
+}
+
+# aggregate max on columns
+type game_view_active_round_max_fields {
+  created_at: timestamptz
+  id: bigint
+  start_pending_at: timestamptz
+  start_playing_at: timestamptz
+  start_show_at: timestamptz
+  status: String
+  x: Int
+}
+
+# order by max() on columns of table "game.view_active_round"
+input game_view_active_round_max_order_by {
+  created_at: order_by
+  id: order_by
+  start_pending_at: order_by
+  start_playing_at: order_by
+  start_show_at: order_by
+  status: order_by
+  x: order_by
+}
+
+# aggregate min on columns
+type game_view_active_round_min_fields {
+  created_at: timestamptz
+  id: bigint
+  start_pending_at: timestamptz
+  start_playing_at: timestamptz
+  start_show_at: timestamptz
+  status: String
+  x: Int
+}
+
+# order by min() on columns of table "game.view_active_round"
+input game_view_active_round_min_order_by {
+  created_at: order_by
+  id: order_by
+  start_pending_at: order_by
+  start_playing_at: order_by
+  start_show_at: order_by
+  status: order_by
+  x: order_by
+}
+
+# response of any mutation on the table "game.view_active_round"
+type game_view_active_round_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [game_view_active_round!]!
+}
+
+# input type for inserting object relation for remote table "game.view_active_round"
+input game_view_active_round_obj_rel_insert_input {
+  data: game_view_active_round_insert_input!
+}
+
+# ordering options when selecting data from "game.view_active_round"
+input game_view_active_round_order_by {
+  created_at: order_by
+  id: order_by
+  start_pending_at: order_by
+  start_playing_at: order_by
+  start_show_at: order_by
+  status: order_by
+  x: order_by
+}
+
+# select columns of table "game.view_active_round"
+enum game_view_active_round_select_column {
+  # column name
+  created_at
+
+  # column name
+  id
+
+  # column name
+  start_pending_at
+
+  # column name
+  start_playing_at
+
+  # column name
+  start_show_at
+
+  # column name
+  status
+
+  # column name
+  x
+}
+
+# input type for updating data in table "game.view_active_round"
+input game_view_active_round_set_input {
+  created_at: timestamptz
+  id: bigint
+  start_pending_at: timestamptz
+  start_playing_at: timestamptz
+  start_show_at: timestamptz
+  status: String
+  x: Int
+}
+
+# aggregate stddev on columns
+type game_view_active_round_stddev_fields {
+  id: Float
+  x: Float
+}
+
+# order by stddev() on columns of table "game.view_active_round"
+input game_view_active_round_stddev_order_by {
+  id: order_by
+  x: order_by
+}
+
+# aggregate stddev_pop on columns
+type game_view_active_round_stddev_pop_fields {
+  id: Float
+  x: Float
+}
+
+# order by stddev_pop() on columns of table "game.view_active_round"
+input game_view_active_round_stddev_pop_order_by {
+  id: order_by
+  x: order_by
+}
+
+# aggregate stddev_samp on columns
+type game_view_active_round_stddev_samp_fields {
+  id: Float
+  x: Float
+}
+
+# order by stddev_samp() on columns of table "game.view_active_round"
+input game_view_active_round_stddev_samp_order_by {
+  id: order_by
+  x: order_by
+}
+
+# aggregate sum on columns
+type game_view_active_round_sum_fields {
+  id: bigint
+  x: Int
+}
+
+# order by sum() on columns of table "game.view_active_round"
+input game_view_active_round_sum_order_by {
+  id: order_by
+  x: order_by
+}
+
+# aggregate var_pop on columns
+type game_view_active_round_var_pop_fields {
+  id: Float
+  x: Float
+}
+
+# order by var_pop() on columns of table "game.view_active_round"
+input game_view_active_round_var_pop_order_by {
+  id: order_by
+  x: order_by
+}
+
+# aggregate var_samp on columns
+type game_view_active_round_var_samp_fields {
+  id: Float
+  x: Float
+}
+
+# order by var_samp() on columns of table "game.view_active_round"
+input game_view_active_round_var_samp_order_by {
+  id: order_by
+  x: order_by
+}
+
+# aggregate variance on columns
+type game_view_active_round_variance_fields {
+  id: Float
+  x: Float
+}
+
+# order by variance() on columns of table "game.view_active_round"
+input game_view_active_round_variance_order_by {
+  id: order_by
+  x: order_by
+}
+
+# columns and relationships of "game.view_my_item"
+type game_view_my_item {
+  id: bigint
+
+  # An object relationship
+  item_data: game_item_data
+  item_data_id: bigint
+
+  # An object relationship
+  user: user
+  user_id: bigint
+}
+
+# aggregated selection of "game.view_my_item"
+type game_view_my_item_aggregate {
+  aggregate: game_view_my_item_aggregate_fields
+  nodes: [game_view_my_item!]!
+}
+
+# aggregate fields of "game.view_my_item"
+type game_view_my_item_aggregate_fields {
+  avg: game_view_my_item_avg_fields
+  count(columns: [game_view_my_item_select_column!], distinct: Boolean): Int
+  max: game_view_my_item_max_fields
+  min: game_view_my_item_min_fields
+  stddev: game_view_my_item_stddev_fields
+  stddev_pop: game_view_my_item_stddev_pop_fields
+  stddev_samp: game_view_my_item_stddev_samp_fields
+  sum: game_view_my_item_sum_fields
+  var_pop: game_view_my_item_var_pop_fields
+  var_samp: game_view_my_item_var_samp_fields
+  variance: game_view_my_item_variance_fields
+}
+
+# order by aggregate values of table "game.view_my_item"
+input game_view_my_item_aggregate_order_by {
+  avg: game_view_my_item_avg_order_by
+  count: order_by
+  max: game_view_my_item_max_order_by
+  min: game_view_my_item_min_order_by
+  stddev: game_view_my_item_stddev_order_by
+  stddev_pop: game_view_my_item_stddev_pop_order_by
+  stddev_samp: game_view_my_item_stddev_samp_order_by
+  sum: game_view_my_item_sum_order_by
+  var_pop: game_view_my_item_var_pop_order_by
+  var_samp: game_view_my_item_var_samp_order_by
+  variance: game_view_my_item_variance_order_by
+}
+
+# input type for inserting array relation for remote table "game.view_my_item"
+input game_view_my_item_arr_rel_insert_input {
+  data: [game_view_my_item_insert_input!]!
+}
+
+# aggregate avg on columns
+type game_view_my_item_avg_fields {
+  id: Float
+  item_data_id: Float
+  user_id: Float
+}
+
+# order by avg() on columns of table "game.view_my_item"
+input game_view_my_item_avg_order_by {
+  id: order_by
+  item_data_id: order_by
+  user_id: order_by
+}
+
+# Boolean expression to filter rows from the table "game.view_my_item". All fields are combined with a logical 'AND'.
+input game_view_my_item_bool_exp {
+  _and: [game_view_my_item_bool_exp]
+  _not: game_view_my_item_bool_exp
+  _or: [game_view_my_item_bool_exp]
+  id: bigint_comparison_exp
+  item_data: game_item_data_bool_exp
+  item_data_id: bigint_comparison_exp
   user: user_bool_exp
   user_id: bigint_comparison_exp
 }
 
-# unique or primary key constraints on table "game.skin_in_inventar"
-enum game_skin_in_inventar_constraint {
-  # unique or primary key constraint
-  skin_in_inventar_pkey
-}
-
-# input type for incrementing integer column in table "game.skin_in_inventar"
-input game_skin_in_inventar_inc_input {
+# input type for incrementing integer column in table "game.view_my_item"
+input game_view_my_item_inc_input {
   id: bigint
-  skin_id: bigint
+  item_data_id: bigint
   user_id: bigint
 }
 
-# input type for inserting data into table "game.skin_in_inventar"
-input game_skin_in_inventar_insert_input {
-  created_at: timestamptz
+# input type for inserting data into table "game.view_my_item"
+input game_view_my_item_insert_input {
   id: bigint
-  skin: game_skin_obj_rel_insert_input
-  skin_id: bigint
+  item_data: game_item_data_obj_rel_insert_input
+  item_data_id: bigint
   user: user_obj_rel_insert_input
   user_id: bigint
 }
 
 # aggregate max on columns
-type game_skin_in_inventar_max_fields {
-  created_at: timestamptz
+type game_view_my_item_max_fields {
   id: bigint
-  skin_id: bigint
+  item_data_id: bigint
   user_id: bigint
 }
 
-# order by max() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_max_order_by {
-  created_at: order_by
+# order by max() on columns of table "game.view_my_item"
+input game_view_my_item_max_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate min on columns
-type game_skin_in_inventar_min_fields {
-  created_at: timestamptz
+type game_view_my_item_min_fields {
   id: bigint
-  skin_id: bigint
+  item_data_id: bigint
   user_id: bigint
 }
 
-# order by min() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_min_order_by {
-  created_at: order_by
+# order by min() on columns of table "game.view_my_item"
+input game_view_my_item_min_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
-# response of any mutation on the table "game.skin_in_inventar"
-type game_skin_in_inventar_mutation_response {
+# response of any mutation on the table "game.view_my_item"
+type game_view_my_item_mutation_response {
   # number of affected rows by the mutation
   affected_rows: Int!
 
   # data of the affected rows by the mutation
-  returning: [game_skin_in_inventar!]!
+  returning: [game_view_my_item!]!
 }
 
-# input type for inserting object relation for remote table "game.skin_in_inventar"
-input game_skin_in_inventar_obj_rel_insert_input {
-  data: game_skin_in_inventar_insert_input!
-  on_conflict: game_skin_in_inventar_on_conflict
+# input type for inserting object relation for remote table "game.view_my_item"
+input game_view_my_item_obj_rel_insert_input {
+  data: game_view_my_item_insert_input!
 }
 
-# on conflict condition type for table "game.skin_in_inventar"
-input game_skin_in_inventar_on_conflict {
-  constraint: game_skin_in_inventar_constraint!
-  update_columns: [game_skin_in_inventar_update_column!]!
-  where: game_skin_in_inventar_bool_exp
-}
-
-# ordering options when selecting data from "game.skin_in_inventar"
-input game_skin_in_inventar_order_by {
-  created_at: order_by
+# ordering options when selecting data from "game.view_my_item"
+input game_view_my_item_order_by {
   id: order_by
-  skin: game_skin_order_by
-  skin_id: order_by
+  item_data: game_item_data_order_by
+  item_data_id: order_by
   user: user_order_by
   user_id: order_by
 }
 
-# primary key columns input for table: "game.skin_in_inventar"
-input game_skin_in_inventar_pk_columns_input {
-  id: bigint!
-}
-
-# select columns of table "game.skin_in_inventar"
-enum game_skin_in_inventar_select_column {
-  # column name
-  created_at
-
+# select columns of table "game.view_my_item"
+enum game_view_my_item_select_column {
   # column name
   id
 
   # column name
-  skin_id
+  item_data_id
 
   # column name
   user_id
 }
 
-# input type for updating data in table "game.skin_in_inventar"
-input game_skin_in_inventar_set_input {
-  created_at: timestamptz
+# input type for updating data in table "game.view_my_item"
+input game_view_my_item_set_input {
   id: bigint
-  skin_id: bigint
+  item_data_id: bigint
   user_id: bigint
 }
 
 # aggregate stddev on columns
-type game_skin_in_inventar_stddev_fields {
+type game_view_my_item_stddev_fields {
   id: Float
-  skin_id: Float
+  item_data_id: Float
   user_id: Float
 }
 
-# order by stddev() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_stddev_order_by {
+# order by stddev() on columns of table "game.view_my_item"
+input game_view_my_item_stddev_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate stddev_pop on columns
-type game_skin_in_inventar_stddev_pop_fields {
+type game_view_my_item_stddev_pop_fields {
   id: Float
-  skin_id: Float
+  item_data_id: Float
   user_id: Float
 }
 
-# order by stddev_pop() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_stddev_pop_order_by {
+# order by stddev_pop() on columns of table "game.view_my_item"
+input game_view_my_item_stddev_pop_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate stddev_samp on columns
-type game_skin_in_inventar_stddev_samp_fields {
+type game_view_my_item_stddev_samp_fields {
   id: Float
-  skin_id: Float
+  item_data_id: Float
   user_id: Float
 }
 
-# order by stddev_samp() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_stddev_samp_order_by {
+# order by stddev_samp() on columns of table "game.view_my_item"
+input game_view_my_item_stddev_samp_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate sum on columns
-type game_skin_in_inventar_sum_fields {
+type game_view_my_item_sum_fields {
   id: bigint
-  skin_id: bigint
+  item_data_id: bigint
   user_id: bigint
 }
 
-# order by sum() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_sum_order_by {
+# order by sum() on columns of table "game.view_my_item"
+input game_view_my_item_sum_order_by {
   id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# update columns of table "game.skin_in_inventar"
-enum game_skin_in_inventar_update_column {
-  # column name
-  created_at
-
-  # column name
-  id
-
-  # column name
-  skin_id
-
-  # column name
-  user_id
-}
-
-# aggregate var_pop on columns
-type game_skin_in_inventar_var_pop_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by var_pop() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_var_pop_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# aggregate var_samp on columns
-type game_skin_in_inventar_var_samp_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by var_samp() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_var_samp_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# aggregate variance on columns
-type game_skin_in_inventar_variance_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by variance() on columns of table "game.skin_in_inventar"
-input game_skin_in_inventar_variance_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# columns and relationships of "game.skin_in_my_inventar_view"
-type game_skin_in_my_inventar_view {
-  created_at: timestamptz
-  id: bigint
-
-  # An object relationship
-  skin: game_skin
-  skin_id: bigint
-
-  # An object relationship
-  user: user
-  user_id: bigint
-}
-
-# aggregated selection of "game.skin_in_my_inventar_view"
-type game_skin_in_my_inventar_view_aggregate {
-  aggregate: game_skin_in_my_inventar_view_aggregate_fields
-  nodes: [game_skin_in_my_inventar_view!]!
-}
-
-# aggregate fields of "game.skin_in_my_inventar_view"
-type game_skin_in_my_inventar_view_aggregate_fields {
-  avg: game_skin_in_my_inventar_view_avg_fields
-  count(columns: [game_skin_in_my_inventar_view_select_column!], distinct: Boolean): Int
-  max: game_skin_in_my_inventar_view_max_fields
-  min: game_skin_in_my_inventar_view_min_fields
-  stddev: game_skin_in_my_inventar_view_stddev_fields
-  stddev_pop: game_skin_in_my_inventar_view_stddev_pop_fields
-  stddev_samp: game_skin_in_my_inventar_view_stddev_samp_fields
-  sum: game_skin_in_my_inventar_view_sum_fields
-  var_pop: game_skin_in_my_inventar_view_var_pop_fields
-  var_samp: game_skin_in_my_inventar_view_var_samp_fields
-  variance: game_skin_in_my_inventar_view_variance_fields
-}
-
-# order by aggregate values of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_aggregate_order_by {
-  avg: game_skin_in_my_inventar_view_avg_order_by
-  count: order_by
-  max: game_skin_in_my_inventar_view_max_order_by
-  min: game_skin_in_my_inventar_view_min_order_by
-  stddev: game_skin_in_my_inventar_view_stddev_order_by
-  stddev_pop: game_skin_in_my_inventar_view_stddev_pop_order_by
-  stddev_samp: game_skin_in_my_inventar_view_stddev_samp_order_by
-  sum: game_skin_in_my_inventar_view_sum_order_by
-  var_pop: game_skin_in_my_inventar_view_var_pop_order_by
-  var_samp: game_skin_in_my_inventar_view_var_samp_order_by
-  variance: game_skin_in_my_inventar_view_variance_order_by
-}
-
-# input type for inserting array relation for remote table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_arr_rel_insert_input {
-  data: [game_skin_in_my_inventar_view_insert_input!]!
-}
-
-# aggregate avg on columns
-type game_skin_in_my_inventar_view_avg_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by avg() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_avg_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# Boolean expression to filter rows from the table
-# "game.skin_in_my_inventar_view". All fields are combined with a logical 'AND'.
-input game_skin_in_my_inventar_view_bool_exp {
-  _and: [game_skin_in_my_inventar_view_bool_exp]
-  _not: game_skin_in_my_inventar_view_bool_exp
-  _or: [game_skin_in_my_inventar_view_bool_exp]
-  created_at: timestamptz_comparison_exp
-  id: bigint_comparison_exp
-  skin: game_skin_bool_exp
-  skin_id: bigint_comparison_exp
-  user: user_bool_exp
-  user_id: bigint_comparison_exp
-}
-
-# input type for incrementing integer column in table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_inc_input {
-  id: bigint
-  skin_id: bigint
-  user_id: bigint
-}
-
-# input type for inserting data into table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_insert_input {
-  created_at: timestamptz
-  id: bigint
-  skin: game_skin_obj_rel_insert_input
-  skin_id: bigint
-  user: user_obj_rel_insert_input
-  user_id: bigint
-}
-
-# aggregate max on columns
-type game_skin_in_my_inventar_view_max_fields {
-  created_at: timestamptz
-  id: bigint
-  skin_id: bigint
-  user_id: bigint
-}
-
-# order by max() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_max_order_by {
-  created_at: order_by
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# aggregate min on columns
-type game_skin_in_my_inventar_view_min_fields {
-  created_at: timestamptz
-  id: bigint
-  skin_id: bigint
-  user_id: bigint
-}
-
-# order by min() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_min_order_by {
-  created_at: order_by
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# response of any mutation on the table "game.skin_in_my_inventar_view"
-type game_skin_in_my_inventar_view_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [game_skin_in_my_inventar_view!]!
-}
-
-# input type for inserting object relation for remote table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_obj_rel_insert_input {
-  data: game_skin_in_my_inventar_view_insert_input!
-}
-
-# ordering options when selecting data from "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_order_by {
-  created_at: order_by
-  id: order_by
-  skin: game_skin_order_by
-  skin_id: order_by
-  user: user_order_by
-  user_id: order_by
-}
-
-# select columns of table "game.skin_in_my_inventar_view"
-enum game_skin_in_my_inventar_view_select_column {
-  # column name
-  created_at
-
-  # column name
-  id
-
-  # column name
-  skin_id
-
-  # column name
-  user_id
-}
-
-# input type for updating data in table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_set_input {
-  created_at: timestamptz
-  id: bigint
-  skin_id: bigint
-  user_id: bigint
-}
-
-# aggregate stddev on columns
-type game_skin_in_my_inventar_view_stddev_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by stddev() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_stddev_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# aggregate stddev_pop on columns
-type game_skin_in_my_inventar_view_stddev_pop_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by stddev_pop() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_stddev_pop_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# aggregate stddev_samp on columns
-type game_skin_in_my_inventar_view_stddev_samp_fields {
-  id: Float
-  skin_id: Float
-  user_id: Float
-}
-
-# order by stddev_samp() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_stddev_samp_order_by {
-  id: order_by
-  skin_id: order_by
-  user_id: order_by
-}
-
-# aggregate sum on columns
-type game_skin_in_my_inventar_view_sum_fields {
-  id: bigint
-  skin_id: bigint
-  user_id: bigint
-}
-
-# order by sum() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_sum_order_by {
-  id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate var_pop on columns
-type game_skin_in_my_inventar_view_var_pop_fields {
+type game_view_my_item_var_pop_fields {
   id: Float
-  skin_id: Float
+  item_data_id: Float
   user_id: Float
 }
 
-# order by var_pop() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_var_pop_order_by {
+# order by var_pop() on columns of table "game.view_my_item"
+input game_view_my_item_var_pop_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate var_samp on columns
-type game_skin_in_my_inventar_view_var_samp_fields {
+type game_view_my_item_var_samp_fields {
   id: Float
-  skin_id: Float
+  item_data_id: Float
   user_id: Float
 }
 
-# order by var_samp() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_var_samp_order_by {
+# order by var_samp() on columns of table "game.view_my_item"
+input game_view_my_item_var_samp_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
 }
 
 # aggregate variance on columns
-type game_skin_in_my_inventar_view_variance_fields {
+type game_view_my_item_variance_fields {
   id: Float
-  skin_id: Float
+  item_data_id: Float
   user_id: Float
 }
 
-# order by variance() on columns of table "game.skin_in_my_inventar_view"
-input game_skin_in_my_inventar_view_variance_order_by {
+# order by variance() on columns of table "game.view_my_item"
+input game_view_my_item_variance_order_by {
   id: order_by
-  skin_id: order_by
+  item_data_id: order_by
   user_id: order_by
-}
-
-# input type for incrementing integer column in table "game.skin"
-input game_skin_inc_input {
-  id: bigint
-  max_ask: Int
-  min_bid: Int
-  price: Int
-  volume: Int
-}
-
-# input type for inserting data into table "game.skin"
-input game_skin_insert_input {
-  active: Boolean
-  id: bigint
-  image_url: String
-  market_hash_name: String
-  max_ask: Int
-  min_bid: Int
-  price: Int
-  volume: Int
-}
-
-# columns and relationships of "game.skin_loader"
-type game_skin_loader {
-  completed: Int!
-  completed_images: Int!
-  id: bigint!
-  loading: Boolean!
-  total: Int!
-  total_images: Int!
-  try_images_loading: Boolean!
-}
-
-# aggregated selection of "game.skin_loader"
-type game_skin_loader_aggregate {
-  aggregate: game_skin_loader_aggregate_fields
-  nodes: [game_skin_loader!]!
-}
-
-# aggregate fields of "game.skin_loader"
-type game_skin_loader_aggregate_fields {
-  avg: game_skin_loader_avg_fields
-  count(columns: [game_skin_loader_select_column!], distinct: Boolean): Int
-  max: game_skin_loader_max_fields
-  min: game_skin_loader_min_fields
-  stddev: game_skin_loader_stddev_fields
-  stddev_pop: game_skin_loader_stddev_pop_fields
-  stddev_samp: game_skin_loader_stddev_samp_fields
-  sum: game_skin_loader_sum_fields
-  var_pop: game_skin_loader_var_pop_fields
-  var_samp: game_skin_loader_var_samp_fields
-  variance: game_skin_loader_variance_fields
-}
-
-# order by aggregate values of table "game.skin_loader"
-input game_skin_loader_aggregate_order_by {
-  avg: game_skin_loader_avg_order_by
-  count: order_by
-  max: game_skin_loader_max_order_by
-  min: game_skin_loader_min_order_by
-  stddev: game_skin_loader_stddev_order_by
-  stddev_pop: game_skin_loader_stddev_pop_order_by
-  stddev_samp: game_skin_loader_stddev_samp_order_by
-  sum: game_skin_loader_sum_order_by
-  var_pop: game_skin_loader_var_pop_order_by
-  var_samp: game_skin_loader_var_samp_order_by
-  variance: game_skin_loader_variance_order_by
-}
-
-# input type for inserting array relation for remote table "game.skin_loader"
-input game_skin_loader_arr_rel_insert_input {
-  data: [game_skin_loader_insert_input!]!
-  on_conflict: game_skin_loader_on_conflict
-}
-
-# aggregate avg on columns
-type game_skin_loader_avg_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by avg() on columns of table "game.skin_loader"
-input game_skin_loader_avg_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# Boolean expression to filter rows from the table "game.skin_loader". All fields are combined with a logical 'AND'.
-input game_skin_loader_bool_exp {
-  _and: [game_skin_loader_bool_exp]
-  _not: game_skin_loader_bool_exp
-  _or: [game_skin_loader_bool_exp]
-  completed: Int_comparison_exp
-  completed_images: Int_comparison_exp
-  id: bigint_comparison_exp
-  loading: Boolean_comparison_exp
-  total: Int_comparison_exp
-  total_images: Int_comparison_exp
-  try_images_loading: Boolean_comparison_exp
-}
-
-# unique or primary key constraints on table "game.skin_loader"
-enum game_skin_loader_constraint {
-  # unique or primary key constraint
-  skin_loader_pkey
-}
-
-# input type for incrementing integer column in table "game.skin_loader"
-input game_skin_loader_inc_input {
-  completed: Int
-  completed_images: Int
-  id: bigint
-  total: Int
-  total_images: Int
-}
-
-# input type for inserting data into table "game.skin_loader"
-input game_skin_loader_insert_input {
-  completed: Int
-  completed_images: Int
-  id: bigint
-  loading: Boolean
-  total: Int
-  total_images: Int
-  try_images_loading: Boolean
-}
-
-# aggregate max on columns
-type game_skin_loader_max_fields {
-  completed: Int
-  completed_images: Int
-  id: bigint
-  total: Int
-  total_images: Int
-}
-
-# order by max() on columns of table "game.skin_loader"
-input game_skin_loader_max_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate min on columns
-type game_skin_loader_min_fields {
-  completed: Int
-  completed_images: Int
-  id: bigint
-  total: Int
-  total_images: Int
-}
-
-# order by min() on columns of table "game.skin_loader"
-input game_skin_loader_min_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# response of any mutation on the table "game.skin_loader"
-type game_skin_loader_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [game_skin_loader!]!
-}
-
-# input type for inserting object relation for remote table "game.skin_loader"
-input game_skin_loader_obj_rel_insert_input {
-  data: game_skin_loader_insert_input!
-  on_conflict: game_skin_loader_on_conflict
-}
-
-# on conflict condition type for table "game.skin_loader"
-input game_skin_loader_on_conflict {
-  constraint: game_skin_loader_constraint!
-  update_columns: [game_skin_loader_update_column!]!
-  where: game_skin_loader_bool_exp
-}
-
-# ordering options when selecting data from "game.skin_loader"
-input game_skin_loader_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  loading: order_by
-  total: order_by
-  total_images: order_by
-  try_images_loading: order_by
-}
-
-# primary key columns input for table: "game.skin_loader"
-input game_skin_loader_pk_columns_input {
-  id: bigint!
-}
-
-# select columns of table "game.skin_loader"
-enum game_skin_loader_select_column {
-  # column name
-  completed
-
-  # column name
-  completed_images
-
-  # column name
-  id
-
-  # column name
-  loading
-
-  # column name
-  total
-
-  # column name
-  total_images
-
-  # column name
-  try_images_loading
-}
-
-# input type for updating data in table "game.skin_loader"
-input game_skin_loader_set_input {
-  completed: Int
-  completed_images: Int
-  id: bigint
-  loading: Boolean
-  total: Int
-  total_images: Int
-  try_images_loading: Boolean
-}
-
-# aggregate stddev on columns
-type game_skin_loader_stddev_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by stddev() on columns of table "game.skin_loader"
-input game_skin_loader_stddev_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate stddev_pop on columns
-type game_skin_loader_stddev_pop_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by stddev_pop() on columns of table "game.skin_loader"
-input game_skin_loader_stddev_pop_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate stddev_samp on columns
-type game_skin_loader_stddev_samp_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by stddev_samp() on columns of table "game.skin_loader"
-input game_skin_loader_stddev_samp_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate sum on columns
-type game_skin_loader_sum_fields {
-  completed: Int
-  completed_images: Int
-  id: bigint
-  total: Int
-  total_images: Int
-}
-
-# order by sum() on columns of table "game.skin_loader"
-input game_skin_loader_sum_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# update columns of table "game.skin_loader"
-enum game_skin_loader_update_column {
-  # column name
-  completed
-
-  # column name
-  completed_images
-
-  # column name
-  id
-
-  # column name
-  loading
-
-  # column name
-  total
-
-  # column name
-  total_images
-
-  # column name
-  try_images_loading
-}
-
-# aggregate var_pop on columns
-type game_skin_loader_var_pop_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by var_pop() on columns of table "game.skin_loader"
-input game_skin_loader_var_pop_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate var_samp on columns
-type game_skin_loader_var_samp_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by var_samp() on columns of table "game.skin_loader"
-input game_skin_loader_var_samp_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate variance on columns
-type game_skin_loader_variance_fields {
-  completed: Float
-  completed_images: Float
-  id: Float
-  total: Float
-  total_images: Float
-}
-
-# order by variance() on columns of table "game.skin_loader"
-input game_skin_loader_variance_order_by {
-  completed: order_by
-  completed_images: order_by
-  id: order_by
-  total: order_by
-  total_images: order_by
-}
-
-# aggregate max on columns
-type game_skin_max_fields {
-  id: bigint
-  image_url: String
-  market_hash_name: String
-  max_ask: Int
-  min_bid: Int
-  price: Int
-  volume: Int
-}
-
-# order by max() on columns of table "game.skin"
-input game_skin_max_order_by {
-  id: order_by
-  image_url: order_by
-  market_hash_name: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# aggregate min on columns
-type game_skin_min_fields {
-  id: bigint
-  image_url: String
-  market_hash_name: String
-  max_ask: Int
-  min_bid: Int
-  price: Int
-  volume: Int
-}
-
-# order by min() on columns of table "game.skin"
-input game_skin_min_order_by {
-  id: order_by
-  image_url: order_by
-  market_hash_name: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# response of any mutation on the table "game.skin"
-type game_skin_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [game_skin!]!
-}
-
-# input type for inserting object relation for remote table "game.skin"
-input game_skin_obj_rel_insert_input {
-  data: game_skin_insert_input!
-  on_conflict: game_skin_on_conflict
-}
-
-# on conflict condition type for table "game.skin"
-input game_skin_on_conflict {
-  constraint: game_skin_constraint!
-  update_columns: [game_skin_update_column!]!
-  where: game_skin_bool_exp
-}
-
-# ordering options when selecting data from "game.skin"
-input game_skin_order_by {
-  active: order_by
-  id: order_by
-  image_url: order_by
-  market_hash_name: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# primary key columns input for table: "game.skin"
-input game_skin_pk_columns_input {
-  id: bigint!
-}
-
-# select columns of table "game.skin"
-enum game_skin_select_column {
-  # column name
-  active
-
-  # column name
-  id
-
-  # column name
-  image_url
-
-  # column name
-  market_hash_name
-
-  # column name
-  max_ask
-
-  # column name
-  min_bid
-
-  # column name
-  price
-
-  # column name
-  volume
-}
-
-# input type for updating data in table "game.skin"
-input game_skin_set_input {
-  active: Boolean
-  id: bigint
-  image_url: String
-  market_hash_name: String
-  max_ask: Int
-  min_bid: Int
-  price: Int
-  volume: Int
-}
-
-# aggregate stddev on columns
-type game_skin_stddev_fields {
-  id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by stddev() on columns of table "game.skin"
-input game_skin_stddev_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# aggregate stddev_pop on columns
-type game_skin_stddev_pop_fields {
-  id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by stddev_pop() on columns of table "game.skin"
-input game_skin_stddev_pop_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# aggregate stddev_samp on columns
-type game_skin_stddev_samp_fields {
-  id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by stddev_samp() on columns of table "game.skin"
-input game_skin_stddev_samp_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# aggregate sum on columns
-type game_skin_sum_fields {
-  id: bigint
-  max_ask: Int
-  min_bid: Int
-  price: Int
-  volume: Int
-}
-
-# order by sum() on columns of table "game.skin"
-input game_skin_sum_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# update columns of table "game.skin"
-enum game_skin_update_column {
-  # column name
-  active
-
-  # column name
-  id
-
-  # column name
-  image_url
-
-  # column name
-  market_hash_name
-
-  # column name
-  max_ask
-
-  # column name
-  min_bid
-
-  # column name
-  price
-
-  # column name
-  volume
-}
-
-# aggregate var_pop on columns
-type game_skin_var_pop_fields {
-  id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by var_pop() on columns of table "game.skin"
-input game_skin_var_pop_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# aggregate var_samp on columns
-type game_skin_var_samp_fields {
-  id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by var_samp() on columns of table "game.skin"
-input game_skin_var_samp_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
-}
-
-# aggregate variance on columns
-type game_skin_variance_fields {
-  id: Float
-  max_ask: Float
-  min_bid: Float
-  price: Float
-  volume: Float
-}
-
-# order by variance() on columns of table "game.skin"
-input game_skin_variance_order_by {
-  id: order_by
-  max_ask: order_by
-  min_bid: order_by
-  price: order_by
-  volume: order_by
 }
 
 type Inp {
@@ -3400,8 +3190,8 @@ type MoneyPlusOutput {
 
 # mutation root
 type mutation_root {
-  # perform the action: "buy_skin"
-  buy_skin(skin_id: bigint!): BuySkinOutput
+  # perform the action: "buy_item"
+  buy_item(item_data_id: bigint!): BuyItemOutput
 
   # delete data from the table: "chat.message"
   delete_chat_message(
@@ -3418,26 +3208,41 @@ type mutation_root {
     where: game_bet_bool_exp!
   ): game_bet_mutation_response
 
-  # delete data from the table: "game.bet_active_view"
-  delete_game_bet_active_view(
-    # filter the rows which have to be deleted
-    where: game_bet_active_view_bool_exp!
-  ): game_bet_active_view_mutation_response
-
   # delete single row from the table: "game.bet"
   delete_game_bet_by_pk(id: bigint!): game_bet
+
+  # delete data from the table: "game.item"
+  delete_game_item(
+    # filter the rows which have to be deleted
+    where: game_item_bool_exp!
+  ): game_item_mutation_response
+
+  # delete single row from the table: "game.item"
+  delete_game_item_by_pk(id: bigint!): game_item
+
+  # delete data from the table: "game.item_data"
+  delete_game_item_data(
+    # filter the rows which have to be deleted
+    where: game_item_data_bool_exp!
+  ): game_item_data_mutation_response
+
+  # delete single row from the table: "game.item_data"
+  delete_game_item_data_by_pk(id: bigint!): game_item_data
+
+  # delete data from the table: "game.items_data_loader"
+  delete_game_items_data_loader(
+    # filter the rows which have to be deleted
+    where: game_items_data_loader_bool_exp!
+  ): game_items_data_loader_mutation_response
+
+  # delete single row from the table: "game.items_data_loader"
+  delete_game_items_data_loader_by_pk(id: bigint!): game_items_data_loader
 
   # delete data from the table: "game.round"
   delete_game_round(
     # filter the rows which have to be deleted
     where: game_round_bool_exp!
   ): game_round_mutation_response
-
-  # delete data from the table: "game.round_active_view"
-  delete_game_round_active_view(
-    # filter the rows which have to be deleted
-    where: game_round_active_view_bool_exp!
-  ): game_round_active_view_mutation_response
 
   # delete single row from the table: "game.round"
   delete_game_round_by_pk(id: bigint!): game_round
@@ -3460,38 +3265,23 @@ type mutation_root {
   # delete single row from the table: "game.settings"
   delete_game_settings_by_pk(id: bigint!): game_settings
 
-  # delete data from the table: "game.skin"
-  delete_game_skin(
+  # delete data from the table: "game.view_active_bet"
+  delete_game_view_active_bet(
     # filter the rows which have to be deleted
-    where: game_skin_bool_exp!
-  ): game_skin_mutation_response
+    where: game_view_active_bet_bool_exp!
+  ): game_view_active_bet_mutation_response
 
-  # delete single row from the table: "game.skin"
-  delete_game_skin_by_pk(id: bigint!): game_skin
-
-  # delete data from the table: "game.skin_in_inventar"
-  delete_game_skin_in_inventar(
+  # delete data from the table: "game.view_active_round"
+  delete_game_view_active_round(
     # filter the rows which have to be deleted
-    where: game_skin_in_inventar_bool_exp!
-  ): game_skin_in_inventar_mutation_response
+    where: game_view_active_round_bool_exp!
+  ): game_view_active_round_mutation_response
 
-  # delete single row from the table: "game.skin_in_inventar"
-  delete_game_skin_in_inventar_by_pk(id: bigint!): game_skin_in_inventar
-
-  # delete data from the table: "game.skin_in_my_inventar_view"
-  delete_game_skin_in_my_inventar_view(
+  # delete data from the table: "game.view_my_item"
+  delete_game_view_my_item(
     # filter the rows which have to be deleted
-    where: game_skin_in_my_inventar_view_bool_exp!
-  ): game_skin_in_my_inventar_view_mutation_response
-
-  # delete data from the table: "game.skin_loader"
-  delete_game_skin_loader(
-    # filter the rows which have to be deleted
-    where: game_skin_loader_bool_exp!
-  ): game_skin_loader_mutation_response
-
-  # delete single row from the table: "game.skin_loader"
-  delete_game_skin_loader_by_pk(id: bigint!): game_skin_loader
+    where: game_view_my_item_bool_exp!
+  ): game_view_my_item_mutation_response
 
   # delete data from the table: "simulation.bank"
   delete_simulation_bank(
@@ -3547,12 +3337,6 @@ type mutation_root {
   # delete single row from the table: "user"
   delete_user_by_pk(id: bigint!): user
 
-  # delete data from the table: "user_current_view"
-  delete_user_current_view(
-    # filter the rows which have to be deleted
-    where: user_current_view_bool_exp!
-  ): user_current_view_mutation_response
-
   # delete data from the table: "user_role"
   delete_user_role(
     # filter the rows which have to be deleted
@@ -3561,6 +3345,12 @@ type mutation_root {
 
   # delete single row from the table: "user_role"
   delete_user_role_by_pk(value: String!): user_role
+
+  # delete data from the table: "view_current_user"
+  delete_view_current_user(
+    # filter the rows which have to be deleted
+    where: view_current_user_bool_exp!
+  ): view_current_user_mutation_response
 
   # perform the action: "game_make_bet"
   game_make_bet: MakeBetOutput!
@@ -3592,18 +3382,6 @@ type mutation_root {
     on_conflict: game_bet_on_conflict
   ): game_bet_mutation_response
 
-  # insert data into the table: "game.bet_active_view"
-  insert_game_bet_active_view(
-    # the rows to be inserted
-    objects: [game_bet_active_view_insert_input!]!
-  ): game_bet_active_view_mutation_response
-
-  # insert a single row into the table: "game.bet_active_view"
-  insert_game_bet_active_view_one(
-    # the row to be inserted
-    object: game_bet_active_view_insert_input!
-  ): game_bet_active_view
-
   # insert a single row into the table: "game.bet"
   insert_game_bet_one(
     # the row to be inserted
@@ -3613,6 +3391,60 @@ type mutation_root {
     on_conflict: game_bet_on_conflict
   ): game_bet
 
+  # insert data into the table: "game.item"
+  insert_game_item(
+    # the rows to be inserted
+    objects: [game_item_insert_input!]!
+
+    # on conflict condition
+    on_conflict: game_item_on_conflict
+  ): game_item_mutation_response
+
+  # insert data into the table: "game.item_data"
+  insert_game_item_data(
+    # the rows to be inserted
+    objects: [game_item_data_insert_input!]!
+
+    # on conflict condition
+    on_conflict: game_item_data_on_conflict
+  ): game_item_data_mutation_response
+
+  # insert a single row into the table: "game.item_data"
+  insert_game_item_data_one(
+    # the row to be inserted
+    object: game_item_data_insert_input!
+
+    # on conflict condition
+    on_conflict: game_item_data_on_conflict
+  ): game_item_data
+
+  # insert a single row into the table: "game.item"
+  insert_game_item_one(
+    # the row to be inserted
+    object: game_item_insert_input!
+
+    # on conflict condition
+    on_conflict: game_item_on_conflict
+  ): game_item
+
+  # insert data into the table: "game.items_data_loader"
+  insert_game_items_data_loader(
+    # the rows to be inserted
+    objects: [game_items_data_loader_insert_input!]!
+
+    # on conflict condition
+    on_conflict: game_items_data_loader_on_conflict
+  ): game_items_data_loader_mutation_response
+
+  # insert a single row into the table: "game.items_data_loader"
+  insert_game_items_data_loader_one(
+    # the row to be inserted
+    object: game_items_data_loader_insert_input!
+
+    # on conflict condition
+    on_conflict: game_items_data_loader_on_conflict
+  ): game_items_data_loader
+
   # insert data into the table: "game.round"
   insert_game_round(
     # the rows to be inserted
@@ -3621,18 +3453,6 @@ type mutation_root {
     # on conflict condition
     on_conflict: game_round_on_conflict
   ): game_round_mutation_response
-
-  # insert data into the table: "game.round_active_view"
-  insert_game_round_active_view(
-    # the rows to be inserted
-    objects: [game_round_active_view_insert_input!]!
-  ): game_round_active_view_mutation_response
-
-  # insert a single row into the table: "game.round_active_view"
-  insert_game_round_active_view_one(
-    # the row to be inserted
-    object: game_round_active_view_insert_input!
-  ): game_round_active_view
 
   # insert a single row into the table: "game.round"
   insert_game_round_one(
@@ -3679,71 +3499,41 @@ type mutation_root {
     on_conflict: game_settings_on_conflict
   ): game_settings
 
-  # insert data into the table: "game.skin"
-  insert_game_skin(
+  # insert data into the table: "game.view_active_bet"
+  insert_game_view_active_bet(
     # the rows to be inserted
-    objects: [game_skin_insert_input!]!
+    objects: [game_view_active_bet_insert_input!]!
+  ): game_view_active_bet_mutation_response
 
-    # on conflict condition
-    on_conflict: game_skin_on_conflict
-  ): game_skin_mutation_response
+  # insert a single row into the table: "game.view_active_bet"
+  insert_game_view_active_bet_one(
+    # the row to be inserted
+    object: game_view_active_bet_insert_input!
+  ): game_view_active_bet
 
-  # insert data into the table: "game.skin_in_inventar"
-  insert_game_skin_in_inventar(
+  # insert data into the table: "game.view_active_round"
+  insert_game_view_active_round(
     # the rows to be inserted
-    objects: [game_skin_in_inventar_insert_input!]!
+    objects: [game_view_active_round_insert_input!]!
+  ): game_view_active_round_mutation_response
 
-    # on conflict condition
-    on_conflict: game_skin_in_inventar_on_conflict
-  ): game_skin_in_inventar_mutation_response
-
-  # insert a single row into the table: "game.skin_in_inventar"
-  insert_game_skin_in_inventar_one(
+  # insert a single row into the table: "game.view_active_round"
+  insert_game_view_active_round_one(
     # the row to be inserted
-    object: game_skin_in_inventar_insert_input!
+    object: game_view_active_round_insert_input!
+  ): game_view_active_round
 
-    # on conflict condition
-    on_conflict: game_skin_in_inventar_on_conflict
-  ): game_skin_in_inventar
-
-  # insert data into the table: "game.skin_in_my_inventar_view"
-  insert_game_skin_in_my_inventar_view(
+  # insert data into the table: "game.view_my_item"
+  insert_game_view_my_item(
     # the rows to be inserted
-    objects: [game_skin_in_my_inventar_view_insert_input!]!
-  ): game_skin_in_my_inventar_view_mutation_response
+    objects: [game_view_my_item_insert_input!]!
+  ): game_view_my_item_mutation_response
 
-  # insert a single row into the table: "game.skin_in_my_inventar_view"
-  insert_game_skin_in_my_inventar_view_one(
+  # insert a single row into the table: "game.view_my_item"
+  insert_game_view_my_item_one(
     # the row to be inserted
-    object: game_skin_in_my_inventar_view_insert_input!
-  ): game_skin_in_my_inventar_view
-
-  # insert data into the table: "game.skin_loader"
-  insert_game_skin_loader(
-    # the rows to be inserted
-    objects: [game_skin_loader_insert_input!]!
-
-    # on conflict condition
-    on_conflict: game_skin_loader_on_conflict
-  ): game_skin_loader_mutation_response
-
-  # insert a single row into the table: "game.skin_loader"
-  insert_game_skin_loader_one(
-    # the row to be inserted
-    object: game_skin_loader_insert_input!
-
-    # on conflict condition
-    on_conflict: game_skin_loader_on_conflict
-  ): game_skin_loader
-
-  # insert a single row into the table: "game.skin"
-  insert_game_skin_one(
-    # the row to be inserted
-    object: game_skin_insert_input!
-
-    # on conflict condition
-    on_conflict: game_skin_on_conflict
-  ): game_skin
+    object: game_view_my_item_insert_input!
+  ): game_view_my_item
 
   # insert data into the table: "simulation.bank"
   insert_simulation_bank(
@@ -3844,18 +3634,6 @@ type mutation_root {
     on_conflict: user_on_conflict
   ): user_mutation_response
 
-  # insert data into the table: "user_current_view"
-  insert_user_current_view(
-    # the rows to be inserted
-    objects: [user_current_view_insert_input!]!
-  ): user_current_view_mutation_response
-
-  # insert a single row into the table: "user_current_view"
-  insert_user_current_view_one(
-    # the row to be inserted
-    object: user_current_view_insert_input!
-  ): user_current_view
-
   # insert a single row into the table: "user"
   insert_user_one(
     # the row to be inserted
@@ -3883,11 +3661,26 @@ type mutation_root {
     on_conflict: user_role_on_conflict
   ): user_role
 
+  # insert data into the table: "view_current_user"
+  insert_view_current_user(
+    # the rows to be inserted
+    objects: [view_current_user_insert_input!]!
+  ): view_current_user_mutation_response
+
+  # insert a single row into the table: "view_current_user"
+  insert_view_current_user_one(
+    # the row to be inserted
+    object: view_current_user_insert_input!
+  ): view_current_user
+
   # perform the action: "money_minus"
   money_minus: MoneyMinusOutput
 
   # perform the action: "money_plus"
   money_plus: MoneyPlusOutput
+
+  # perform the action: "sell_item"
+  sell_item(item_id: bigint!): SellItemOutput
 
   # update data of the table: "chat.message"
   update_chat_message(
@@ -3923,18 +3716,6 @@ type mutation_root {
     where: game_bet_bool_exp!
   ): game_bet_mutation_response
 
-  # update data of the table: "game.bet_active_view"
-  update_game_bet_active_view(
-    # increments the integer columns with given value of the filtered values
-    _inc: game_bet_active_view_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: game_bet_active_view_set_input
-
-    # filter the rows which have to be updated
-    where: game_bet_active_view_bool_exp!
-  ): game_bet_active_view_mutation_response
-
   # update single row of the table: "game.bet"
   update_game_bet_by_pk(
     # increments the integer columns with given value of the filtered values
@@ -3944,6 +3725,72 @@ type mutation_root {
     _set: game_bet_set_input
     pk_columns: game_bet_pk_columns_input!
   ): game_bet
+
+  # update data of the table: "game.item"
+  update_game_item(
+    # increments the integer columns with given value of the filtered values
+    _inc: game_item_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: game_item_set_input
+
+    # filter the rows which have to be updated
+    where: game_item_bool_exp!
+  ): game_item_mutation_response
+
+  # update single row of the table: "game.item"
+  update_game_item_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: game_item_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: game_item_set_input
+    pk_columns: game_item_pk_columns_input!
+  ): game_item
+
+  # update data of the table: "game.item_data"
+  update_game_item_data(
+    # increments the integer columns with given value of the filtered values
+    _inc: game_item_data_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: game_item_data_set_input
+
+    # filter the rows which have to be updated
+    where: game_item_data_bool_exp!
+  ): game_item_data_mutation_response
+
+  # update single row of the table: "game.item_data"
+  update_game_item_data_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: game_item_data_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: game_item_data_set_input
+    pk_columns: game_item_data_pk_columns_input!
+  ): game_item_data
+
+  # update data of the table: "game.items_data_loader"
+  update_game_items_data_loader(
+    # increments the integer columns with given value of the filtered values
+    _inc: game_items_data_loader_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: game_items_data_loader_set_input
+
+    # filter the rows which have to be updated
+    where: game_items_data_loader_bool_exp!
+  ): game_items_data_loader_mutation_response
+
+  # update single row of the table: "game.items_data_loader"
+  update_game_items_data_loader_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: game_items_data_loader_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: game_items_data_loader_set_input
+    pk_columns: game_items_data_loader_pk_columns_input!
+  ): game_items_data_loader
 
   # update data of the table: "game.round"
   update_game_round(
@@ -3956,18 +3803,6 @@ type mutation_root {
     # filter the rows which have to be updated
     where: game_round_bool_exp!
   ): game_round_mutation_response
-
-  # update data of the table: "game.round_active_view"
-  update_game_round_active_view(
-    # increments the integer columns with given value of the filtered values
-    _inc: game_round_active_view_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: game_round_active_view_set_input
-
-    # filter the rows which have to be updated
-    where: game_round_active_view_bool_exp!
-  ): game_round_active_view_mutation_response
 
   # update single row of the table: "game.round"
   update_game_round_by_pk(
@@ -4017,83 +3852,44 @@ type mutation_root {
     pk_columns: game_settings_pk_columns_input!
   ): game_settings
 
-  # update data of the table: "game.skin"
-  update_game_skin(
+  # update data of the table: "game.view_active_bet"
+  update_game_view_active_bet(
     # increments the integer columns with given value of the filtered values
-    _inc: game_skin_inc_input
+    _inc: game_view_active_bet_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: game_skin_set_input
+    _set: game_view_active_bet_set_input
 
     # filter the rows which have to be updated
-    where: game_skin_bool_exp!
-  ): game_skin_mutation_response
+    where: game_view_active_bet_bool_exp!
+  ): game_view_active_bet_mutation_response
 
-  # update single row of the table: "game.skin"
-  update_game_skin_by_pk(
+  # update data of the table: "game.view_active_round"
+  update_game_view_active_round(
     # increments the integer columns with given value of the filtered values
-    _inc: game_skin_inc_input
+    _inc: game_view_active_round_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: game_skin_set_input
-    pk_columns: game_skin_pk_columns_input!
-  ): game_skin
-
-  # update data of the table: "game.skin_in_inventar"
-  update_game_skin_in_inventar(
-    # increments the integer columns with given value of the filtered values
-    _inc: game_skin_in_inventar_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: game_skin_in_inventar_set_input
+    _set: game_view_active_round_set_input
 
     # filter the rows which have to be updated
-    where: game_skin_in_inventar_bool_exp!
-  ): game_skin_in_inventar_mutation_response
+    where: game_view_active_round_bool_exp!
+  ): game_view_active_round_mutation_response
 
-  # update single row of the table: "game.skin_in_inventar"
-  update_game_skin_in_inventar_by_pk(
+  # update data of the table: "game.view_my_item"
+  update_game_view_my_item(
     # increments the integer columns with given value of the filtered values
-    _inc: game_skin_in_inventar_inc_input
+    _inc: game_view_my_item_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: game_skin_in_inventar_set_input
-    pk_columns: game_skin_in_inventar_pk_columns_input!
-  ): game_skin_in_inventar
-
-  # update data of the table: "game.skin_in_my_inventar_view"
-  update_game_skin_in_my_inventar_view(
-    # increments the integer columns with given value of the filtered values
-    _inc: game_skin_in_my_inventar_view_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: game_skin_in_my_inventar_view_set_input
+    _set: game_view_my_item_set_input
 
     # filter the rows which have to be updated
-    where: game_skin_in_my_inventar_view_bool_exp!
-  ): game_skin_in_my_inventar_view_mutation_response
+    where: game_view_my_item_bool_exp!
+  ): game_view_my_item_mutation_response
 
-  # update data of the table: "game.skin_loader"
-  update_game_skin_loader(
-    # increments the integer columns with given value of the filtered values
-    _inc: game_skin_loader_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: game_skin_loader_set_input
-
-    # filter the rows which have to be updated
-    where: game_skin_loader_bool_exp!
-  ): game_skin_loader_mutation_response
-
-  # update single row of the table: "game.skin_loader"
-  update_game_skin_loader_by_pk(
-    # increments the integer columns with given value of the filtered values
-    _inc: game_skin_loader_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: game_skin_loader_set_input
-    pk_columns: game_skin_loader_pk_columns_input!
-  ): game_skin_loader
+  # perform the action: "update_items_data"
+  update_items_data: UpdateItemsDataOutput
 
   # update data of the table: "simulation.bank"
   update_simulation_bank(
@@ -4199,9 +3995,6 @@ type mutation_root {
     pk_columns: simulation_user_pk_columns_input!
   ): simulation_user
 
-  # perform the action: "update_skins"
-  update_skins: UpdateSkinsOutput
-
   # update data of the table: "user"
   update_user(
     # increments the integer columns with given value of the filtered values
@@ -4224,18 +4017,6 @@ type mutation_root {
     pk_columns: user_pk_columns_input!
   ): user
 
-  # update data of the table: "user_current_view"
-  update_user_current_view(
-    # increments the integer columns with given value of the filtered values
-    _inc: user_current_view_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: user_current_view_set_input
-
-    # filter the rows which have to be updated
-    where: user_current_view_bool_exp!
-  ): user_current_view_mutation_response
-
   # update data of the table: "user_role"
   update_user_role(
     # sets the columns of the filtered rows to the given values
@@ -4251,6 +4032,18 @@ type mutation_root {
     _set: user_role_set_input
     pk_columns: user_role_pk_columns_input!
   ): user_role
+
+  # update data of the table: "view_current_user"
+  update_view_current_user(
+    # increments the integer columns with given value of the filtered values
+    _inc: view_current_user_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: view_current_user_set_input
+
+    # filter the rows which have to be updated
+    where: view_current_user_bool_exp!
+  ): view_current_user_mutation_response
 }
 
 # column ordering options
@@ -4276,11 +4069,6 @@ enum order_by {
 
 type Output {
   money: Int!
-}
-
-input PurchaseDescription {
-  count: Int!
-  skin_id: bigint!
 }
 
 # query root
@@ -4342,42 +4130,6 @@ type query_root {
     where: game_bet_bool_exp
   ): [game_bet!]!
 
-  # fetch data from the table: "game.bet_active_view"
-  game_bet_active_view(
-    # distinct select on columns
-    distinct_on: [game_bet_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_bet_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_bet_active_view_bool_exp
-  ): [game_bet_active_view!]!
-
-  # fetch aggregated fields from the table: "game.bet_active_view"
-  game_bet_active_view_aggregate(
-    # distinct select on columns
-    distinct_on: [game_bet_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_bet_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_bet_active_view_bool_exp
-  ): game_bet_active_view_aggregate!
-
   # fetch aggregated fields from the table: "game.bet"
   game_bet_aggregate(
     # distinct select on columns
@@ -4399,6 +4151,123 @@ type query_root {
   # fetch data from the table: "game.bet" using primary key columns
   game_bet_by_pk(id: bigint!): game_bet
 
+  # fetch data from the table: "game.item"
+  game_item(
+    # distinct select on columns
+    distinct_on: [game_item_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_order_by!]
+
+    # filter the rows returned
+    where: game_item_bool_exp
+  ): [game_item!]!
+
+  # fetch aggregated fields from the table: "game.item"
+  game_item_aggregate(
+    # distinct select on columns
+    distinct_on: [game_item_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_order_by!]
+
+    # filter the rows returned
+    where: game_item_bool_exp
+  ): game_item_aggregate!
+
+  # fetch data from the table: "game.item" using primary key columns
+  game_item_by_pk(id: bigint!): game_item
+
+  # fetch data from the table: "game.item_data"
+  game_item_data(
+    # distinct select on columns
+    distinct_on: [game_item_data_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_data_order_by!]
+
+    # filter the rows returned
+    where: game_item_data_bool_exp
+  ): [game_item_data!]!
+
+  # fetch aggregated fields from the table: "game.item_data"
+  game_item_data_aggregate(
+    # distinct select on columns
+    distinct_on: [game_item_data_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_data_order_by!]
+
+    # filter the rows returned
+    where: game_item_data_bool_exp
+  ): game_item_data_aggregate!
+
+  # fetch data from the table: "game.item_data" using primary key columns
+  game_item_data_by_pk(id: bigint!): game_item_data
+
+  # fetch data from the table: "game.items_data_loader"
+  game_items_data_loader(
+    # distinct select on columns
+    distinct_on: [game_items_data_loader_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_items_data_loader_order_by!]
+
+    # filter the rows returned
+    where: game_items_data_loader_bool_exp
+  ): [game_items_data_loader!]!
+
+  # fetch aggregated fields from the table: "game.items_data_loader"
+  game_items_data_loader_aggregate(
+    # distinct select on columns
+    distinct_on: [game_items_data_loader_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_items_data_loader_order_by!]
+
+    # filter the rows returned
+    where: game_items_data_loader_bool_exp
+  ): game_items_data_loader_aggregate!
+
+  # fetch data from the table: "game.items_data_loader" using primary key columns
+  game_items_data_loader_by_pk(id: bigint!): game_items_data_loader
+
   # fetch data from the table: "game.round"
   game_round(
     # distinct select on columns
@@ -4416,42 +4285,6 @@ type query_root {
     # filter the rows returned
     where: game_round_bool_exp
   ): [game_round!]!
-
-  # fetch data from the table: "game.round_active_view"
-  game_round_active_view(
-    # distinct select on columns
-    distinct_on: [game_round_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_round_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_round_active_view_bool_exp
-  ): [game_round_active_view!]!
-
-  # fetch aggregated fields from the table: "game.round_active_view"
-  game_round_active_view_aggregate(
-    # distinct select on columns
-    distinct_on: [game_round_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_round_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_round_active_view_bool_exp
-  ): game_round_active_view_aggregate!
 
   # fetch aggregated fields from the table: "game.round"
   game_round_aggregate(
@@ -4552,10 +4385,10 @@ type query_root {
   # fetch data from the table: "game.settings" using primary key columns
   game_settings_by_pk(id: bigint!): game_settings
 
-  # fetch data from the table: "game.skin"
-  game_skin(
+  # fetch data from the table: "game.view_active_bet"
+  game_view_active_bet(
     # distinct select on columns
-    distinct_on: [game_skin_select_column!]
+    distinct_on: [game_view_active_bet_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -4564,16 +4397,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_order_by!]
+    order_by: [game_view_active_bet_order_by!]
 
     # filter the rows returned
-    where: game_skin_bool_exp
-  ): [game_skin!]!
+    where: game_view_active_bet_bool_exp
+  ): [game_view_active_bet!]!
 
-  # fetch aggregated fields from the table: "game.skin"
-  game_skin_aggregate(
+  # fetch aggregated fields from the table: "game.view_active_bet"
+  game_view_active_bet_aggregate(
     # distinct select on columns
-    distinct_on: [game_skin_select_column!]
+    distinct_on: [game_view_active_bet_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -4582,19 +4415,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_order_by!]
+    order_by: [game_view_active_bet_order_by!]
 
     # filter the rows returned
-    where: game_skin_bool_exp
-  ): game_skin_aggregate!
+    where: game_view_active_bet_bool_exp
+  ): game_view_active_bet_aggregate!
 
-  # fetch data from the table: "game.skin" using primary key columns
-  game_skin_by_pk(id: bigint!): game_skin
-
-  # fetch data from the table: "game.skin_in_inventar"
-  game_skin_in_inventar(
+  # fetch data from the table: "game.view_active_round"
+  game_view_active_round(
     # distinct select on columns
-    distinct_on: [game_skin_in_inventar_select_column!]
+    distinct_on: [game_view_active_round_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -4603,16 +4433,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_inventar_order_by!]
+    order_by: [game_view_active_round_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_inventar_bool_exp
-  ): [game_skin_in_inventar!]!
+    where: game_view_active_round_bool_exp
+  ): [game_view_active_round!]!
 
-  # fetch aggregated fields from the table: "game.skin_in_inventar"
-  game_skin_in_inventar_aggregate(
+  # fetch aggregated fields from the table: "game.view_active_round"
+  game_view_active_round_aggregate(
     # distinct select on columns
-    distinct_on: [game_skin_in_inventar_select_column!]
+    distinct_on: [game_view_active_round_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -4621,19 +4451,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_inventar_order_by!]
+    order_by: [game_view_active_round_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_inventar_bool_exp
-  ): game_skin_in_inventar_aggregate!
+    where: game_view_active_round_bool_exp
+  ): game_view_active_round_aggregate!
 
-  # fetch data from the table: "game.skin_in_inventar" using primary key columns
-  game_skin_in_inventar_by_pk(id: bigint!): game_skin_in_inventar
-
-  # fetch data from the table: "game.skin_in_my_inventar_view"
-  game_skin_in_my_inventar_view(
+  # fetch data from the table: "game.view_my_item"
+  game_view_my_item(
     # distinct select on columns
-    distinct_on: [game_skin_in_my_inventar_view_select_column!]
+    distinct_on: [game_view_my_item_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -4642,16 +4469,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_my_inventar_view_order_by!]
+    order_by: [game_view_my_item_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_my_inventar_view_bool_exp
-  ): [game_skin_in_my_inventar_view!]!
+    where: game_view_my_item_bool_exp
+  ): [game_view_my_item!]!
 
-  # fetch aggregated fields from the table: "game.skin_in_my_inventar_view"
-  game_skin_in_my_inventar_view_aggregate(
+  # fetch aggregated fields from the table: "game.view_my_item"
+  game_view_my_item_aggregate(
     # distinct select on columns
-    distinct_on: [game_skin_in_my_inventar_view_select_column!]
+    distinct_on: [game_view_my_item_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -4660,50 +4487,11 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_my_inventar_view_order_by!]
+    order_by: [game_view_my_item_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_my_inventar_view_bool_exp
-  ): game_skin_in_my_inventar_view_aggregate!
-
-  # fetch data from the table: "game.skin_loader"
-  game_skin_loader(
-    # distinct select on columns
-    distinct_on: [game_skin_loader_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_skin_loader_order_by!]
-
-    # filter the rows returned
-    where: game_skin_loader_bool_exp
-  ): [game_skin_loader!]!
-
-  # fetch aggregated fields from the table: "game.skin_loader"
-  game_skin_loader_aggregate(
-    # distinct select on columns
-    distinct_on: [game_skin_loader_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_skin_loader_order_by!]
-
-    # filter the rows returned
-    where: game_skin_loader_bool_exp
-  ): game_skin_loader_aggregate!
-
-  # fetch data from the table: "game.skin_loader" using primary key columns
-  game_skin_loader_by_pk(id: bigint!): game_skin_loader
+    where: game_view_my_item_bool_exp
+  ): game_view_my_item_aggregate!
 
   # fetch data from the table: "simulation.bank"
   simulation_bank(
@@ -4939,42 +4727,6 @@ type query_root {
   # fetch data from the table: "user" using primary key columns
   user_by_pk(id: bigint!): user
 
-  # fetch data from the table: "user_current_view"
-  user_current_view(
-    # distinct select on columns
-    distinct_on: [user_current_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [user_current_view_order_by!]
-
-    # filter the rows returned
-    where: user_current_view_bool_exp
-  ): [user_current_view!]!
-
-  # fetch aggregated fields from the table: "user_current_view"
-  user_current_view_aggregate(
-    # distinct select on columns
-    distinct_on: [user_current_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [user_current_view_order_by!]
-
-    # filter the rows returned
-    where: user_current_view_bool_exp
-  ): user_current_view_aggregate!
-
   # fetch data from the table: "user_role"
   user_role(
     # distinct select on columns
@@ -5013,6 +4765,42 @@ type query_root {
 
   # fetch data from the table: "user_role" using primary key columns
   user_role_by_pk(value: String!): user_role
+
+  # fetch data from the table: "view_current_user"
+  view_current_user(
+    # distinct select on columns
+    distinct_on: [view_current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [view_current_user_order_by!]
+
+    # filter the rows returned
+    where: view_current_user_bool_exp
+  ): [view_current_user!]!
+
+  # fetch aggregated fields from the table: "view_current_user"
+  view_current_user_aggregate(
+    # distinct select on columns
+    distinct_on: [view_current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [view_current_user_order_by!]
+
+    # filter the rows returned
+    where: view_current_user_bool_exp
+  ): view_current_user_aggregate!
 }
 
 input SampleInput {
@@ -5031,6 +4819,10 @@ type SampleInputttttpppp {
 
 type SampleOutput {
   accessToken: String!
+}
+
+type SellItemOutput {
+  id: bigint!
 }
 
 type SendChatMessageOutput {
@@ -6411,42 +6203,6 @@ type subscription_root {
     where: game_bet_bool_exp
   ): [game_bet!]!
 
-  # fetch data from the table: "game.bet_active_view"
-  game_bet_active_view(
-    # distinct select on columns
-    distinct_on: [game_bet_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_bet_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_bet_active_view_bool_exp
-  ): [game_bet_active_view!]!
-
-  # fetch aggregated fields from the table: "game.bet_active_view"
-  game_bet_active_view_aggregate(
-    # distinct select on columns
-    distinct_on: [game_bet_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_bet_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_bet_active_view_bool_exp
-  ): game_bet_active_view_aggregate!
-
   # fetch aggregated fields from the table: "game.bet"
   game_bet_aggregate(
     # distinct select on columns
@@ -6468,6 +6224,123 @@ type subscription_root {
   # fetch data from the table: "game.bet" using primary key columns
   game_bet_by_pk(id: bigint!): game_bet
 
+  # fetch data from the table: "game.item"
+  game_item(
+    # distinct select on columns
+    distinct_on: [game_item_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_order_by!]
+
+    # filter the rows returned
+    where: game_item_bool_exp
+  ): [game_item!]!
+
+  # fetch aggregated fields from the table: "game.item"
+  game_item_aggregate(
+    # distinct select on columns
+    distinct_on: [game_item_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_order_by!]
+
+    # filter the rows returned
+    where: game_item_bool_exp
+  ): game_item_aggregate!
+
+  # fetch data from the table: "game.item" using primary key columns
+  game_item_by_pk(id: bigint!): game_item
+
+  # fetch data from the table: "game.item_data"
+  game_item_data(
+    # distinct select on columns
+    distinct_on: [game_item_data_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_data_order_by!]
+
+    # filter the rows returned
+    where: game_item_data_bool_exp
+  ): [game_item_data!]!
+
+  # fetch aggregated fields from the table: "game.item_data"
+  game_item_data_aggregate(
+    # distinct select on columns
+    distinct_on: [game_item_data_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_item_data_order_by!]
+
+    # filter the rows returned
+    where: game_item_data_bool_exp
+  ): game_item_data_aggregate!
+
+  # fetch data from the table: "game.item_data" using primary key columns
+  game_item_data_by_pk(id: bigint!): game_item_data
+
+  # fetch data from the table: "game.items_data_loader"
+  game_items_data_loader(
+    # distinct select on columns
+    distinct_on: [game_items_data_loader_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_items_data_loader_order_by!]
+
+    # filter the rows returned
+    where: game_items_data_loader_bool_exp
+  ): [game_items_data_loader!]!
+
+  # fetch aggregated fields from the table: "game.items_data_loader"
+  game_items_data_loader_aggregate(
+    # distinct select on columns
+    distinct_on: [game_items_data_loader_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [game_items_data_loader_order_by!]
+
+    # filter the rows returned
+    where: game_items_data_loader_bool_exp
+  ): game_items_data_loader_aggregate!
+
+  # fetch data from the table: "game.items_data_loader" using primary key columns
+  game_items_data_loader_by_pk(id: bigint!): game_items_data_loader
+
   # fetch data from the table: "game.round"
   game_round(
     # distinct select on columns
@@ -6485,42 +6358,6 @@ type subscription_root {
     # filter the rows returned
     where: game_round_bool_exp
   ): [game_round!]!
-
-  # fetch data from the table: "game.round_active_view"
-  game_round_active_view(
-    # distinct select on columns
-    distinct_on: [game_round_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_round_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_round_active_view_bool_exp
-  ): [game_round_active_view!]!
-
-  # fetch aggregated fields from the table: "game.round_active_view"
-  game_round_active_view_aggregate(
-    # distinct select on columns
-    distinct_on: [game_round_active_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_round_active_view_order_by!]
-
-    # filter the rows returned
-    where: game_round_active_view_bool_exp
-  ): game_round_active_view_aggregate!
 
   # fetch aggregated fields from the table: "game.round"
   game_round_aggregate(
@@ -6621,10 +6458,10 @@ type subscription_root {
   # fetch data from the table: "game.settings" using primary key columns
   game_settings_by_pk(id: bigint!): game_settings
 
-  # fetch data from the table: "game.skin"
-  game_skin(
+  # fetch data from the table: "game.view_active_bet"
+  game_view_active_bet(
     # distinct select on columns
-    distinct_on: [game_skin_select_column!]
+    distinct_on: [game_view_active_bet_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6633,16 +6470,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_order_by!]
+    order_by: [game_view_active_bet_order_by!]
 
     # filter the rows returned
-    where: game_skin_bool_exp
-  ): [game_skin!]!
+    where: game_view_active_bet_bool_exp
+  ): [game_view_active_bet!]!
 
-  # fetch aggregated fields from the table: "game.skin"
-  game_skin_aggregate(
+  # fetch aggregated fields from the table: "game.view_active_bet"
+  game_view_active_bet_aggregate(
     # distinct select on columns
-    distinct_on: [game_skin_select_column!]
+    distinct_on: [game_view_active_bet_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6651,19 +6488,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_order_by!]
+    order_by: [game_view_active_bet_order_by!]
 
     # filter the rows returned
-    where: game_skin_bool_exp
-  ): game_skin_aggregate!
+    where: game_view_active_bet_bool_exp
+  ): game_view_active_bet_aggregate!
 
-  # fetch data from the table: "game.skin" using primary key columns
-  game_skin_by_pk(id: bigint!): game_skin
-
-  # fetch data from the table: "game.skin_in_inventar"
-  game_skin_in_inventar(
+  # fetch data from the table: "game.view_active_round"
+  game_view_active_round(
     # distinct select on columns
-    distinct_on: [game_skin_in_inventar_select_column!]
+    distinct_on: [game_view_active_round_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6672,16 +6506,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_inventar_order_by!]
+    order_by: [game_view_active_round_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_inventar_bool_exp
-  ): [game_skin_in_inventar!]!
+    where: game_view_active_round_bool_exp
+  ): [game_view_active_round!]!
 
-  # fetch aggregated fields from the table: "game.skin_in_inventar"
-  game_skin_in_inventar_aggregate(
+  # fetch aggregated fields from the table: "game.view_active_round"
+  game_view_active_round_aggregate(
     # distinct select on columns
-    distinct_on: [game_skin_in_inventar_select_column!]
+    distinct_on: [game_view_active_round_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6690,19 +6524,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_inventar_order_by!]
+    order_by: [game_view_active_round_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_inventar_bool_exp
-  ): game_skin_in_inventar_aggregate!
+    where: game_view_active_round_bool_exp
+  ): game_view_active_round_aggregate!
 
-  # fetch data from the table: "game.skin_in_inventar" using primary key columns
-  game_skin_in_inventar_by_pk(id: bigint!): game_skin_in_inventar
-
-  # fetch data from the table: "game.skin_in_my_inventar_view"
-  game_skin_in_my_inventar_view(
+  # fetch data from the table: "game.view_my_item"
+  game_view_my_item(
     # distinct select on columns
-    distinct_on: [game_skin_in_my_inventar_view_select_column!]
+    distinct_on: [game_view_my_item_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6711,16 +6542,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_my_inventar_view_order_by!]
+    order_by: [game_view_my_item_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_my_inventar_view_bool_exp
-  ): [game_skin_in_my_inventar_view!]!
+    where: game_view_my_item_bool_exp
+  ): [game_view_my_item!]!
 
-  # fetch aggregated fields from the table: "game.skin_in_my_inventar_view"
-  game_skin_in_my_inventar_view_aggregate(
+  # fetch aggregated fields from the table: "game.view_my_item"
+  game_view_my_item_aggregate(
     # distinct select on columns
-    distinct_on: [game_skin_in_my_inventar_view_select_column!]
+    distinct_on: [game_view_my_item_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6729,50 +6560,11 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [game_skin_in_my_inventar_view_order_by!]
+    order_by: [game_view_my_item_order_by!]
 
     # filter the rows returned
-    where: game_skin_in_my_inventar_view_bool_exp
-  ): game_skin_in_my_inventar_view_aggregate!
-
-  # fetch data from the table: "game.skin_loader"
-  game_skin_loader(
-    # distinct select on columns
-    distinct_on: [game_skin_loader_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_skin_loader_order_by!]
-
-    # filter the rows returned
-    where: game_skin_loader_bool_exp
-  ): [game_skin_loader!]!
-
-  # fetch aggregated fields from the table: "game.skin_loader"
-  game_skin_loader_aggregate(
-    # distinct select on columns
-    distinct_on: [game_skin_loader_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [game_skin_loader_order_by!]
-
-    # filter the rows returned
-    where: game_skin_loader_bool_exp
-  ): game_skin_loader_aggregate!
-
-  # fetch data from the table: "game.skin_loader" using primary key columns
-  game_skin_loader_by_pk(id: bigint!): game_skin_loader
+    where: game_view_my_item_bool_exp
+  ): game_view_my_item_aggregate!
 
   # fetch data from the table: "simulation.bank"
   simulation_bank(
@@ -7008,42 +6800,6 @@ type subscription_root {
   # fetch data from the table: "user" using primary key columns
   user_by_pk(id: bigint!): user
 
-  # fetch data from the table: "user_current_view"
-  user_current_view(
-    # distinct select on columns
-    distinct_on: [user_current_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [user_current_view_order_by!]
-
-    # filter the rows returned
-    where: user_current_view_bool_exp
-  ): [user_current_view!]!
-
-  # fetch aggregated fields from the table: "user_current_view"
-  user_current_view_aggregate(
-    # distinct select on columns
-    distinct_on: [user_current_view_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [user_current_view_order_by!]
-
-    # filter the rows returned
-    where: user_current_view_bool_exp
-  ): user_current_view_aggregate!
-
   # fetch data from the table: "user_role"
   user_role(
     # distinct select on columns
@@ -7082,6 +6838,42 @@ type subscription_root {
 
   # fetch data from the table: "user_role" using primary key columns
   user_role_by_pk(value: String!): user_role
+
+  # fetch data from the table: "view_current_user"
+  view_current_user(
+    # distinct select on columns
+    distinct_on: [view_current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [view_current_user_order_by!]
+
+    # filter the rows returned
+    where: view_current_user_bool_exp
+  ): [view_current_user!]!
+
+  # fetch aggregated fields from the table: "view_current_user"
+  view_current_user_aggregate(
+    # distinct select on columns
+    distinct_on: [view_current_user_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [view_current_user_order_by!]
+
+    # filter the rows returned
+    where: view_current_user_bool_exp
+  ): view_current_user_aggregate!
 }
 
 scalar timestamptz
@@ -7099,7 +6891,7 @@ input timestamptz_comparison_exp {
   _nin: [timestamptz!]
 }
 
-type UpdateSkinsOutput {
+type UpdateItemsDataOutput {
   id: bigint!
 }
 
@@ -7230,309 +7022,6 @@ enum user_constraint {
 
   # unique or primary key constraint
   user_steam_id_key
-}
-
-# columns and relationships of "user_current_view"
-type user_current_view {
-  avatar: String
-  bot: Boolean
-  id: bigint
-  lang: String
-  money: bigint
-  nickname: String
-  role: String
-  steam_id: String
-  steam_profile: String
-}
-
-# aggregated selection of "user_current_view"
-type user_current_view_aggregate {
-  aggregate: user_current_view_aggregate_fields
-  nodes: [user_current_view!]!
-}
-
-# aggregate fields of "user_current_view"
-type user_current_view_aggregate_fields {
-  avg: user_current_view_avg_fields
-  count(columns: [user_current_view_select_column!], distinct: Boolean): Int
-  max: user_current_view_max_fields
-  min: user_current_view_min_fields
-  stddev: user_current_view_stddev_fields
-  stddev_pop: user_current_view_stddev_pop_fields
-  stddev_samp: user_current_view_stddev_samp_fields
-  sum: user_current_view_sum_fields
-  var_pop: user_current_view_var_pop_fields
-  var_samp: user_current_view_var_samp_fields
-  variance: user_current_view_variance_fields
-}
-
-# order by aggregate values of table "user_current_view"
-input user_current_view_aggregate_order_by {
-  avg: user_current_view_avg_order_by
-  count: order_by
-  max: user_current_view_max_order_by
-  min: user_current_view_min_order_by
-  stddev: user_current_view_stddev_order_by
-  stddev_pop: user_current_view_stddev_pop_order_by
-  stddev_samp: user_current_view_stddev_samp_order_by
-  sum: user_current_view_sum_order_by
-  var_pop: user_current_view_var_pop_order_by
-  var_samp: user_current_view_var_samp_order_by
-  variance: user_current_view_variance_order_by
-}
-
-# input type for inserting array relation for remote table "user_current_view"
-input user_current_view_arr_rel_insert_input {
-  data: [user_current_view_insert_input!]!
-}
-
-# aggregate avg on columns
-type user_current_view_avg_fields {
-  id: Float
-  money: Float
-}
-
-# order by avg() on columns of table "user_current_view"
-input user_current_view_avg_order_by {
-  id: order_by
-  money: order_by
-}
-
-# Boolean expression to filter rows from the table "user_current_view". All fields are combined with a logical 'AND'.
-input user_current_view_bool_exp {
-  _and: [user_current_view_bool_exp]
-  _not: user_current_view_bool_exp
-  _or: [user_current_view_bool_exp]
-  avatar: String_comparison_exp
-  bot: Boolean_comparison_exp
-  id: bigint_comparison_exp
-  lang: String_comparison_exp
-  money: bigint_comparison_exp
-  nickname: String_comparison_exp
-  role: String_comparison_exp
-  steam_id: String_comparison_exp
-  steam_profile: String_comparison_exp
-}
-
-# input type for incrementing integer column in table "user_current_view"
-input user_current_view_inc_input {
-  id: bigint
-  money: bigint
-}
-
-# input type for inserting data into table "user_current_view"
-input user_current_view_insert_input {
-  avatar: String
-  bot: Boolean
-  id: bigint
-  lang: String
-  money: bigint
-  nickname: String
-  role: String
-  steam_id: String
-  steam_profile: String
-}
-
-# aggregate max on columns
-type user_current_view_max_fields {
-  avatar: String
-  id: bigint
-  lang: String
-  money: bigint
-  nickname: String
-  role: String
-  steam_id: String
-  steam_profile: String
-}
-
-# order by max() on columns of table "user_current_view"
-input user_current_view_max_order_by {
-  avatar: order_by
-  id: order_by
-  lang: order_by
-  money: order_by
-  nickname: order_by
-  role: order_by
-  steam_id: order_by
-  steam_profile: order_by
-}
-
-# aggregate min on columns
-type user_current_view_min_fields {
-  avatar: String
-  id: bigint
-  lang: String
-  money: bigint
-  nickname: String
-  role: String
-  steam_id: String
-  steam_profile: String
-}
-
-# order by min() on columns of table "user_current_view"
-input user_current_view_min_order_by {
-  avatar: order_by
-  id: order_by
-  lang: order_by
-  money: order_by
-  nickname: order_by
-  role: order_by
-  steam_id: order_by
-  steam_profile: order_by
-}
-
-# response of any mutation on the table "user_current_view"
-type user_current_view_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [user_current_view!]!
-}
-
-# input type for inserting object relation for remote table "user_current_view"
-input user_current_view_obj_rel_insert_input {
-  data: user_current_view_insert_input!
-}
-
-# ordering options when selecting data from "user_current_view"
-input user_current_view_order_by {
-  avatar: order_by
-  bot: order_by
-  id: order_by
-  lang: order_by
-  money: order_by
-  nickname: order_by
-  role: order_by
-  steam_id: order_by
-  steam_profile: order_by
-}
-
-# select columns of table "user_current_view"
-enum user_current_view_select_column {
-  # column name
-  avatar
-
-  # column name
-  bot
-
-  # column name
-  id
-
-  # column name
-  lang
-
-  # column name
-  money
-
-  # column name
-  nickname
-
-  # column name
-  role
-
-  # column name
-  steam_id
-
-  # column name
-  steam_profile
-}
-
-# input type for updating data in table "user_current_view"
-input user_current_view_set_input {
-  avatar: String
-  bot: Boolean
-  id: bigint
-  lang: String
-  money: bigint
-  nickname: String
-  role: String
-  steam_id: String
-  steam_profile: String
-}
-
-# aggregate stddev on columns
-type user_current_view_stddev_fields {
-  id: Float
-  money: Float
-}
-
-# order by stddev() on columns of table "user_current_view"
-input user_current_view_stddev_order_by {
-  id: order_by
-  money: order_by
-}
-
-# aggregate stddev_pop on columns
-type user_current_view_stddev_pop_fields {
-  id: Float
-  money: Float
-}
-
-# order by stddev_pop() on columns of table "user_current_view"
-input user_current_view_stddev_pop_order_by {
-  id: order_by
-  money: order_by
-}
-
-# aggregate stddev_samp on columns
-type user_current_view_stddev_samp_fields {
-  id: Float
-  money: Float
-}
-
-# order by stddev_samp() on columns of table "user_current_view"
-input user_current_view_stddev_samp_order_by {
-  id: order_by
-  money: order_by
-}
-
-# aggregate sum on columns
-type user_current_view_sum_fields {
-  id: bigint
-  money: bigint
-}
-
-# order by sum() on columns of table "user_current_view"
-input user_current_view_sum_order_by {
-  id: order_by
-  money: order_by
-}
-
-# aggregate var_pop on columns
-type user_current_view_var_pop_fields {
-  id: Float
-  money: Float
-}
-
-# order by var_pop() on columns of table "user_current_view"
-input user_current_view_var_pop_order_by {
-  id: order_by
-  money: order_by
-}
-
-# aggregate var_samp on columns
-type user_current_view_var_samp_fields {
-  id: Float
-  money: Float
-}
-
-# order by var_samp() on columns of table "user_current_view"
-input user_current_view_var_samp_order_by {
-  id: order_by
-  money: order_by
-}
-
-# aggregate variance on columns
-type user_current_view_variance_fields {
-  id: Float
-  money: Float
-}
-
-# order by variance() on columns of table "user_current_view"
-input user_current_view_variance_order_by {
-  id: order_by
-  money: order_by
 }
 
 # input type for incrementing integer column in table "user"
@@ -7970,4 +7459,307 @@ input user_variance_order_by {
 }
 
 scalar uuid
+
+# columns and relationships of "view_current_user"
+type view_current_user {
+  avatar: String
+  bot: Boolean
+  id: bigint
+  lang: String
+  money: bigint
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+}
+
+# aggregated selection of "view_current_user"
+type view_current_user_aggregate {
+  aggregate: view_current_user_aggregate_fields
+  nodes: [view_current_user!]!
+}
+
+# aggregate fields of "view_current_user"
+type view_current_user_aggregate_fields {
+  avg: view_current_user_avg_fields
+  count(columns: [view_current_user_select_column!], distinct: Boolean): Int
+  max: view_current_user_max_fields
+  min: view_current_user_min_fields
+  stddev: view_current_user_stddev_fields
+  stddev_pop: view_current_user_stddev_pop_fields
+  stddev_samp: view_current_user_stddev_samp_fields
+  sum: view_current_user_sum_fields
+  var_pop: view_current_user_var_pop_fields
+  var_samp: view_current_user_var_samp_fields
+  variance: view_current_user_variance_fields
+}
+
+# order by aggregate values of table "view_current_user"
+input view_current_user_aggregate_order_by {
+  avg: view_current_user_avg_order_by
+  count: order_by
+  max: view_current_user_max_order_by
+  min: view_current_user_min_order_by
+  stddev: view_current_user_stddev_order_by
+  stddev_pop: view_current_user_stddev_pop_order_by
+  stddev_samp: view_current_user_stddev_samp_order_by
+  sum: view_current_user_sum_order_by
+  var_pop: view_current_user_var_pop_order_by
+  var_samp: view_current_user_var_samp_order_by
+  variance: view_current_user_variance_order_by
+}
+
+# input type for inserting array relation for remote table "view_current_user"
+input view_current_user_arr_rel_insert_input {
+  data: [view_current_user_insert_input!]!
+}
+
+# aggregate avg on columns
+type view_current_user_avg_fields {
+  id: Float
+  money: Float
+}
+
+# order by avg() on columns of table "view_current_user"
+input view_current_user_avg_order_by {
+  id: order_by
+  money: order_by
+}
+
+# Boolean expression to filter rows from the table "view_current_user". All fields are combined with a logical 'AND'.
+input view_current_user_bool_exp {
+  _and: [view_current_user_bool_exp]
+  _not: view_current_user_bool_exp
+  _or: [view_current_user_bool_exp]
+  avatar: String_comparison_exp
+  bot: Boolean_comparison_exp
+  id: bigint_comparison_exp
+  lang: String_comparison_exp
+  money: bigint_comparison_exp
+  nickname: String_comparison_exp
+  role: String_comparison_exp
+  steam_id: String_comparison_exp
+  steam_profile: String_comparison_exp
+}
+
+# input type for incrementing integer column in table "view_current_user"
+input view_current_user_inc_input {
+  id: bigint
+  money: bigint
+}
+
+# input type for inserting data into table "view_current_user"
+input view_current_user_insert_input {
+  avatar: String
+  bot: Boolean
+  id: bigint
+  lang: String
+  money: bigint
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+}
+
+# aggregate max on columns
+type view_current_user_max_fields {
+  avatar: String
+  id: bigint
+  lang: String
+  money: bigint
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+}
+
+# order by max() on columns of table "view_current_user"
+input view_current_user_max_order_by {
+  avatar: order_by
+  id: order_by
+  lang: order_by
+  money: order_by
+  nickname: order_by
+  role: order_by
+  steam_id: order_by
+  steam_profile: order_by
+}
+
+# aggregate min on columns
+type view_current_user_min_fields {
+  avatar: String
+  id: bigint
+  lang: String
+  money: bigint
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+}
+
+# order by min() on columns of table "view_current_user"
+input view_current_user_min_order_by {
+  avatar: order_by
+  id: order_by
+  lang: order_by
+  money: order_by
+  nickname: order_by
+  role: order_by
+  steam_id: order_by
+  steam_profile: order_by
+}
+
+# response of any mutation on the table "view_current_user"
+type view_current_user_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [view_current_user!]!
+}
+
+# input type for inserting object relation for remote table "view_current_user"
+input view_current_user_obj_rel_insert_input {
+  data: view_current_user_insert_input!
+}
+
+# ordering options when selecting data from "view_current_user"
+input view_current_user_order_by {
+  avatar: order_by
+  bot: order_by
+  id: order_by
+  lang: order_by
+  money: order_by
+  nickname: order_by
+  role: order_by
+  steam_id: order_by
+  steam_profile: order_by
+}
+
+# select columns of table "view_current_user"
+enum view_current_user_select_column {
+  # column name
+  avatar
+
+  # column name
+  bot
+
+  # column name
+  id
+
+  # column name
+  lang
+
+  # column name
+  money
+
+  # column name
+  nickname
+
+  # column name
+  role
+
+  # column name
+  steam_id
+
+  # column name
+  steam_profile
+}
+
+# input type for updating data in table "view_current_user"
+input view_current_user_set_input {
+  avatar: String
+  bot: Boolean
+  id: bigint
+  lang: String
+  money: bigint
+  nickname: String
+  role: String
+  steam_id: String
+  steam_profile: String
+}
+
+# aggregate stddev on columns
+type view_current_user_stddev_fields {
+  id: Float
+  money: Float
+}
+
+# order by stddev() on columns of table "view_current_user"
+input view_current_user_stddev_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate stddev_pop on columns
+type view_current_user_stddev_pop_fields {
+  id: Float
+  money: Float
+}
+
+# order by stddev_pop() on columns of table "view_current_user"
+input view_current_user_stddev_pop_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate stddev_samp on columns
+type view_current_user_stddev_samp_fields {
+  id: Float
+  money: Float
+}
+
+# order by stddev_samp() on columns of table "view_current_user"
+input view_current_user_stddev_samp_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate sum on columns
+type view_current_user_sum_fields {
+  id: bigint
+  money: bigint
+}
+
+# order by sum() on columns of table "view_current_user"
+input view_current_user_sum_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate var_pop on columns
+type view_current_user_var_pop_fields {
+  id: Float
+  money: Float
+}
+
+# order by var_pop() on columns of table "view_current_user"
+input view_current_user_var_pop_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate var_samp on columns
+type view_current_user_var_samp_fields {
+  id: Float
+  money: Float
+}
+
+# order by var_samp() on columns of table "view_current_user"
+input view_current_user_var_samp_order_by {
+  id: order_by
+  money: order_by
+}
+
+# aggregate variance on columns
+type view_current_user_variance_fields {
+  id: Float
+  money: Float
+}
+
+# order by variance() on columns of table "view_current_user"
+input view_current_user_variance_order_by {
+  id: order_by
+  money: order_by
+}
 

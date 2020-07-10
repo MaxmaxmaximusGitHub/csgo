@@ -7,36 +7,33 @@ import Pages from "../../components/Pages"
 import withCurrentUser from "../../lib/withCurrentUser"
 import Confirm from "../../components/Confirm"
 import HomePage from "./HomePage/HomePage"
-import AboutPage from "./AboutPage/AboutPage"
 import Notificator from "../../components/Notificator/Notificator"
 import DesktopHeader from "../../components/DesktopHeader/DesktopHeader";
 import Chat from "../../components/Chat/Chat";
 import Market from "../../components/Market/Market";
 import withRouter from "../../lib/withRouter";
-import MarketProvider from "../../components/Market/MarketProvider";
+import AdminPage from "./AdminPage/AdminPage";
 
 
 export const pages = [
   {name: 'Home', url: '/', Page: HomePage},
-  {name: 'About', url: '/about', Page: AboutPage},
+  {name: 'Admin', url: '/admin', Page: AdminPage},
 ]
 
 
 function Desktop() {
 
   return <>
-    <MarketProvider>
-      <DesktopHeader pages={pages}/>
+    <DesktopHeader pages={pages}/>
 
-      <div className={styles.content}>
-        <Pages pages={pages}/>
-        <Chat/>
-      </div>
+    <div className={styles.content}>
+      <Pages pages={pages}/>
+      <Chat/>
+    </div>
 
-      <Market/>
-      <Confirm/>
-      <Notificator/>
-    </MarketProvider>
+    <Market/>
+    <Confirm/>
+    <Notificator/>
   </>
 }
 

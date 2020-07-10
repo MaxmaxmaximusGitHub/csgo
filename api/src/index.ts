@@ -2,5 +2,5 @@ import './lib/auth'
 import './lib/auth-hook'
 
 import './Game'
-import './SkinsLoader/SkinsLoader'
+import './Game/ItemsDataLoader'
 import './User/User'

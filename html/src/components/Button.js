@@ -1,9 +1,11 @@
 import styles from './Button.styl'
 
 
-export default function Button({children, onClick, ...props}) {
+export default function Button({onClick, ...props}) {
 
-  return <div className={styles.button} onClick={onClick} {...props}>
-    {children}
-  </div>
+  return <div
+    className={styles.button}
+    onClick={onClick}
+    {...props}
+  />
 }

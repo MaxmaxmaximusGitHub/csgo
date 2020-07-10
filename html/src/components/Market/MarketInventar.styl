@@ -1,0 +1,15 @@
+.MarketInventar
+  $time = 0.3s
+  background-color #222
+  border-radius 0.25em
+  flex-shrink 0
+  opacity 0
+  width 25em
+  transform scale(0.9)
+  transition transform $time, opacity $time
+
+  &.__opened
+    opacity 1
+    transform none
+
+

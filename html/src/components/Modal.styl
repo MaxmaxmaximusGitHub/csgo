@@ -1,0 +1,25 @@
+.Modal
+  $time = 0.3s
+  background-color #222
+  border-radius 0.25em
+  display flex
+  flex-direction column
+  align-items center
+  margin 3em
+  color white
+  max-width calc(100% - 6em)
+  max-height calc(100% - 3em)
+  border 1px solid #444
+  overflow hidden
+  transition transform $time, opacity $time
+  transform scale(0.9)
+  opacity 0
+
+  &.__opened
+    transform none
+    opacity 1
+
+
+
+
+

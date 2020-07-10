@@ -1,8 +1,8 @@
 import useLiveQuery from "./useLiveQuery";
-import {GET_SKINS_LOADER_STATE} from "../graphql/queries";
+import {GET_ITEMS_DATA_LOADER} from "../graphql/queries";
 
 
 export default function useSkinLoadingState() {
-  const loadingStates = useLiveQuery(GET_SKINS_LOADER_STATE)
+  const loadingStates = useLiveQuery(GET_ITEMS_DATA_LOADER)
   return loadingStates[0] || {}
 }

@@ -2,7 +2,6 @@ import {useQuery as apolloUseQuery} from "@apollo/react-hooks";
 
 
 export default function useQuery(query, options = {}) {
-
   const queryResult = apolloUseQuery(query, options)
   return wrapQueryResult(queryResult, options)
 }
@@ -10,7 +9,7 @@ export default function useQuery(query, options = {}) {
 
 function wrapQueryResult({data, fetchMore}, {cursor = {}}) {
 
-  const {prop = 'id' } = cursor
+  const {prop = 'id'} = cursor
 
   if (!data) var arr = []
   else arr = data[Object.keys(data)[0]]

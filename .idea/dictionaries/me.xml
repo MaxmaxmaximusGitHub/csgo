@@ -5,6 +5,7 @@
       <w>autoprefixer</w>
       <w>avatarfull</w>
       <w>baseurl</w>
+      <w>bitskins</w>
       <w>callsite</w>
       <w>contenthash</w>
       <w>csgo</w>
@@ -21,8 +22,10 @@
       <w>hasura</w>
       <w>hasurahook</w>
       <w>inited</w>
+      <w>inspectable</w>
       <w>inventar</w>
       <w>inventars</w>
+      <w>itemset</w>
       <w>largeimage</w>
       <w>loccountrycode</w>
       <w>myadminsecretkey</w>
@@ -34,6 +37,11 @@
       <w>nodir</w>
       <w>notif</w>
       <w>ololo</w>
+      <w>paddings</w>
+      <w>paintindex</w>
+      <w>paintseed</w>
+      <w>paintwear</w>
+      <w>patternname</w>
       <w>personaname</w>
       <w>preact</w>
       <w>prerender</w>
@@ -46,14 +54,17 @@
       <w>realname</w>
       <w>refetch</w>
       <w>resave</w>
+      <w>rungame</w>
       <w>sasuke</w>
       <w>serverless</w>
       <w>setimmediate</w>
       <w>steamid</w>
+      <w>totp</w>
       <w>trololo</w>
       <w>tsdx</w>
       <w>vendorize</w>
       <w>webhook</w>
+      <w>withdrawable</w>
     </words>
   </dictionary>
 </component>

@@ -1,19 +1,18 @@
-import classes from "../lib/classes";
+import classNames from 'classnames'
 import styles from './Popup.styl'
 
 
 export default function Popup(props) {
 
-  const {opened, onClose, fullSize = false, children} = props
+  const {opened, onClose, children} = props
 
   const popupRef = useRef(null)
 
-  const popupClassName = classes(styles.popup, [
-    styles.__opened, opened,
-    styles['__full-size'], fullSize,
-  ])
-
-  const contentClassName = classes(styles.content)
+  const popupClassName = classNames(
+    styles.Popup, {
+      [styles.__opened]: opened,
+    }
+  )
 
   function closePopup() {
     if (onClose) {
@@ -32,9 +31,7 @@ export default function Popup(props) {
     className={popupClassName}
     onMouseDown={onMouseDown}>
 
-    <div className={contentClassName}>
-      {children}
-    </div>
+    {children}
 
   </div>
 }

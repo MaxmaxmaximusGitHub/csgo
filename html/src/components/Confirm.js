@@ -1,6 +1,6 @@
 import styles from './Confirm.styl'
 import Button from "./Button";
-import Popup from "./Popup";
+import Modal from "./Modal";
 
 
 export const ConfirmContext = React.createContext({})
@@ -38,7 +38,7 @@ export default function Confirm() {
     setOpened(false)
   }
 
-  return <Popup opened={opened} onClose={reject}>
+  return <Modal opened={opened} onClose={reject}>
     <div className={styles.confirm}>
       <div className={styles.message}>{message || 'Вы уверены?'}</div>
 
@@ -47,5 +47,5 @@ export default function Confirm() {
         <Button onClick={reject}>Нет</Button>
       </div>
     </div>
-  </Popup>
+  </Modal>
 }
