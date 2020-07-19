@@ -1,18 +1,18 @@
 import {action, observable} from "mobx";
 
 
-export default new class MarketModel {
+export default new class MarketController {
 
   @observable
   opened = false
 
-  @action.bound
-  open() {
+  @action
+  open = () => {
     this.opened = true
   }
 
-  @action.bound
-  close() {
+  @action
+  close = () => {
     this.opened = false
   }
 

@@ -44,11 +44,7 @@ export const GET_ITEMS_DATA_LOADER = gql`
   query GET_ITEMS_LOADER {
     game_items_data_loader {
       loading
-      total
       completed
-      total_images
-      completed_images
-      try_images_loading
     }
   }
 `
@@ -57,45 +53,45 @@ export const GET_ITEMS_DATA_LOADER = gql`
 export const GET_ITEMS_DATA = gql`
   query GET_ITEMS_DATA (
     $cursor: Int
-    $search: String
   ) {
     game_item_data (
       where: {
         price: {_lt: $cursor}
-        market_hash_name: {_ilike: $search}
-        active: {_eq: true}
       }
       order_by: {price: desc, id: asc}
     ) {
       id
-      image_url
+      image
       market_hash_name
+      inspect_link
+      inspectable
+      phase
+      quality
+      rarity
       price
     }
   }
 `
 
+
 export const GET_MY_ITEMS = gql`
-  query GET_MY_ITEMS (
-    $cursor: timestamptz
-    $search: String
-  ) {
+  query GET_MY_ITEMS ($cursor: timestamptz) {
     game_view_my_item (
-      where: {
-        item_data: {market_hash_name: {_ilike: $search}}
-        created_at: {_lt: $cursor}
-      }
       order_by: {created_at: desc}
     ) {
       id
-      created_at
-      item_data {
-        image_url
+
+      item_data{
+        image
+        inspect_link
+        inspectable
         market_hash_name
+        phase
         price
+        quality
+        rarity
       }
     }
   }
 `
-
 

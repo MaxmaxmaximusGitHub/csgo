@@ -4,6 +4,7 @@ import {getUserById} from "./helpers";
 
 class ActionsController {
 
+
   private actions: Map<String, Function>;
 
 
@@ -22,9 +23,10 @@ class ActionsController {
 
     try {
       var result = await this.callAction(action.name, user, data)
-      this.sendResult(result, res)
+      this.sendResult(res, result)
+
     } catch (error) {
-      this.sendError(error, res)
+      this.sendError(res, error)
     }
   }
 
@@ -40,12 +42,12 @@ class ActionsController {
   }
 
 
-  sendResult(result, res) {
+  sendResult(res, result) {
     res.json(result)
   }
 
 
-  sendError(error, res) {
+  sendError(res, error) {
     res.status(403).send({
       message: error.message,
       code: error.code,

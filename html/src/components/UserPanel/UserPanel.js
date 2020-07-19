@@ -40,7 +40,7 @@ export default function UserPanel() {
 
   if (!user) {
     return <div className={styles.userPanel}>
-      <Button onClick={login}>login with steam</Button>
+      <Button onClick={login}>Войти через Steam</Button>
     </div>
   }
 

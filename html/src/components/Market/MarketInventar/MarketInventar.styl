@@ -1,15 +1,22 @@
 .MarketInventar
   $time = 0.3s
+  display flex
+  flex-direction column
   background-color #222
   border-radius 0.25em
   flex-shrink 0
   opacity 0
-  width 25em
+  width 23.5em
   transform scale(0.9)
   transition transform $time, opacity $time
+  overflow hidden
 
   &.__opened
     opacity 1
     transform none
 
+  .list
+    height 0
+    flex-grow 1
+    overflow auto
 

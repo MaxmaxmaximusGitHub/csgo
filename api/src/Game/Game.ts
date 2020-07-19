@@ -34,14 +34,14 @@ export default class Game {
   }
 
 
-  static async makeBet(user) {
-
+  static async makeBet(user, items_ids) {
     if (!this.activeRound) {
-      throw new Error('Отсутствует активный раунд')
+      throw new Error('Дождитесь ожидания ставок')
     }
 
-    return this.activeRound.makeBet(user)
+    return this.activeRound.makeBet(user, items_ids)
   }
 
 }
 
+Game.start()

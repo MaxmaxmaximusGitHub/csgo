@@ -1,12 +1,16 @@
 import useLiveQuery from "./useLiveQuery";
 import {GET_MY_ITEMS} from "../graphql/queries";
+import BetController from "../controllers/BetController";
 
 
-export default function useMyItems(search = '') {
+export default function useMyItems() {
 
-  return useLiveQuery(GET_MY_ITEMS, {
+  const items =  useLiveQuery(GET_MY_ITEMS, {
     cursor: {prop: 'created_at'},
-    variables: {search: `%${search}%`}
+  })
+
+  return items.filter(item=>{
+    return !BetController.hasItem(item)
   })
 }
 

@@ -1,18 +1,31 @@
-import ActionsController from "../lib/ActionsController";
-import db from "../lib/db"
-import Game from "./Game"
+import ActionsController from "./lib/ActionsController";
+import db from "./lib/db"
+import Game from "./Game/Game"
 import sql from "sql-tag"
-import ItemsDataLoader from "./ItemsDataLoader";
-
-
-ActionsController.add('game_make_bet', async (user, data) => {
-  return Game.makeBet(user)
-})
+import ItemsDataLoader from "./ItemsDataLoader/ItemsDataLoader";
 
 
 ActionsController.add('update_items_data', async () => {
-  await ItemsDataLoader.update()
-  return {id: 1}
+  ItemsDataLoader.update()
+  return {done: true}
+})
+
+
+ActionsController.add('stop_update_items_data', async () => {
+  await ItemsDataLoader.stop()
+  return {done: true}
+})
+
+
+ActionsController.add('clear_items_data', async () => {
+  await ItemsDataLoader.clear()
+  return {done: true}
+})
+
+
+ActionsController.add('game_make_bet', async (user, {items_ids}) => {
+  await Game.makeBet(user, items_ids)
+  return {done: true}
 })
 
 
@@ -58,12 +71,12 @@ ActionsController.add('buy_item', async (user, {item_data_id}) => {
 })
 
 
-ActionsController.add('sell_item', async (user, {id}) => {
+ActionsController.add('sell_item', async (user, {item_id}) => {
 
   const {rows: [{count}]} = await db.query(sql`
     SELECT count(*) FROM game.item
     WHERE user_id = ${user.id}
-    AND id = ${id}
+    AND id = ${item_id}
   `)
 
   if (!Number(count)) {
@@ -76,7 +89,7 @@ ActionsController.add('sell_item', async (user, {id}) => {
     saled_item AS (
       DELETE FROM game.item
       WHERE user_id = ${user.id}
-      AND id = ${id}
+      AND id = ${item_id}
       RETURNING item_data_id
     ),
      
@@ -89,7 +102,31 @@ ActionsController.add('sell_item', async (user, {id}) => {
     SET money = money + (SELECT price FROM saled_item_data)
   `)
 
-  return {id}
+  return {done: true}
 })
 
 
+const STEP = 5000000
+
+ActionsController.add('money_minus', async () => {
+
+  const {rows} = await db.query(sql`
+    UPDATE public."user"
+    SET money = money - ${STEP}
+    RETURNING money
+  `)
+
+  return {money: rows[0].money}
+})
+
+
+ActionsController.add('money_plus', async () => {
+
+  const {rows} = await db.query(sql`
+    UPDATE public."user"
+    SET money = money + ${STEP}
+    RETURNING money
+  `)
+
+  return {money: rows[0].money}
+})

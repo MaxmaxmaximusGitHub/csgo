@@ -1,4 +1,4 @@
-tunnels:
+unnels:
   httpbin:
     proto: http
     addr: 8000

@@ -2,5 +2,9 @@
   "private": true,
   "scripts": {
     "docker:dev": "docker-compose -f docker-compose.dev.yaml up --build -d"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "hasura": "^2.0.1"
   }
 }

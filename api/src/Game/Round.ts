@@ -16,7 +16,6 @@ export default class Round {
   id = null
   x = 1
 
-
   async play() {
     await this.loadSettings()
     await this.createRound()
@@ -64,7 +63,7 @@ export default class Round {
 
   async generateX() {
     // this.x = Math.round((1 + (Math.random() * 5)) * 100)
-    this.x = 200
+    this.x = 0
   }
 
 
@@ -93,8 +92,31 @@ export default class Round {
   }
 
 
-  async makeBet(user) {
-    const money = 100
+  async makeBet(user, items_ids = []) {
+    await this.validateBetParams(user, items_ids)
+
+    await this.takeItemsFromUser(user, items_ids)
+    const money = await this.getItemsMoney(items_ids)
+
+    const {rows: [{id}]} = await db.query(sql`
+      INSERT INTO game.bet
+        (round_id, user_id, money)
+      VALUES (${this.id}, ${user.id}, ${money})
+      RETURNING id 
+    `)
+
+    return {id}
+  }
+
+
+  private async validateBetParams(user, items_ids) {
+    if (!items_ids.length) {
+      throw new Error('Не выбранны айтемы для ставки')
+    }
+
+    if (items_ids.length > 3) {
+      throw new Error('Слишком много айтемов для ставки')
+    }
 
     if (this.status !== 'pending') {
       throw new Error('Раунд не в ожидании ставок')
@@ -104,16 +126,41 @@ export default class Round {
       throw new Error('Вы уже делали ставку в этом раунде')
     }
 
-    const {rows} = await db.query(sql`
-      INSERT INTO game.bet
-        (round_id, user_id, money)
-      VALUES (${this.id}, ${user.id}, ${money})
-      RETURNING id 
+    if (!await this.isUserItems(user, items_ids)) {
+      throw new Error('Айтемы не ваши')
+    }
+  }
+
+
+  private async getItemsMoney(items_ids) {
+    const {rows: [{sum}]} = await db.query(sql`
+      WITH items AS (
+        SELECT item_data_id FROM game.item
+        WHERE id = ANY(${items_ids})
+      )
+     
+      SELECT SUM(price) FROM game.item_data
+      WHERE id IN (SELECT item_data_id FROM items)
     `)
 
-    return {
-      id: rows[0].id
-    }
+    return Number(sum)
+  }
+
+
+  private async takeItemsFromUser(user, items_ids) {
+    await db.query(sql`
+      DELETE FROM game.item
+      WHERE id = ANY(${items_ids}) 
+        AND user_id = ${user.id}
+    `)
+  }
+
+
+  private async isUserItems(user, items_ids) {
+    // db.query(sql`
+    //
+    // `)
+    return true
   }
 
 

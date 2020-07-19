@@ -1,8 +1,8 @@
-import useInterval from "../hooks/useInterval";
-import Button from "./Button";
+import styles from './List.styl'
+import classNames from 'classnames'
+import {observer} from 'mobx-react-lite'
 
-
-export default function List(
+export default observer(function List(
   {emptyMessage, children, list, className, ...props}
 ) {
 
@@ -29,10 +29,15 @@ export default function List(
     return emptyMessage
   }
 
-  return <ul ref={ref} onScroll={checkMore} className={className} {...props}>
+  const totalClassName = classNames(styles.List, className)
+
+  return <ul
+    ref={ref} className={totalClassName} onScroll={checkMore} {...props}>
+
     {list.map(item => (
       React.cloneElement(children(item), {key: item.id})
     ))}
+
   </ul>
-}
+})
 

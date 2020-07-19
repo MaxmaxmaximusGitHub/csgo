@@ -10,6 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/api/build" />
       <excludeFolder url="file://$MODULE_DIR$/auth/.build" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/hasura/metadata" />
       <excludeFolder url="file://$MODULE_DIR$/html/build" />
       <excludeFolder url="file://$MODULE_DIR$/next/.build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/nextjs/examples" />

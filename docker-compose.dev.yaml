@@ -3,8 +3,8 @@ version: '3.6'
 services:
 
   postgres:
-    image: postgres:12
     restart: always
+    image: postgres:12
     ports:
       - ${PG_PORT}:${PG_PORT}
     command: -p ${PG_PORT}
@@ -14,17 +14,19 @@ services:
       - db_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:6.0.4
     restart: always
+    image: redis
     ports:
       - ${REDIS_PORT}:${REDIS_PORT}
     command: redis-server --port ${REDIS_PORT} --requirepass ${REDIS_PASS}
+    volumes:
+      - redis-data:/data
 
   hasura:
+    restart: always
     image: hasura/graphql-engine:v1.2.2
     ports:
       - ${HASURA_GRAPHQL_SERVER_PORT}:${HASURA_GRAPHQL_SERVER_PORT}
-    restart: always
     environment:
       HASURA_GRAPHQL_SERVER_PORT: ${HASURA_GRAPHQL_SERVER_PORT}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${PG_PASSWORD}@${PG_USER}:${PG_PORT}/${PG_DB_NAME}
@@ -42,44 +44,37 @@ services:
 
   api:
     restart: always
-
     build:
       context: .
       dockerfile: ./api/Dockerfile.dev
-
     volumes:
       - ./api/:/app/
-
     environment:
       API_PORT: ${API_PORT}
       API_DEBUG_PORT: ${API_DEBUG_PORT}
       API_STEAM_REALM: ${API_STEAM_REALM}
       API_STEAM_API_KEY: ${API_STEAM_API_KEY}
       API_SESSIONS_SECRET_KEY: ${API_SESSIONS_SECRET_KEY}
-
       PG_DB_NAME: ${PG_DB_NAME}
       PG_HOST: ${PG_HOST}
       PG_PORT: ${PG_PORT}
       PG_USER: ${PG_USER}
       PG_PASSWORD: ${PG_PASSWORD}
-
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PASS: ${REDIS_PASS}
       REDIS_PORT: ${REDIS_PORT}
-
     ports:
       - ${API_PORT}:${API_PORT}
       - ${API_DEBUG_PORT}:${API_DEBUG_PORT}
-
     depends_on:
       - postgres
       - redis
 
   html:
+    restart: always
     build:
       context: .
       dockerfile: ./html/Dockerfile.dev
-    restart: always
     ports:
       - ${HTML_ADMIN_PORT}:${HTML_ADMIN_PORT}
       - ${HTML_PUBLIC_PORT}:${HTML_PUBLIC_PORT}
@@ -90,10 +85,10 @@ services:
       HTML_PUBLIC_PORT: ${HTML_PUBLIC_PORT}
 
   nginx:
+    restart: always
     build:
       context: .
       dockerfile: ./nginx/Dockerfile.dev
-    restart: always
     ports:
       - ${NGINX_HTTP_PORT}:${NGINX_HTTP_PORT}
       - ${NGINX_HTTPS_PORT}:${NGINX_HTTPS_PORT}
@@ -107,4 +102,4 @@ services:
 
 volumes:
   db_data:
-    driver: local
+  redis-data:

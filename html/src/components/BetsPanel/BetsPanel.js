@@ -1,15 +1,35 @@
 import styles from './BetsPanel.styl'
-import Slot from "./Slot";
 import {observer} from 'mobx-react-lite'
-import {observable, computed, action} from 'mobx'
+import BetController from "../../controllers/BetController";
+import BetItem from "./BetItem";
 import Button from "../Button";
-
+import {useMutation} from "@apollo/react-hooks";
+import {MAKE_BET} from "../../graphql/mutations";
+import useNotificator from "../../hooks/useNotificator";
 
 
 export default observer(function BetsPanel() {
 
-  return <div className={styles.BetPanel}>
-    <Button>plus</Button>
+  const items = BetController.items
+
+  const notificator = useNotificator()
+
+  const [makeBet] = useMutation(MAKE_BET, {
+    variables: {items_ids: items.map(item => item.id)},
+    onCompleted() {
+      BetController.clear()
+      notificator.alert('Ставка сделана')
+    },
+  })
+
+  return <div className={styles.BetsPanel}>
+
+    <div className={styles.betItems}>
+      {items.map(item => <BetItem key={item.id} item={item}/>)}
+    </div>
+
+    <Button onClick={makeBet}>Играть</Button>
+
   </div>
 })
 
