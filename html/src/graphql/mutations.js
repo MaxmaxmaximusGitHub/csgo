@@ -64,4 +64,10 @@ export const SELL_ITEM = gql`
     }
   }
 `
-
+export const GET_TWO_FA = gql`
+  mutation GET_TWO_FA  {
+    get_two_fa {
+      done
+    }
+  }
+`

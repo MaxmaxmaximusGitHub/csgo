@@ -16,9 +16,9 @@ module.exports = (api) => {
 
       ["@babel/plugin-proposal-class-properties"],
 
-      isDev && 'react-refresh/babel',
-
       ['babel-plugin-graphql-tag'],
+
+      isDev && 'react-refresh/babel',
 
       ["auto-import", {
         declarations: [

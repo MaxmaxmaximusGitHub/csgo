@@ -6,7 +6,6 @@ import {observer} from "mobx-react-lite";
 
 export default observer(function InventarPanel() {
 
-
   return <div className={styles.InventarPanel}>
     <Button onClick={MarketController.open}>Купить скины</Button>
   </div>

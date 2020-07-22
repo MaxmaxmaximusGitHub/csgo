@@ -1,6 +1,6 @@
 import useLiveQuery from "./useLiveQuery";
 import {GET_MY_ITEMS} from "../graphql/queries";
-import BetController from "../controllers/BetController";
+import BetController from "../controllers/BetsController";
 
 
 export default function useMyItems() {

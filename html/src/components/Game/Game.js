@@ -8,7 +8,6 @@ import useTimeLeft from "../../hooks/useTimeLeft";
 import toRange from "../../filters/toRange";
 import Button from "../Button";
 import useExponentialBetX from "../../hooks/useExponentialBetX";
-import Confetti from 'react-confetti'
 
 
 export default function Game() {
@@ -27,8 +26,6 @@ export default function Game() {
 
 
   return <div className={styles.game}>
-    {/*{round && round.status === 'show' && <Confetti/>}*/}
-
     {content}
   </div>
 }
@@ -46,7 +43,6 @@ function RoundPending({round, settings}) {
   return <>
     <ProgressBar value={completed}/>
     <div>Ожидание игроков {toTimeLeft(timeLeft)}</div>
-    <Button style={{fontSize: '1.3em'}}>Играть</Button>
   </>
 }
 

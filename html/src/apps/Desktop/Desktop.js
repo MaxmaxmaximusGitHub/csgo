@@ -6,17 +6,17 @@ import withApollo from "../../lib/withApollo"
 import Pages from "../../components/Pages"
 import withCurrentUser from "../../lib/withCurrentUser"
 import Confirm from "../../components/Confirm"
-import HomePage from "./HomePage/HomePage"
+import DesktopHomePage from "./pages/DesktopHomePage/DesktopHomePage"
 import Notificator from "../../components/Notificator/Notificator"
-import DesktopHeader from "../../components/DesktopHeader/DesktopHeader";
+import DesktopHeader from "./components/DesktopHeader/DesktopHeader";
 import Chat from "../../components/Chat/Chat";
-import Market from "../../components/Market/Market";
+import Market from "./components/DesktopMarket/DesktopMarket";
 import withRouter from "../../lib/withRouter";
-import AdminPage from "./AdminPage/AdminPage";
+import AdminPage from "./pages/DesktopAdminPage/DesktopAdminPage";
 
 
 export const pages = [
-  {name: 'Home', url: '/', Page: HomePage},
+  {name: 'Home', url: '/', Page: DesktopHomePage},
   {name: 'Admin', url: '/admin', Page: AdminPage},
 ]
 
@@ -43,8 +43,10 @@ Desktop = withRouter(Desktop)
 Desktop = withApollo(Desktop)
 
 
-ReactDOM
-.unstable_createRoot(document.querySelector('#App'))
-.render(<Desktop/>)
+ReactDOM.render(
+  <Desktop/>,
+  document.querySelector('#App')
+)
+
 
 

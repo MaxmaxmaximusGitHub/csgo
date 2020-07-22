@@ -1,6 +1,8 @@
 import styles from './List.styl'
 import classNames from 'classnames'
 import {observer} from 'mobx-react-lite'
+import Button from "./Button";
+
 
 export default observer(function List(
   {emptyMessage, children, list, className, ...props}
@@ -8,17 +10,15 @@ export default observer(function List(
 
   const ref = useRef(null)
   const padding = 1000
+  const {next} = list
 
   function checkMore() {
     const element = ref.current
     const scrollTop = element.scrollTop
     const maxScroll = element.scrollHeight - element.offsetHeight - padding
-    const {next} = list
 
     if (scrollTop >= maxScroll) {
-      if (typeof next === 'function') {
-        next()
-      }
+      next()
     }
   }
 
@@ -37,7 +37,6 @@ export default observer(function List(
     {list.map(item => (
       React.cloneElement(children(item), {key: item.id})
     ))}
-
   </ul>
 })
 

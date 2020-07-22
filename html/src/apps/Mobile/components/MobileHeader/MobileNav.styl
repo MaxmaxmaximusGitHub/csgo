@@ -1,0 +1,44 @@
+.MobileNav
+  $time = 0.3s
+  display flex
+  flex-direction column
+  align-items center
+
+  .title
+    color rgba(white, 0.2)
+    padding 0.5em 1em
+
+
+  .links
+
+    .link
+      padding 0.5em 1em
+      text-decoration none
+      display flex
+      flex-direction row
+      align-items center
+      justify-content center
+      text-transform uppercase
+      color white
+      text-align center
+      position relative
+
+      &:before
+        content ''
+        display block
+        absolute bottom 0 left 0
+        size 100% 0.1em
+        background-color #4E6FD9
+        box-shadow 0 0 0.5em #4E6FD9
+        border-radius 50%
+        transform scaleX(0)
+        transition transform $time
+
+      &.__active
+        color #5a84ff
+        text-shadow 0 0 0.5em rgba(#4E6FD9, 0.3)
+
+        &:before
+          transform none
+
+

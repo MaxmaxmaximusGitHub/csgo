@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -6,10 +7,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const PreactRefreshPlugin = require('@prefresh/webpack');
 const nodePath = require('path');
 const glob = require('glob-all');
 const fs = require('fs')
 
+
+const PREACT_MODE = false
 
 const IS_DEV = Boolean(process.env.WEBPACK_DEV_SERVER)
 const HTML_PUBLIC_PORT = process.env.HTML_PUBLIC_PORT
@@ -18,8 +22,15 @@ const INDEX_STYLE = './src/styles/index.styl'
 const INDEX_HTML = './src/lib/index.html'
 const STATIC_DIR = 'static'
 
+
 const ALIASES = {
-  res: nodePath.resolve(__dirname, './src/res/')
+  'res': nodePath.resolve(__dirname, './src/res/'),
+}
+
+
+if (PREACT_MODE) {
+  ALIASES['react'] = 'preact/compat'
+  ALIASES['react-dom'] = 'preact/compat'
 }
 
 
@@ -28,8 +39,8 @@ module.exports = [
     name: 'public',
     port: HTML_PUBLIC_PORT,
     entry: {
-      // mobile: './src/apps/Mobile/Mobile.js',
-      index: './src/apps/Desktop/Desktop.js',
+      index: './src/apps/Mobile/Mobile.js',
+      desktop: './src/apps/Desktop/Desktop.js',
     },
   }),
 
@@ -142,7 +153,7 @@ function createWebpackConfig({name, entry, port}) {
         },
 
         {
-          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
           use: [
             {
               loader: 'file-loader',
@@ -164,6 +175,13 @@ function createWebpackConfig({name, entry, port}) {
                 disable: true, // webpack@2.x and newer
               },
             },
+          ],
+        },
+
+        {
+          test: /\.(mp4)$/i,
+          use: [
+            'file-loader'
           ],
         }
 
@@ -189,11 +207,15 @@ function createWebpackConfig({name, entry, port}) {
         ,
       }),
 
-      IS_DEV && new ReactRefreshWebpackPlugin({
+      IS_DEV && new FriendlyErrorsWebpackPlugin(),
+
+      IS_DEV && !PREACT_MODE && new ReactRefreshWebpackPlugin({
         overlay: false
       }),
 
-      IS_DEV && new FriendlyErrorsWebpackPlugin(),
+      IS_DEV && PREACT_MODE && new webpack.HotModuleReplacementPlugin(),
+
+      IS_DEV && PREACT_MODE && new PreactRefreshPlugin(),
 
       // !IS_DEV && new BundleAnalyzerPlugin({
       //   analyzerPort: 'auto'
@@ -287,19 +309,4 @@ function addStyleToEntry(entry, stylePath) {
   return newEntry
 }
 
-
-function getDirAliases(path) {
-  const aliases = {}
-  path = nodePath.resolve(__dirname, path)
-
-  const dirNames = fs.readdirSync(path, {withFileTypes: true})
-  .filter(dirEnt => dirEnt.isDirectory())
-  .map(dirEnt => dirEnt.name)
-
-  dirNames.forEach(dirName => {
-    aliases[dirName] = nodePath.join(path, dirName)
-  })
-
-  return aliases
-}
 

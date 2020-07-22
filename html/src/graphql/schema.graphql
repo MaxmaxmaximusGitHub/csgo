@@ -3491,6 +3491,9 @@ type mutation_root {
   # perform the action: "game_make_bet"
   game_make_bet(items_ids: [bigint!]!): Result!
 
+  # perform the action: "get_two_fa"
+  get_two_fa: Result
+
   # insert data into the table: "chat.message"
   insert_chat_message(
     # the rows to be inserted

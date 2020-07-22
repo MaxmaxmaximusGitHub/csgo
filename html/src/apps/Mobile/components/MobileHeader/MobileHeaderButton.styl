@@ -1,0 +1,40 @@
+.MobileHeaderButton
+  $time = 0.3s
+  size 1.5em
+  display flex
+  flex-direction column
+  position relative
+  margin-left 1em
+
+  &.__opened
+
+    .plank
+
+      &:nth-child(1)
+        transform rotateZ(135deg)
+
+      &:nth-child(2)
+        transform scaleX(0)
+        opacity 0
+
+      &:nth-child(3)
+        transform rotateZ(-135deg)
+
+  .plank
+    background-color white
+    size 100% 0.2em
+    absolute left top 50%
+    margin-top -0.1em
+    border-radius 0.1em
+    transform-origin center
+    transition transform $time, opacity $time
+
+    &:nth-child(1)
+      transform translateY(-0.5em)
+
+    &:nth-child(3)
+      transform translateY(0.5em)
+
+
+
+

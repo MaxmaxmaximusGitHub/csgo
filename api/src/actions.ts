@@ -11,6 +11,13 @@ ActionsController.add('update_items_data', async () => {
 })
 
 
+ActionsController.add('get_two_fa', async () => {
+  const code = ItemsDataLoader.generate2FACode()
+  console.log(code)
+  return {done: true}
+})
+
+
 ActionsController.add('stop_update_items_data', async () => {
   await ItemsDataLoader.stop()
   return {done: true}

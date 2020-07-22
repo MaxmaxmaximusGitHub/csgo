@@ -1,11 +1,11 @@
 import styles from './Inventar.styl'
-import useInput from "../../hooks/useInput";
 import InventarPanel from "./InventarPanel";
 import {observer} from "mobx-react-lite"
 import MarketController from '../../controllers/MarketController'
 import classNames from 'classnames'
 import useMyItems from "../../hooks/useMyItems";
 import List from "../List";
+import Item from "../Item";
 import InventarItem from "./InventarItem";
 
 
@@ -18,6 +18,7 @@ export default observer(function Inventar() {
   )
 
   const items = useMyItems()
+
 
   return <div className={className}>
     <InventarPanel/>

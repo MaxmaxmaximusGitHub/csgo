@@ -1,20 +1,23 @@
-.button
+.Button
   display inline-flex
   padding 0.2em 1em
-  margin 0.5em
+  //margin 0.5em
   user-select none
   cursor pointer
   color white
-  border 1px solid yellowgreen
-  border-radius 0.5em
+  background-color rgba(#4E6FD9, 0.3)
+  border 0.15em solid #4E6FD8
+  border-radius 0.7em
   justify-content center
   align-items center
+  flex-shrink 0
+  box-shadow 0 0 1em rgba(#4E6FD8, 0.4)
 
   & + &
     margin-left 0.5em
 
   &:hover
-    background-color rgba(yellowgreen, 0.3)
-    box-shadow 0 0 1em rgba(yellowgreen, 0.4)
+    background-color rgba(#4E6FD8, 0.4)
+    box-shadow 0 0 1em rgba(#4E6FD8, 0.4)
 
 

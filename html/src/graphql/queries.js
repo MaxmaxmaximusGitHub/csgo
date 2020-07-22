@@ -78,10 +78,11 @@ export const GET_MY_ITEMS = gql`
   query GET_MY_ITEMS ($cursor: timestamptz) {
     game_view_my_item (
       order_by: {created_at: desc}
+      where: {created_at: {_lt: $cursor}}
     ) {
       id
-
-      item_data{
+      created_at
+      item_data {
         image
         inspect_link
         inspectable
@@ -95,3 +96,17 @@ export const GET_MY_ITEMS = gql`
   }
 `
 
+
+export const GET_ROUNDS_HISTORY_MINI = gql`
+  query GET_ROUNDS_HISTORY_MINI {
+    game_round (
+      order_by: [{created_at: desc}]
+      limit: 10
+      where: {status: {_eq: done}}
+    ){
+      id
+      x
+      status
+    }
+  }
+`

@@ -1,6 +1,6 @@
 import styles from './BetItem.styl'
 import {observer} from 'mobx-react-lite'
-import BetController from "../../controllers/BetController";
+import BetController from "../../controllers/BetsController";
 import toMoney from "../../filters/toMoney";
 
 
@@ -17,7 +17,7 @@ export default observer(function BetItem({item}) {
     <img className={styles.image} src={image} alt={market_hash_name}/>
     <div className={styles.price}>{toMoney(price)}</div>
     {/*<div className={styles.market_hash_name}>{market_hash_name}</div>*/}
-    {/*<div className={styles.phase}>{phase}</div>*/}
+    <div className={styles.phase}>{phase}</div>
   </div>
 })
 

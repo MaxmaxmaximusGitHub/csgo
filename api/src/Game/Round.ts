@@ -1,5 +1,6 @@
 import sql from 'sql-tag'
 import db from '../lib/db'
+import PromisifyPromise from './PromisifyPromise'
 
 
 interface GameSettings {
@@ -18,11 +19,11 @@ export default class Round {
 
   async play() {
     await this.loadSettings()
-    await this.createRound()
+    await this.createRoundInDb()
     await this.pendingBets()
     await this.playRound()
     await this.showResult()
-    await this.doneRound()
+    await this.markRoundAsDone()
   }
 
 
@@ -36,7 +37,7 @@ export default class Round {
   }
 
 
-  async createRound() {
+  async createRoundInDb() {
     const {rows} = await db.query(sql`
       INSERT INTO game.round
         DEFAULT
@@ -56,21 +57,20 @@ export default class Round {
 
   async playRound() {
     await this.setStatus('playing')
-    await this.generateX()
-    await this.waitXAnimation()
+    await this.updatePotentialX()
+
+    var playingRoundPromise = new PromisifyPromise()
+    return playingRoundPromise
+  }
+
+
+  async updatePotentialX() {
+    this.x = await this.generateX()
   }
 
 
   async generateX() {
-    // this.x = Math.round((1 + (Math.random() * 5)) * 100)
-    this.x = 0
-  }
-
-
-  async waitXAnimation() {
-    const a = this.settings.speed_x / 1000
-    const sec = Math.sqrt(((this.x) / 100) / a)
-    await this.time(sec * 1000)
+    return Math.round((1 + (Math.random() * 5)) * 100)
   }
 
 
@@ -87,7 +87,7 @@ export default class Round {
   }
 
 
-  async doneRound() {
+  async markRoundAsDone() {
     await this.setStatus('done')
   }
 
@@ -95,8 +95,8 @@ export default class Round {
   async makeBet(user, items_ids = []) {
     await this.validateBetParams(user, items_ids)
 
-    await this.takeItemsFromUser(user, items_ids)
     const money = await this.getItemsMoney(items_ids)
+    await this.takeItemsFromUser(user, items_ids)
 
     const {rows: [{id}]} = await db.query(sql`
       INSERT INTO game.bet

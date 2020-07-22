@@ -1,4 +1,5 @@
 import {useQuery as apolloUseQuery} from "@apollo/react-hooks";
+import ReactiveList from "../lib/ReactiveList";
 
 
 export default function useQuery(query, options = {}) {
@@ -7,47 +8,10 @@ export default function useQuery(query, options = {}) {
 }
 
 
-function wrapQueryResult({data, fetchMore}, {cursor = {}}) {
-
-  const {prop = 'id'} = cursor
-
-  if (!data) var arr = []
-  else arr = data[Object.keys(data)[0]]
-
-
-  arr.next = () => {
-    if (!arr.length) return
-
-    const lastItem = arr[arr.length - 1]
-
-    fetchMore({
-      variables: {
-        cursor: lastItem[prop],
-      },
-      updateQuery(prev, {fetchMoreResult}) {
-        // console.log('load more', fetchMoreResult)
-        return mergeFetchMoreResult(prev, fetchMoreResult)
-      }
-    })
-  }
-
-  return arr
+function wrapQueryResult(queryResult, options) {
+  return new ReactiveList(0, queryResult, options)
 }
 
 
-function mergeFetchMoreResult(prev, fetchMoreResult) {
-  const keys = Object.keys(fetchMoreResult)
-  const key = keys[0]
-  const prevArr = prev[key]
-  const newArr = fetchMoreResult[key]
-  const mergedArr = [...prevArr]
-
-  newArr.forEach(item => {
-    const has = prevArr.some(it => it.id === item.id)
-    if (!has) mergedArr.push(item)
-  })
-
-  return {[key]: mergedArr}
-}
 
 

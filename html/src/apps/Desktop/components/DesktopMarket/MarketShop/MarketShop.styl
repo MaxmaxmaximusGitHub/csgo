@@ -1,0 +1,21 @@
+.MarketShop
+  $time = 0.3s
+  background-color #222
+  flex-grow 1
+  margin-left 2em
+  border-radius 0.25em
+  opacity 0
+  transform translateX(15em)
+  transition transform $time, opacity $time
+  display flex
+  flex-direction column
+  overflow hidden
+
+  &.__opened
+    opacity 1
+    transform none
+
+  .list
+    text-align center
+    padding 0.5em
+

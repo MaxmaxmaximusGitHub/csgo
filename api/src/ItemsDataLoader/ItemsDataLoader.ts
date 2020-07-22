@@ -86,7 +86,7 @@ export default class ItemsDataLoader {
       try {
         var {items} = await this.api('get_inventory_on_sale', {
           page: page,
-          per_page: 450,
+          per_page: 480,
         })
 
         if (!items.length) {

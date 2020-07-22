@@ -1,0 +1,35 @@
+.MobileChatButton
+  $time = 0.5s
+  size 2em
+  absolute top 1em right
+  background-color #474D81
+  z-index 1
+  pointer-events all
+  border-radius 0.5em
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  transition transform $time, opacity $time
+  opacity 0.6
+
+  &.__opened
+    transform translateX(-1em)
+    opacity 1
+
+    .arrowIcon
+      transform none
+
+  .arrowIcon
+    size 1em
+    background-image url("~res/images/arrow.svg")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    transition transform $time
+    transform rotateZ(-180deg)
+
+
+
+
+
