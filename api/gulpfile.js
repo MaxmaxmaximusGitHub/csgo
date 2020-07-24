@@ -16,7 +16,7 @@ const webpackConfig = {
     __filename: false,
   },
 
-  entry: './src/index.ts',
+  entry: './src/index.js',
 
   output: {
     path: nodePath.resolve(__dirname, './build/'),
@@ -24,7 +24,7 @@ const webpackConfig = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
 
   externals: [nodeExternals()],
@@ -32,11 +32,11 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.ts(x?)$/,
+        test: /\.js(x?)$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: "ts-loader"
+            loader: "babel-loader"
           }
         ]
       },

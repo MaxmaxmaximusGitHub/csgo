@@ -19,7 +19,7 @@ export default function Game() {
   } else if (round.status === 'pending') {
     content = <RoundPending round={round} settings={settings}/>
   } else if (round.status === 'playing') {
-    content = <RoundPlaying round={round} settings={settings}/>
+    content = <RoundPlaying round={round}/>
   } else {
     content = <RoundShow round={round} settings={settings}/>
   }
@@ -47,10 +47,9 @@ function RoundPending({round, settings}) {
 }
 
 
-function RoundPlaying({round, settings}) {
+function RoundPlaying({round}) {
 
-  const {start_playing_at} = round
-  const x = useExponentialBetX(start_playing_at, settings)
+  const x = useExponentialBetX(round)
 
 
   return <div className={styles.playing}>

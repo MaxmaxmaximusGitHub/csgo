@@ -1,0 +1,20 @@
+.MobileGameGreed
+  $color = #4e5697
+  $size = 2em
+  height 10em
+  position relative
+  flex-grow 1
+  background-image: linear-gradient(left, $color, transparent 1px),
+    linear-gradient(bottom, $color, transparent 1px)
+
+  background-size: $size $size
+  background-position: left 1em bottom 1em
+
+  .graphic
+    absolute left bottom
+    size 100%
+    background-repeat no-repeat
+    background-size 100% 50%
+    background-position left 1em bottom 1em
+    background-image url("~res/images/game.png")
+

@@ -1,14 +1,12 @@
 import styles from './MobileHomePage.styl'
 import {observer} from 'mobx-react-lite'
+import MobileGame from "../../components/MobileGame/MobileGame";
 
 
 function MobileHomePage() {
 
   return <div className={styles.MobileHomePage}>
-    <div>MobileHomePage</div>
-    <div>MobileHomePage</div>
-    <div>MobileHomePage</div>
-    <div>MobileHomePage</div>
+    <MobileGame/>
   </div>
 }
 

@@ -1,8 +1,8 @@
 .MobileChatContent
-  $time = 0.4s
+  $time = 0.2s
   size 100%
-  transform translateX(105%) skew(40deg)
-  transform-origin top
+  transform translateX(105%)
+  transform-origin top right
   transition transform $time, opacity $time
   pointer-events none
   background-color #2C3255
@@ -10,7 +10,7 @@
   overflow hidden
   display flex
   flex-direction column
-  box-shadow 0 0 0.5em rgba(black, 0.1)
+  box-shadow 0 0 1em rgba(black, 0.3)
 
   &.__opened
     transform none

@@ -1,5 +1,5 @@
 .MobileHeader
-  $time = 0.3s
+  $time = 0.6s
   absolute top left
   size 100%
   z-index 999
@@ -52,8 +52,8 @@
     & *
       transform translateX(10em)
 
-      for i in (0...20)
+      for i in (1...20)
         &:nth-child({i})
-          transition transform $time + (0.1s * (i - 1))
+          transition transform $time + (($time / 3) * (i - 1))
 
 

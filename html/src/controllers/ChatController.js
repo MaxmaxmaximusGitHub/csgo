@@ -4,7 +4,7 @@ import {observable, action} from "mobx";
 export default new class ChatController {
 
   @observable
-  opened = true
+  opened = false
 
   @action
   open = () => {
